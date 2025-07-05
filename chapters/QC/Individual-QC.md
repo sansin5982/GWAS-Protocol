@@ -1,3 +1,10 @@
+<script type="text/javascript" async
+    src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+</script>
+
 # Per Individual Quality Control
 
 Per-individual QC screens genotype to identify subjects that may
@@ -326,7 +333,7 @@ failure rate suggest poor DNA sample quality.
 
 #### PLINK command to calculate missing rate.
 
-    ./plink2 --bfile 1_QC_Raw_GWAS_data --missing --out missing_data_rate**
+    ./plink2 --bfile 1_QC_Raw_GWAS_data --missing --out missing_data_rate
 
 -   Command creates the files “missing\_data\_rate.imiss” and
     “missing\_data\_rate.lmiss”.
@@ -502,4 +509,75 @@ standard deviation.
 <img src="Missing_hetero_check.png" alt="Individual missingness and heterozygoisty rate" width="480" />
 <p class="caption">
 Individual missingness and heterozygoisty rate
+</p>
+
+### Step 5: Identification of duplicate samples
+
+In a population based study, it is important that all samples should be
+unrelated. Presence of duplicate, first- or second-degree relatives will
+introduce bias in the study as their genotypes will be overrepresented.
+This step was used to identify all related and duplicate individuals for
+removal. A metric (identity by state, IBS) for each pair of individuals
+was calculated to identify duplicate samples. IBS is defined as, at a
+locus, two individuals who have an identical nucleotide sequence or the
+same allele.
+
+<table>
+<thead>
+<tr>
+<th>PIHAT values</th>
+<th>Relation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Identical or Duplicate</td>
+</tr>
+<tr>
+<td>0.8 and above</td>
+<td>Highly related</td>
+</tr>
+<tr>
+<td>0.5</td>
+<td>First Degree</td>
+</tr>
+<tr>
+<td>0.25</td>
+<td>Highly related</td>
+</tr>
+<tr>
+<td>0.125</td>
+<td>First Cousin</td>
+</tr>
+<tr>
+<td>0.0625</td>
+<td>Second Cousin</td>
+</tr>
+</tbody>
+</table>
+
+-   Check the relatedness. Use the independent SNPs (pruning) for this
+    analysis and limit to autosomal chromosome only
+
+#### PLINK command
+
+    .\plink     --bfile     2_QC_Raw_GWAS_data      --chr 1-22  --make-bed --out Autosomal
+
+-   Create independent SNPs through pruning
+
+#### PLINK command
+
+    .\plink     --bfile     Autosomal   --indep-pairwise    50 5 0.2 --out raw-GWAS-data
+
+it will generate raw-GWAS-data.prune.in file. This file use in next step
+\* Check relatedness
+
+#### PLINK command
+
+    plink --bfile 2_QC_Raw_GWAS_data –extract raw-GWAS-data.prune.in  --genome --out related_check
+
+<img src="Related_samples.png" alt="Relatedness" width="480" />
+<p class="caption">
+Relatedness
 </p>
