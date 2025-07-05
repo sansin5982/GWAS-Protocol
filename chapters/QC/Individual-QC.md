@@ -458,7 +458,7 @@ failure rate suggest poor DNA sample quality.
 Next we calculate observed heterozygosity rate
 
 $$
-\large \text {Observed Heterozygosity Rate} = \frac {\text {non-missing genotypes (N(NM)) - Observed number of homozygous genotypes (O(HOM))}}{\text {non-missing genotypes (N(NM))}} 
+\text {Observed Heterozygosity Rate} = \frac {\text {non-missing genotypes (N(NM)) - Observed number of homozygous genotypes (O(HOM))}}{\text {non-missing genotypes (N(NM))}} 
 $$
 
     # Calculate the observed heterozyosity rate
