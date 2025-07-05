@@ -16,30 +16,34 @@ GWAS data set.
 
 <table>
 <colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
+<col style="width: 47%" />
+<col style="width: 52%" />
 </colgroup>
 <thead>
 <tr>
-<th>Part</th>
+<th style="text-align: left;">Part</th>
 <th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>./plink</code></td>
+<td style="text-align: left;"><code>./plink</code></td>
 <td>Runs the PLINK executable from the current directory
 (<code>./</code>).</td>
 </tr>
 <tr>
-<td><code>--file raw_GWAS_data</code></td>
+<td style="text-align: left;"><code>--file raw_GWAS_data</code></td>
 <td>Tells PLINK to use <strong>text format PED/MAP files</strong> named
 <code>raw_GWAS_data.ped</code> and <code>raw_GWAS_data.map</code>.</td>
 </tr>
 <tr>
-<td><code>--make-bed</code></td>
+<td style="text-align: left;"><code>--make-bed</code></td>
 <td>Converts the input files into <strong>binary PLINK format</strong>:
 <code>.bed</code> / <code>.bim</code> / <code>.fam</code>.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--out raw_GWAS_data</code></td>
+<td>To give a new name to file</td>
 </tr>
 </tbody>
 </table>
@@ -88,38 +92,38 @@ removed, if information was inconclusive, for further analyses.
 
 <table>
 <colgroup>
-<col style="width: 13%" />
-<col style="width: 86%" />
+<col style="width: 55%" />
+<col style="width: 44%" />
 </colgroup>
 <thead>
 <tr>
-<th>Part</th>
-<th>Meaning</th>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>./plink</code></td>
-<td>Run the PLINK software executable from the current directory
-(<code>./</code> means “this folder”).</td>
+<td style="text-align: left;"><code>./plink</code></td>
+<td style="text-align: left;">Run the PLINK software executable from the
+current directory (<code>./</code> means “this folder”).</td>
 </tr>
 <tr>
-<td><code>--bfile raw_GWAS_data</code></td>
-<td>Use the <strong>binary PLINK files</strong>:
-<code>raw_GWAS_data.bed</code>, <code>raw_GWAS_data.bim</code>, and
-<code>raw_GWAS_data.fam</code>. These 3 files together define your
-genotype dataset.</td>
+<td style="text-align: left;"><code>--bfile raw_GWAS_data</code></td>
+<td style="text-align: left;">Use the <strong>binary PLINK
+files</strong>: <code>raw_GWAS_data.bed</code>,
+<code>raw_GWAS_data.bim</code>, and <code>raw_GWAS_data.fam</code>.
+These 3 files together define your genotype dataset.</td>
 </tr>
 <tr>
-<td><code>--check-sex</code></td>
-<td>Run PLINK’s <strong>sex check</strong> routine. This checks whether
-the genetically inferred sex matches the sex reported in your
-<code>.fam</code> file.</td>
+<td style="text-align: left;"><code>--check-sex</code></td>
+<td style="text-align: left;">Run PLINK’s <strong>sex check</strong>
+routine. This checks whether the genetically inferred sex matches the
+sex reported in your <code>.fam</code> file.</td>
 </tr>
 <tr>
-<td><code>--out GWAS_Sex_Check</code></td>
-<td>Name the output files: e.g., <code>GWAS_Sex_Check.sexcheck</code>
-will be created.</td>
+<td style="text-align: left;"><code>--out GWAS_Sex_Check</code></td>
+<td style="text-align: left;">Name the output files: e.g.,
+<code>GWAS_Sex_Check.sexcheck</code> will be created.</td>
 </tr>
 </tbody>
 </table>
