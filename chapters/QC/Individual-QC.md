@@ -10,30 +10,231 @@ GWAS data set.
 
 #### PLINK command
 
-    ./plink –file raw_GWAS_data --make-bed
+    ./plink –file raw_GWAS_data --make-bed --out raw_GWAS_data
+
+#### What each part means
+
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr>
+<th>Part</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>./plink</code></td>
+<td>Runs the PLINK executable from the current directory
+(<code>./</code>).</td>
+</tr>
+<tr>
+<td><code>--file raw_GWAS_data</code></td>
+<td>Tells PLINK to use <strong>text format PED/MAP files</strong> named
+<code>raw_GWAS_data.ped</code> and <code>raw_GWAS_data.map</code>.</td>
+</tr>
+<tr>
+<td><code>--make-bed</code></td>
+<td>Converts the input files into <strong>binary PLINK format</strong>:
+<code>.bed</code> / <code>.bim</code> / <code>.fam</code>.</td>
+</tr>
+</tbody>
+</table>
+
+#### what happens here?
+
+-   The `--file` option means: &gt; “Use the old text-based PED/MAP
+    format.”
+
+-   The `--make-bed` option means: &gt; “Create binary files instead.”
+
+So this step **converts** our dataset from **PED/MAP** → **BED/BIM/FAM
+format**.
+
+#### Why do this?
+
+The **binary format** is: \* Faster to read/write \* Smaller file size
+\* Required for many downstream PLINK operations
+
+Most people do **all GWAS work** in binary format (`--bfile`).
+
+#### What files are created?
+
+PLINK will produce:
+
+-   plink.bed → genotype binary data
+-   plink.bim → variant info
+-   plink.fam → sample info
+
+By default they are named `plink.*` unless we add `--out`:
 
 ### Step 2: Identification of individuals with discordant sex information
+
+This was the first step of QC, performed to identify subjects that have
+inconclusive/contradictory gender information, as it can lead to
+spurious associations. In a case-control study, samples that show the
+wrong gender information are suggested to be excluded from further QC
+and statistical analysis. Subjects were appropriately recoded or
+removed, if information was inconclusive, for further analyses.
 
 #### PLINK command
 
     ./plink --bfile raw_GWAS_data --check-sex --out GWAS_Sex_Check
 
+#### What each part means
+
+<table>
+<colgroup>
+<col style="width: 13%" />
+<col style="width: 86%" />
+</colgroup>
+<thead>
+<tr>
+<th>Part</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>./plink</code></td>
+<td>Run the PLINK software executable from the current directory
+(<code>./</code> means “this folder”).</td>
+</tr>
+<tr>
+<td><code>--bfile raw_GWAS_data</code></td>
+<td>Use the <strong>binary PLINK files</strong>:
+<code>raw_GWAS_data.bed</code>, <code>raw_GWAS_data.bim</code>, and
+<code>raw_GWAS_data.fam</code>. These 3 files together define your
+genotype dataset.</td>
+</tr>
+<tr>
+<td><code>--check-sex</code></td>
+<td>Run PLINK’s <strong>sex check</strong> routine. This checks whether
+the genetically inferred sex matches the sex reported in your
+<code>.fam</code> file.</td>
+</tr>
+<tr>
+<td><code>--out GWAS_Sex_Check</code></td>
+<td>Name the output files: e.g., <code>GWAS_Sex_Check.sexcheck</code>
+will be created.</td>
+</tr>
+</tbody>
+</table>
+
+#### What does –check-sex actually do?
+
+-   PLINK uses **X chromosome data** to estimate the inbreeding
+    coefficient **F** for each sample:
+
+    -   If F ≈ 1 → likely male (only one X chromosome → more
+        homozygosity)
+    -   If F ≈ 0 → likely female (two X chromosomes → more
+        heterozygosity)
+
+-   It then compares this estimate with the **sex** listed in your
+    **.fam** file (column 5).
+
+-   If there’s a mismatch, it flags it:
+
+-   Possible reasons: sample swap, data entry error, or sex chromosome
+    abnormality.
+
+#### Output
+
+-   The main output is:
+    -   GWAS\_Sex\_Check.sexcheck
+
+<table>
+<thead>
+<tr>
+<th>FID</th>
+<th>IID</th>
+<th>PEDSEX</th>
+<th>SNPSEX</th>
+<th>STATUS</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>201320</td>
+<td>2</td>
+<td>2</td>
+<td>OK</td>
+<td>0.027</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201320</td>
+<td>1</td>
+<td>1</td>
+<td>OK</td>
+<td>0.976</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201327</td>
+<td>2</td>
+<td>1</td>
+<td>PROBLEM</td>
+<td>0.974</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201335</td>
+<td>2</td>
+<td>0</td>
+<td>PROBLEM</td>
+<td>0.456</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201342</td>
+<td>1</td>
+<td>2</td>
+<td>PROBLEM</td>
+<td>0.632</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201359</td>
+<td>1</td>
+<td>0</td>
+<td>PROBLEM</td>
+<td>0.321</td>
+</tr>
+</tbody>
+</table>
+
+-   Each row has:
+
+    -   Sample ID
+    -   Reported sex
+    -   Inferred sex
+    -   F coefficient
+    -   Status (OK, PROBLEM)
+
 -   Command Create a list of individuals with discordant sex data in
-    file “GWAS\_Sex\_Check.sexcheck”. Column 3 denotes ascertained sex
-    and column 4 denotes sex according to genotype data. When the
+    file **“GWAS\_Sex\_Check.sexcheck”**. Column 3 denotes ascertained
+    sex and column 4 denotes sex according to genotype data. When the
     homozygosity rate is more than 0.2 but less than 0.8, the genotype
     data are inconclusive regarding the sex of an individual and these
     are marked in column 4 with a 0.
+
 -   Extract the IDs of individuals with discordant sex information. In
     situations in which discrepancy cannot be resolved, remove the
-    individuals through following command. <br> <br> PLINK command <br>
-    **plink –bfile raw\_GWAS\_data –remove
-    discordant-sex-individuals-file.txt –make-bed –out
-    1\_QC\_Raw\_GWAS\_data** <br> <br> (File
-    “discordant-sex-individuals-file.txt”, should contain only FID and
-    IID of the individuals that have to be removed)
+    individuals through following command.
 
-<!-- -->
+#### PLINK command
+
+    **plink --bfile raw_GWAS_data --remove discordant-sex-individuals-file.txt --make-bed --out 1_QC_Raw_GWAS_data**
+
+(File “discordant-sex-individuals-file.txt”, should contain only FID and
+IID of the individuals that have to be removed)
 
     Gender <- read.table("Sex_check_1.sexcheck", header = T, as.is = T) %>%
       na.omit()
