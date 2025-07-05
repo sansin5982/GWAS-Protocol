@@ -41,6 +41,6 @@ powerful tool in the field of genetics and genomics.
     different folder. To set the path first you have enter in that
     specific tools
 
-$$
-\large export PATH=$PATH:$(pwd)
-$$
+<!-- -->
+
+    export PATH=$PATH:$(pwd)
