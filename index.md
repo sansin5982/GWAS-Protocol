@@ -5,5 +5,5 @@ Chapters:
 -   [Introduction to GWAS and tools required](chapters/Introduction)
 -   [File formats to perform GWAS](chapters/File-formats)
 -   [Quality Control](chapters/QC)
-    -   [Individual QC](chapters/QC/Individual-QC)
-    -   [SNP QC](chapters/QC/SNP-QC)
+    -   [Individual Quality Control](chapters/QC/Individual-QC)
+    -   [SNP Quality Control](chapters/QC/SNP-QC)
