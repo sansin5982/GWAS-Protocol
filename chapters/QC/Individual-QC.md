@@ -172,7 +172,7 @@ sex reported in your <code>.fam</code> file.</td>
 <td>2</td>
 <td>2</td>
 <td>OK</td>
-<td>0.027</td>
+<td>0.017</td>
 </tr>
 <tr>
 <td>1</td>
@@ -221,26 +221,27 @@ sex reported in your <code>.fam</code> file.</td>
 
     -   FID
     -   IID
-    -   PEDSEX
-    -   SNPSEX
+    -   PEDSEX: The reported sex in our `.fam` file
+    -   SNPSEX: The inferred sex estimated from the genotype data
     -   STATUS (OK, PROBLEM)
-    -   F
+    -   F: Give value. If it is &lt; 0.2, sample is suggested as female
+        and if score is &gt; 0.8 sample is represented as male.
 
 -   The above command also provide a log file, here
-    GWAS\_Sex\_Check.log, that provides many information including
+    `GWAS_Sex_Check.log`, that provides many information including
     number of cases and controls, males and females count, individuals
     with ambiguous code, etc
 
 -   Extract the IDs of individuals with discordant sex information. In
     situations where discrepancies cannot be resolved, remove the
-    individuals through following command. <br> <br>
+    individuals through following command.
 
-**PLINK command to remove the individuals based on sex information**
-<br> <br> **plink –bfile raw\_GWAS\_data –remove
-discordant-sex-individuals-file.txt –make-bed –out
-1\_QC\_Raw\_GWAS\_data** <br> <br> (File
-“discordant-sex-individuals-file.txt”, should contain only FID and IID
-of the individuals that have to be removed)
+#### PLINK command to remove the individuals based on sex information
+
+    plink --bfile raw_GWAS_data --remove discordant-sex-individuals-file.txt --make-bed --out 1_QC_Raw_GWAS_data
+
+File `“discordant-sex-individuals-file.txt”`, should contain only FID
+and IID of the individuals that have to be removed)
 
 <table>
 <thead>
@@ -309,4 +310,196 @@ separately.
 <img src="Gender_check.png" alt="Discordant Sex information" width="480" />
 <p class="caption">
 Discordant Sex information
+</p>
+
+The above figure explains Individuals Discordant sex information.
+Samples failed QC are in red circle. Some samples also showed value less
+than 0. It is good to cross check these samples or **exclude it F score
+is &lt; -0.05**.
+
+### Step 3: Identification of individuals with elevated missing data rates
+
+This QC step is used to identify and exclude individuals with too much
+missing genotype data. Genotype accuracy and genotype call rate can be
+significantly affected by variations in DNA quality. A high genotype
+failure rate suggest poor DNA sample quality.
+
+#### PLINK command to calculate missing rate.
+
+    ./plink2 --bfile 1_QC_Raw_GWAS_data --missing --out missing_data_rate**
+
+-   Command creates the files “missing\_data\_rate.imiss” and
+    “missing\_data\_rate.lmiss”.
+-   The “imiss” file (individual missingness) reports the proportion of
+    missing genotypes per individual in the dataset. It lists each
+    individual ID and the number and proportion of missing genotypes for
+    that individual. This can be useful for identifying samples with
+    high levels of missing data that may need to be removed from
+    downstream analyses.
+
+<table>
+<thead>
+<tr>
+<th>FID</th>
+<th>IID</th>
+<th>MISS_PHENO</th>
+<th>N_MISS</th>
+<th>N_GENO</th>
+<th>F_MISS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>201320</td>
+<td>N</td>
+<td>631</td>
+<td>536323</td>
+<td>0.00177</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201327</td>
+<td>N</td>
+<td>566</td>
+<td>536323</td>
+<td>0.00105</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201419</td>
+<td>N</td>
+<td>94784</td>
+<td>536323</td>
+<td>0.1767</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201567</td>
+<td>N</td>
+<td>16860</td>
+<td>538448</td>
+<td>0.03131</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201359</td>
+<td>N1103</td>
+<td>538448</td>
+<td>0.00204</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+-   The fourth column in the .imiss file (N\_MISS) denotes the number of
+    missing SNPs and the sixth column (F\_MISS) denotes the proportion
+    of missing SNPs per individual.
+
+### Step 4: Identification of individuals with outlying heterozygosity rate
+
+#### PLINK command
+
+    ./plink --bfile 1_QC_Raw_GWAS_data --het --out outlying_heterozygosity_rate
+
+<table>
+<thead>
+<tr>
+<th>FID</th>
+<th>IID</th>
+<th>O(HOM)</th>
+<th>E(HOM)</th>
+<th>N(NM)</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>201320</td>
+<td>228640</td>
+<td>2.259e+05</td>
+<td>325867</td>
+<td>0.0272</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201337</td>
+<td>227550</td>
+<td>2.26e+05</td>
+<td>326067</td>
+<td>0.01506</td>
+</tr>
+</tbody>
+</table>
+
+**NOTE: plink2 format will give results in a different way**
+
+-   Command creates the file “outlying\_heterozygosity\_rate.het”, in
+    which the third column denotes the observed number of homozygous
+    genotypes \[O(Hom)\] and the fifth column denotes the number of
+    non-missing genotypes \[N(NM)\] per individual.
+
+<!-- -->
+
+    # Missing individual & Heterozygosity rate
+    miss <- fread("SEX_data/Missing_sample/missing_data_rate.imiss")
+    hetro <- fread("SEX_data/Missing_sample/Heterozygosity_rate/outlying_heterozygosity_rate.het")
+    head(miss, 2)
+    head(hetro, 2)
+
+Next we calculate observed heterozygosity rate
+
+$$
+\large \text {Observed Heterozygosity Rate} = \frac {\text {non-missing genotypes (N(NM)) - Observed number of homozygous genotypes (O(HOM))}}{\text {non-missing genotypes (N(NM))}} 
+$$
+
+    # Calculate the observed heterozyosity rate
+    hetro$obs_hetero_rate <- ((hetro$`N(NM)`)-hetro$`O(HOM)`)/hetro$`N(NM)`
+
+-   Merge the miss and hetro dataframe above created
+
+<!-- -->
+
+    # Merge missing file and heterozygoisty file
+    hetro_miss <- miss %>% 
+      left_join(hetro, by = "IID")
+
+    # Creating plot
+    png("Missing_hetero_check.png")
+    ggplot(hetro_miss, aes(x = F_MISS, y = obs_hetero_rate))+
+      geom_point(alpha = 0.5, col = "#00bfff")+
+      labs(x ="Proportion of Missing genotypes(log scale)", y = "Heterozygosity rate")+
+      scale_x_log10(limits = c(0.0001, 1))+
+      theme_classic()+
+      scale_y_continuous(limits = c((min(hetro_miss$obs_hetero_rate) - 0.02), (max(hetro_miss$obs_hetero_rate) + 0.02)))+
+      geom_hline(yintercept = mean(hetro_miss$obs_hetero_rate) + 3*sd(hetro_miss$obs_hetero_rate), col = "Grey")+
+      geom_hline(yintercept = mean(hetro_miss$obs_hetero_rate) - 3*sd(hetro_miss$obs_hetero_rate), col = "Grey")+
+      geom_vline(xintercept = 0.006, col = "Grey")+
+      geom_point(data=hetro_miss %>%
+                   filter(F_MISS > 0.01),
+                 pch = 19,
+                 size=1.6,
+                 colour = "#e75480")+
+      annotate(geom="text", x=0.035, y=0.303, label="Missing genotypes (>1%)",
+               color="#003300")+
+      annotate(geom="text", x=0.1, y=0.285, label="Excess heterozygosity rate (Â± 3 sd from mean)",
+               color="#003300")+
+      annotate(geom="text", x=0.00017, y=0.315, label="+3 sd from mean",
+               color="#003300")+
+      annotate(geom="text", x=0.00017, y=0.301, label="-3 sd from mean",
+               color="#003300")+
+      annotate(geom="text", x=0.0015, y=0.31, label="Genotyping > 99%",
+               color="#003300")
+
+    dev.off()
+
+The above R script will create a png file containing information based
+on missing rate and heterozygosity rate. For missing rate we set a
+threshold value &lt; 0.01 and for heterzygosity rate between + and - 3
+standard deviation.
+
+<img src="Missing_hetero_check.png" alt="Individual missingness and heterozygoisty rate" width="480" />
+<p class="caption">
+Individual missingness and heterozygoisty rate
 </p>
