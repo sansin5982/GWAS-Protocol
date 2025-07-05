@@ -1,0 +1,14 @@
+---
+title: "Genome-wide association study protocol"
+output: md_document
+---
+
+# Welcome to GWAS!
+
+Chapters:
+
+- [Introduction](chapters/Introduction)
+- [Individual QC](chapters/Individual-QC)
+- [SNP QC](chapters/SNP-QC)
+  - [FUMA](chapters/Post-GWAS/FUMA)
+  - [LDSC](chapters/Post-GWAS/LDSC)

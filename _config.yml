@@ -1,0 +1,12 @@
+theme: jekyll-theme-cayman
+
+# Navigation (Optional)
+title: "GWAS PROTOCOL"
+description: "A comprehensive protcol to perform genome-wide association study."
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+
+# Enable navigation links
+include:
+  - chapters/
