@@ -17,7 +17,7 @@ GWAS data set.
 
 #### PLINK command
 
-    ./plink –file raw_GWAS_data --make-bed --out raw_GWAS_data
+    ./plink –file raw_GWAS_data --make-bed --out plink
 
 #### What each part means
 
@@ -49,7 +49,7 @@ GWAS data set.
 <code>.bed</code> / <code>.bim</code> / <code>.fam</code>.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>--out raw_GWAS_data</code></td>
+<td style="text-align: left;"><code>--out plink</code></td>
 <td>To give a new name to file</td>
 </tr>
 </tbody>
@@ -96,7 +96,7 @@ removed, if information was inconclusive, for further analyses.
 
 #### PLINK command
 
-    ./plink --bfile raw_GWAS_data --check-sex --out GWAS_Sex_Check
+    ./plink --bfile plink --check-sex --out Sex_Check
 
 #### What each part means
 
@@ -118,11 +118,11 @@ removed, if information was inconclusive, for further analyses.
 current directory (<code>./</code> means “this folder”).</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>--bfile raw_GWAS_data</code></td>
+<td style="text-align: left;"><code>--bfile plink</code></td>
 <td style="text-align: left;">Use the <strong>binary PLINK
-files</strong>: <code>raw_GWAS_data.bed</code>,
-<code>raw_GWAS_data.bim</code>, and <code>raw_GWAS_data.fam</code>.
-These 3 files together define your genotype dataset.</td>
+files</strong>: <code>plink.bed</code>, <code>plink.bim</code>, and
+<code>plink.fam</code>. These 3 files together define your genotype
+dataset.</td>
 </tr>
 <tr>
 <td style="text-align: left;"><code>--check-sex</code></td>
@@ -131,9 +131,9 @@ routine. This checks whether the genetically inferred sex matches the
 sex reported in your <code>.fam</code> file.</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>--out GWAS_Sex_Check</code></td>
+<td style="text-align: left;"><code>--out Sex_Check</code></td>
 <td style="text-align: left;">Name the output files: e.g.,
-<code>GWAS_Sex_Check.sexcheck</code> will be created.</td>
+<code>Sex_Check.sexcheck</code> will be created.</td>
 </tr>
 </tbody>
 </table>
@@ -159,7 +159,7 @@ sex reported in your <code>.fam</code> file.</td>
 #### Output
 
 -   The main output is:
-    -   GWAS\_Sex\_Check.sexcheck
+    -   Sex\_Check.sexcheck
 
 <table>
 <thead>
@@ -243,43 +243,7 @@ sex reported in your <code>.fam</code> file.</td>
     situations where discrepancies cannot be resolved, remove the
     individuals through following command.
 
-#### PLINK command to remove the individuals based on sex information
-
-    plink --bfile raw_GWAS_data --remove discordant-sex-individuals-file.txt --make-bed --out 1_QC_Raw_GWAS_data
-
-File `“discordant-sex-individuals-file.txt”`, should contain only FID
-and IID of the individuals that have to be removed)
-
-<table>
-<thead>
-<tr>
-<th>FID</th>
-<th>IID</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>201320</td>
-</tr>
-<tr>
-<td>1</td>
-<td>201327</td>
-</tr>
-<tr>
-<td>1</td>
-<td>201335</td>
-</tr>
-<tr>
-<td>1</td>
-<td>201342</td>
-</tr>
-<tr>
-<td>1</td>
-<td>201359</td>
-</tr>
-</tbody>
-</table>
+<!-- -->
 
     Gender <- read.table("Sex_check_1.sexcheck", header = T, as.is = T) %>%
       na.omit()
@@ -323,6 +287,44 @@ The above figure explains Individuals Discordant sex information.
 Samples failed QC are in red circle. Some samples also showed value less
 than 0. It is good to cross check these samples or **exclude it F score
 is &lt; -0.05**.
+
+#### PLINK command to remove the individuals based on sex information
+
+    plink --bfile raw_GWAS_data --remove discordant-sex-individuals-file.txt --make-bed --out 1_QC_Raw_GWAS_data
+
+File `“discordant-sex-individuals-file.txt”`, should contain only FID
+and IID of the individuals that have to be removed)
+
+<table>
+<thead>
+<tr>
+<th>FID</th>
+<th>IID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>201320</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201327</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201335</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201342</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201359</td>
+</tr>
+</tbody>
+</table>
 
 ### Step 3: Identification of individuals with elevated missing data rates
 
@@ -458,7 +460,7 @@ failure rate suggest poor DNA sample quality.
 Next we calculate observed heterozygosity rate
 
 $$
-\text {Observed Heterozygosity Rate} = \frac {\text {non-missing genotypes (N(NM)) - Observed number of homozygous genotypes (O(HOM))}}{\text {non-missing genotypes (N(NM))}} 
+\large \text {Observed Heterozygosity Rate} = \frac {\text {non-missing genotypes (N(NM)) - Observed number of homozygous genotypes (O(HOM))}}{\text {non-missing genotypes (N(NM))}} 
 $$
 
     # Calculate the observed heterozyosity rate
@@ -575,9 +577,44 @@ it will generate raw-GWAS-data.prune.in file. This file use in next step
 
 #### PLINK command
 
-    plink --bfile 2_QC_Raw_GWAS_data –extract raw-GWAS-data.prune.in  --genome --out related_check
+    .\plink --bfile 2_QC_Raw_GWAS_data –extract raw-GWAS-data.prune.in  --genome --out related_check
 
 <img src="Related_samples.png" alt="Relatedness" width="480" />
 <p class="caption">
 Relatedness
 </p>
+
+### Step 6: Identification of Individuals of divergent ancestry
+
+#### Approach 1: Multidimensional scaling
+
+#### PLINK Command
+
+    .\plink --bfile 3_QC_Raw_GWAS_data --extract raw-GWAS-data.prune.in --genome --cluster --mds-plot 10
+
+-   Visualizing population structure using MDS is useful for identifying
+    subpopulations, population stratification and systematic genotyping
+    or sequencing errors, and can also be used to detect individual
+    outliers that may need to be removed, e.g. European-Americans
+    included in a study of African-Americans.
+
+#### Approach 2: Principal component analysis
+
+#### PLINK Command
+
+    .\plink --bfile 3_QC_Raw_GWAS_data --genome --cluster --pca 10
+
+-   We can also utilize hapmap data to perform PCA
+
+# References
+
+1- Marees, A.T., et al, 2018. A tutorial on conducting genome‐wide
+association studies: Quality control and statistical analysis. *Int J
+Methods Psychiatr Res*, Jun; 27(2): e1608.
+
+2- Anderson, C.A. et al, 2010. Data quality control in genetic
+case-control association studies. *Nat Protoc*, Sep:5(9):1564-73
+
+3- Singh, Sandeep Kumar, “A Case-Only Genome-wide Association Study of
+Gender- and Age-specific Risk Markers for Childhood Leukemia” (2015).
+FIU Electronic Theses and Dissertations. 1832
