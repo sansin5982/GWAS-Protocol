@@ -1,6 +1,6 @@
 # Sex discrepency in a GWAS
 
-### Identification of individuals with discordant sex information
+## Identification of individuals with discordant sex information
 
 This was the first step of QC, performed to identify subjects that have
 inconclusive/contradictory gender information, as it can lead to
@@ -8,6 +8,88 @@ spurious associations. In a case-control study, samples that show the
 wrong gender information are suggested to be excluded from further QC
 and statistical analysis. Subjects were appropriately recoded or
 removed, if information was inconclusive, for further analyses.
+
+### X Chromosome Heterozygosity
+
+In mammals, genetic sex is determined by the presence of sex
+chromosomes: **males are typically XY** and **females are XX**. This
+chromosomal difference has a direct impact on heterozygosity patterns on
+the X chromosome. **Males**, having only one X chromosome, should appear
+**homozygous** at X-linked SNPs, because there is only one allele
+present at each position. **Females**, having two X chromosomes, can
+carry two different alleles at each SNP, so they generally show **higher
+heterozygosity** on the X chromosome.
+
+### F-Statistic for Sex Determination
+
+In GWAS, the **F-statistic** (or **inbreeding coefficient**) is used to
+quantify the observed level of X chromosome heterozygosity relative to
+the expected level. This metric helps infer **genetic sex** based on the
+principle that males should have low heterozygosity on the X chromosome
+(resulting in high F-statistic values), while females should have higher
+heterozygosity (resulting in F values closer to zero).
+
+### Inbreeding Coefficient (F)
+
+The **inbreeding coefficient**, symbolized as **F**, is a measure of how
+much **genetic similarity** (homozygosity) there is in an individual’s
+genome **relative to what is expected** under random mating.
+
+#### What Does It Mean?
+
+-   **F = 0** → No inbreeding: the individual’s observed heterozygosity
+    matches what you’d expect in the general population.
+-   **F &gt; 0** → Some inbreeding: there is **more homozygosity** than
+    expected, meaning the individual’s parents share common ancestry.
+-   **F &lt; 0** → More heterozygosity than expected, which is rare but
+    can occur due to certain population structures or genotyping noise.
+
+In simple terms, **F** quantifies the probability that two alleles at
+any locus are **identical by descent** (i.e., inherited from a common
+ancestor).
+
+#### Where Is It Used?
+
+#### Population Genetics:
+
+To estimate how inbred a population or an individual is — high F means
+individuals are more related than random mating would suggest. This is
+important for conservation biology, animal breeding, or isolated human
+populations.
+
+#### Sample QC in GWAS:
+
+On autosomes, it flags samples with unexpectedly high or low
+homozygosity:
+
+-   High F can indicate inbreeding or close parental relatedness.
+-   Extreme F can reveal lab contamination, sample mix-ups, or
+    genotyping errors.
+
+#### Sex Checks:
+
+On the X chromosome, **F is used differently**: it measures
+heterozygosity on the X to infer genetic sex. Males (XY) have only one X
+→ low heterozygosity → F ≈ 1. Females (XX) have two Xs → higher
+heterozygosity → F ≈ 0.
+
+#### How is F Calculated?
+
+In a simplified form:
+
+$$
+\Large F = \frac{H\_{exp} - H\_{obs}}{H\_{exp}}
+$$
+
+-   *H*<sub>*e**x**p*</sub> = expected heterozygosity (based on allele
+    frequencies).
+-   *F*<sub>*o**b**s*</sub> = observed heterozygosity in the sample.
+
+The **inbreeding coefficient (F)** is a simple but powerful measure of
+how much an individual’s genetic variation deviates from what’s expected
+in a randomly mating population. It helps detect relatedness,
+inbreeding, contamination, or sex inconsistencies — making it a core
+metric in **genetic QC pipelines**.
 
 #### PLINK command
 
@@ -70,6 +152,18 @@ sex reported in your <code>.fam</code> file.</td>
 
 -   Possible reasons: sample swap, data entry error, or sex chromosome
     abnormality.
+
+#### Ambiguous Cases
+
+Sometimes, individuals fall into an **intermediate range** (e.g., **F
+between 0.2 and 0.8**). These are flagged as **ambiguous sex**.
+Ambiguity can arise from:
+
+-   Biological factors, such as sex chromosome aneuploidies (e.g., XXY
+    Klinefelter syndrome, XO Turner syndrome).
+-   Technical issues, such as DNA contamination, genotyping error, or
+    low-quality X chromosome SNPs.
+-   Misreporting or sample mix-ups during collection or data entry.
 
 #### Output
 
@@ -203,9 +297,17 @@ Samples failed QC are in red circle. Some samples also showed value less
 than 0. It is good to cross check these samples or **exclude it F score
 is &lt; -0.05**.
 
-#### PLINK command to remove the individuals based on sex information
+### Removing failed gender
 
-    plink --bfile raw_GWAS_data --remove discordant-sex-individuals-file.txt --make-bed --out 1_QC_Raw_GWAS_data
+    Failed_gender <- Gender %>% 
+      filter(STATUS != "OK") %>% 
+      select(1:2) # selecting only FID, IID
+
+    ## Saving file 
+    write.table(Failed_gender,"discordant-sex-individuals-file.txt", 
+                row.names = FALSE, 
+                col.names = FALSE,
+                quote = FALSE)
 
 File `“discordant-sex-individuals-file.txt”`, should contain only FID
 and IID of the individuals that have to be removed)
@@ -240,3 +342,44 @@ and IID of the individuals that have to be removed)
 </tr>
 </tbody>
 </table>
+
+#### PLINK command to remove the individuals based on sex information
+
+    plink --bfile raw_GWAS_data --remove discordant-sex-individuals-file.txt --make-bed --out 1_QC_Raw_GWAS_data
+
+-   **NOTE**: We can also remove all failed individuals at last stage
+    also.
+
+#### Why the Sex Check Matters
+
+A sex-check is a **crucial step** in GWAS QC pipelines because
+**mismatches between reported and genetically inferred sex** can signal
+**serious problems**, like mislabelled samples, swaps, or data entry
+errors. Such discrepancies can introduce bias and reduce confidence in
+downstream analyses. Therefore, samples with sex mismatches are often
+flagged for removal or further investigation.
+
+#### Beyond Basic Sex-Check
+
+While the F-statistic provides a straightforward method for inferring
+sex, it is not foolproof. Some ambiguous results may be true biological
+cases rather than errors — for example, chromosomal anomalies or
+differences in recombination. For suspicious or ambiguous cases,
+researchers often complement the F-statistic with additional checks,
+such as:
+
+-   Examining **Y chromosome SNPs** to confirm the presence or absence
+    of the Y chromosome.
+-   Reviewing reported phenotype information or clinical records for
+    consistency.
+-   Performing visual checks of heterozygosity plots for unexpected
+    outliers.
+
+Together, these measures ensure that sex is correctly assigned,
+supporting the **accuracy and integrity of the entire GWAS dataset**.
+
+The **sex-check using X chromosome heterozygosity and the F-statistic**
+is a simple but vital safeguard in GWAS pipelines. Combined with other
+quality control checks, it helps ensure that the dataset is free of
+mismatches, mix-ups, or anomalies — which is essential for valid,
+reproducible genetic association results.
