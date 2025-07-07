@@ -1,4 +1,4 @@
-# Identification of individuals with elevated missing data rates
+# Identification of Individuals with elevated missing data rates
 
 **Individual missingness** (sometimes called **sample call rate**) is
 the proportion of genotypes that are **missing** for each person in the
