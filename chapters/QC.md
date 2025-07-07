@@ -82,8 +82,6 @@ biological interpretation.
 
 #### References
 
-# References
-
 1- Marees, A.T., et al, 2018. A tutorial on conducting genome‐wide
 association studies: Quality control and statistical analysis. *Int J
 Methods Psychiatr Res*, Jun; 27(2): e1608.

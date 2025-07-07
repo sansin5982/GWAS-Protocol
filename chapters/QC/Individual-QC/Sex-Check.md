@@ -1,0 +1,242 @@
+# Sex discrepency in a GWAS
+
+### Identification of individuals with discordant sex information
+
+This was the first step of QC, performed to identify subjects that have
+inconclusive/contradictory gender information, as it can lead to
+spurious associations. In a case-control study, samples that show the
+wrong gender information are suggested to be excluded from further QC
+and statistical analysis. Subjects were appropriately recoded or
+removed, if information was inconclusive, for further analyses.
+
+#### PLINK command
+
+    ./plink --bfile plink --check-sex --out Sex_Check
+
+#### What each part means
+
+<table>
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 44%" />
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left;">Part</th>
+<th style="text-align: left;">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><code>./plink</code></td>
+<td style="text-align: left;">Run the PLINK software executable from the
+current directory (<code>./</code> means “this folder”).</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--bfile plink</code></td>
+<td style="text-align: left;">Use the <strong>binary PLINK
+files</strong>: <code>plink.bed</code>, <code>plink.bim</code>, and
+<code>plink.fam</code>. These 3 files together define your genotype
+dataset.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--check-sex</code></td>
+<td style="text-align: left;">Run PLINK’s <strong>sex check</strong>
+routine. This checks whether the genetically inferred sex matches the
+sex reported in your <code>.fam</code> file.</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>--out Sex_Check</code></td>
+<td style="text-align: left;">Name the output files: e.g.,
+<code>Sex_Check.sexcheck</code> will be created.</td>
+</tr>
+</tbody>
+</table>
+
+#### What does –check-sex actually do?
+
+-   PLINK uses **X chromosome data** to estimate the inbreeding
+    coefficient **F** for each sample:
+
+    -   If F ≈ 1 → likely male (only one X chromosome → more
+        homozygosity)
+    -   If F ≈ 0 → likely female (two X chromosomes → more
+        heterozygosity)
+
+-   It then compares this estimate with the **sex** listed in your
+    **.fam** file (column 5).
+
+-   If there’s a mismatch, it flags it:
+
+-   Possible reasons: sample swap, data entry error, or sex chromosome
+    abnormality.
+
+#### Output
+
+-   The main output is:
+    -   Sex\_Check.sexcheck
+
+<table>
+<thead>
+<tr>
+<th>FID</th>
+<th>IID</th>
+<th>PEDSEX</th>
+<th>SNPSEX</th>
+<th>STATUS</th>
+<th>F</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>201320</td>
+<td>2</td>
+<td>2</td>
+<td>OK</td>
+<td>0.017</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201320</td>
+<td>1</td>
+<td>1</td>
+<td>OK</td>
+<td>0.976</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201327</td>
+<td>2</td>
+<td>1</td>
+<td>PROBLEM</td>
+<td>0.974</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201335</td>
+<td>2</td>
+<td>0</td>
+<td>PROBLEM</td>
+<td>0.456</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201342</td>
+<td>1</td>
+<td>2</td>
+<td>PROBLEM</td>
+<td>0.632</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201359</td>
+<td>1</td>
+<td>0</td>
+<td>PROBLEM</td>
+<td>0.321</td>
+</tr>
+</tbody>
+</table>
+
+-   Each row has:
+
+    -   FID
+    -   IID
+    -   PEDSEX: The reported sex in our `.fam` file
+    -   SNPSEX: The inferred sex estimated from the genotype data
+    -   STATUS (OK, PROBLEM)
+    -   F: Give value. If it is &lt; 0.2, sample is suggested as female
+        and if score is &gt; 0.8 sample is represented as male.
+
+-   The above command also provide a log file, here
+    `GWAS_Sex_Check.log`, that provides many information including
+    number of cases and controls, males and females count, individuals
+    with ambiguous code, etc
+
+-   Extract the IDs of individuals with discordant sex information. In
+    situations where discrepancies cannot be resolved, remove the
+    individuals through following command.
+
+<!-- -->
+
+    Gender <- read.table("Sex_check_1.sexcheck", header = T, as.is = T) %>%
+      na.omit()
+    png("Gender_check.png")
+
+    ggplot(Gender, aes(x=F, y= PEDSEX, col = STATUS))+
+      geom_point()+
+      labs(y="Gender", x = "F score")+
+      theme_classic()+
+      scale_x_continuous(breaks = round(seq(min(Gender$F), 1, by = 0.01), 1))+
+      theme(strip.text.x = element_blank())+
+      geom_circle(aes(x0 = 0.61,  y0 = 2, r = 0.42),
+                  inherit.aes = FALSE,
+                  col = "Red")+
+      geom_circle(aes(x0 = 0.05,  y0 = 1, r = 0.46),
+                  inherit.aes = FALSE,
+                  col = "Red")+
+      theme(axis.text.y = element_blank(),
+            axis.ticks.y = element_blank(),
+            legend.position = "none")+
+      annotate(geom="text", x=-0.2, y=2.1, label="Females (< 0.2)",
+               color="#e75480")+
+      annotate(geom="text", x=0.9, y=1.1, label="Males (> 0.8)",
+               color="#00bfff")+
+      annotate(geom="text", x=0.61, y=2.1, label="Females failed (> 0.2)",
+               color="#e75480")+
+      annotate(geom="text", x=0.05, y=1.1, label="Males failed (< 0.8)",
+               color="#00bfff")
+    dev.off()
+
+The above R script will create a png file containing information based
+on STATUS column and differentiate males, females and ambiguous data
+separately.
+
+<img src="Gender_check.png" alt="Discordant Sex information" width="480" />
+<p class="caption">
+Discordant Sex information
+</p>
+
+The above figure explains Individuals Discordant sex information.
+Samples failed QC are in red circle. Some samples also showed value less
+than 0. It is good to cross check these samples or **exclude it F score
+is &lt; -0.05**.
+
+#### PLINK command to remove the individuals based on sex information
+
+    plink --bfile raw_GWAS_data --remove discordant-sex-individuals-file.txt --make-bed --out 1_QC_Raw_GWAS_data
+
+File `“discordant-sex-individuals-file.txt”`, should contain only FID
+and IID of the individuals that have to be removed)
+
+<table>
+<thead>
+<tr>
+<th>FID</th>
+<th>IID</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>201320</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201327</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201335</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201342</td>
+</tr>
+<tr>
+<td>1</td>
+<td>201359</td>
+</tr>
+</tbody>
+</table>
