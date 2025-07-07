@@ -96,10 +96,10 @@ perfectly fine SNPs look unreliable.
 <tr>
 <td>1</td>
 <td>201359</td>
-<td>N1103</td>
+<td>N</td>
+<td>1103</td>
 <td>538448</td>
 <td>0.00204</td>
-<td></td>
 </tr>
 </tbody>
 </table>
