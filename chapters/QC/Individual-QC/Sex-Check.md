@@ -294,8 +294,35 @@ Discordant Sex information
 
 The above figure explains Individuals Discordant sex information.
 Samples failed QC are in red circle. Some samples also showed value less
-than 0. It is good to cross check these samples or **exclude it F score
-is &lt; -0.05**.
+than 0. It is good to cross check these samples.
+
+If observed heterozygosity **(*H*<sub>*o**b**s*</sub>) is higher than
+expected**, the F-statistic can drop below zero. \* For females, F
+should be around 0. \* Small negative values (like -0.05 to -0.2) are
+very common and not a concern. \* But -0.3, -0.4, or lower means the
+observed heterozygosity is quite a bit higher than expected.
+
+Sometimes mild negatives are normal noise.
+
+But **strongly negative F scores** (e.g., &lt; -0.3) are unusual — they
+can indicate: \* **Bad SNP calls** on the X chromosome. \* **Poor
+genotyping quality** → excess false heterozygotes. \*
+**Cross-contamination** → mixed DNA causes extra heterozygosity. \*
+**Mislabeled sex** → e.g., truly male but showing high heterozygosity
+due to error. \* **Aneuploidy** (very rare, e.g., XXY Klinefelter, or
+mosaicism).
+
+#### What we should do
+
+-   **Check sample call rates** → Is this sample’s X chromosome call
+    rate low?
+-   **Inspect heterozygosity plots** → Are these outliers compared to
+    other females?
+-   **Look at the sex field in your metadata** → Is the reported sex
+    consistent with the F value?
+-   **Visualize with a scatterplot** — e.g., plot F vs. autosomal
+    heterozygosity — true females should cluster near zero, males near
+    one.
 
 ### Removing failed gender
 
@@ -348,7 +375,7 @@ and IID of the individuals that have to be removed)
     plink --bfile raw_GWAS_data --remove discordant-sex-individuals-file.txt --make-bed --out 1_QC_Raw_GWAS_data
 
 -   **NOTE**: We can also remove all failed individuals at last stage
-    also.
+    too.
 
 #### Why the Sex Check Matters
 
@@ -383,3 +410,23 @@ is a simple but vital safeguard in GWAS pipelines. Combined with other
 quality control checks, it helps ensure that the dataset is free of
 mismatches, mix-ups, or anomalies — which is essential for valid,
 reproducible genetic association results.
+
+#### References
+
+-   Hartl DL, Clark AG (2007). Principles of Population Genetics (4th
+    ed.). Sinauer Associates.
+
+-   Weir BS, Cockerham CC (1984). Estimating F-Statistics for the
+    Analysis of Population Structure. Evolution 38(6): 1358–1370.
+
+-   Anderson CA, Pettersson FH, Clarke GM, Cardon LR, Morris AP,
+    Zondervan KT (2010). Data quality control in genetic case-control
+    association studies. Nat Protoc 5(9):1564–1573.
+
+-   Purcell S, Neale B, Todd-Brown K, et al. (2007). PLINK: A Tool Set
+    for Whole-Genome Association and Population-Based Linkage Analyses.
+    Am J Hum Genet 81(3): 559–575.
+
+-   Wray NR, Wijmenga C, Sullivan PF, Yang J, Visscher PM (2018). Common
+    Disease Is More Complex Than Implied by the Core Gene Omnigenic
+    Model. Cell 173(7): 1573–1580.

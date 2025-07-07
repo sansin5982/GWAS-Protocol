@@ -1,6 +1,12 @@
 ## Per SNP quality control
 
-#### Hardy Weinberg equilibrium
+#### Identification of SNPs with elevated missing data rates
+
+#### Test markers for different genotype call rates between cases and contols
+
+#### Minor Allele Frequency
+
+#### SNPs failing Hardy Weinberg equilibrium
 
 -   If the frequency of observed genotypes of a variant in a population
     can be derived from the observed allele frequencies, the genetic
@@ -58,11 +64,16 @@
 </tbody>
 </table>
 
-Source: Genetic Epidemiology: Mehmet T Dorak <br> - Rule of thumb: the
-heterozygote frequency can only reach a maximum of 50%. If heterozygote
-frequencies are more than 50%, it is a clear sign of HWD, regardless of
-statistical test result. - Most common reason is not biological,
-**genotyping error** is most plausible exploration.
+Source: Genetic Epidemiology: Mehmet T Dorak
 
-<br> PLINK Command <br> **./plink2 –bfile 4\_QC\_Raw\_GWAS\_data –geno
-0.01 –hwe 0.00000001 –make-bed –out 5\_QC\_Raw\_GWAS\_data**
+-   Rule of thumb: the heterozygote frequency can only reach a maximum
+    of 50%. If heterozygote frequencies are more than 50%, it is a clear
+    sign of HWD, regardless of statistical test result.
+-   Most common reason is not biological, **genotyping error** is most
+    plausible exploration.
+
+#### PLINK Command
+
+    ./plink2 --bfile 4_QC_Raw_GWAS_data --geno 0.01 --hwe 0.00000001 --make-bed --out 5_QC_Raw_GWAS_data
+
+#### 
