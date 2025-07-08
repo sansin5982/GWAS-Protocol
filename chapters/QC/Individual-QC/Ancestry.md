@@ -176,7 +176,7 @@ PCA solves this by:
 -   1.  Providing PCs as **numerical covariates** to include in your
         association model.
 
-#### PLINK Command
+#### PLINK Command to create 10 PC
 
     ./plink --bfile 3_QC_Raw_GWAS_data --extract raw-GWAS-data.prune.in --genome --cluster --pca 10 --out PCA
 
@@ -247,6 +247,11 @@ Scree PLot
       ) +
       theme_classic()
 
+<img src="PC_plot.png" alt="Principal Component 1 vs Principal Component 2" width="480" />
+<p class="caption">
+Principal Component 1 vs Principal Component 2
+</p>
+
 #### Saving outliers
 
     # Save outlier list for PLINK
@@ -254,3 +259,23 @@ Scree PLot
     write.table(outliers[, c("V1", "V2")],
                 "PCA_outliers.txt",
                 quote = FALSE, row.names = FALSE, col.names = FALSE)
+
+#### PLINK command to remove outliers using Principal Components
+
+    ./plink --bfile 3_QC_Raw_GWAS_data --remove PCA_outliers.txt --make-bed --out 4_QC_Raw_GWAS_data
+
+-   **Note**: Even after removing clear outliers, subtle structure
+    remains → include top PCs as covariates for final analysis
+
+# References
+
+1- Marees, A.T., et al, 2018. A tutorial on conducting genome‐wide
+association studies: Quality control and statistical analysis. *Int J
+Methods Psychiatr Res*, Jun; 27(2): e1608.
+
+2- Anderson, C.A. et al, 2010. Data quality control in genetic
+case-control association studies. *Nat Protoc*, Sep:5(9):1564-73
+
+3- Singh, Sandeep Kumar, “A Case-Only Genome-wide Association Study of
+Gender- and Age-specific Risk Markers for Childhood Leukemia” (2015).
+FIU Electronic Theses and Dissertations. 1832
