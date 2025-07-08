@@ -6,7 +6,7 @@ Chapters:
 -   [File formats to perform GWAS](chapters/File-formats)
 -   [Quality Control](chapters/QC)
     -   [Per Individual Quality Control](chapters/QC/Individual-QC)
-        -   [Sex Discrepencyl](chapters/QC/Individual-QC/Sex-Check)
+        -   [Sex Discrepency](chapters/QC/Individual-QC/Sex-Check)
         -   [Individuals with high
             missingness](chapters/QC/Individual-QC/Ind-Miss)
         -   [Individuals with high
