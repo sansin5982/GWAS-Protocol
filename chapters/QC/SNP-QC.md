@@ -1,79 +1,103 @@
-## Per SNP quality control
+# Per SNP quality control
 
-#### Identification of SNPs with elevated missing data rates
+**Per-SNP quality control** means evaluating the **quality and
+reliability** of each genetic variant (SNP) in your dataset before
+testing it for association with your trait of interest.
 
-#### Test markers for different genotype call rates between cases and contols
+In any GWAS, you may start with **hundreds of thousands to millions** of
+SNPs across the genome. But not every SNP is equally reliable — some may
+have been poorly genotyped, rarely observed, or show patterns that
+suggest technical errors.
+
+So, per-SNP QC systematically **filters out bad or suspicious
+variants**, leaving only high-confidence markers for robust downstream
+analyses.
+
+### Why is Per-SNP QC Necessary?
+
+#### 1. Avoid Technical Errors:
+
+Some SNPs consistently have poor call rates or high missingness.
+Including these can introduce **genotyping noise**, increasing false
+positives or masking true signals.
+
+#### 2. Exclude Rare, Unreliable Signals:
+
+Extremely rare variants in small samples often lack enough data for
+stable statistical testing. They can inflate standard errors or lead to
+unreliable results if left unfiltered.
+
+#### 3. Detect Systematic Problems:
+
+A SNP whose genotype frequencies **deviate too much** from what’s
+expected (like Hardy-Weinberg Equilibrium in controls) may indicate:
+
+-   Lab contamination.
+-   Genotyping assay problems.
+-   DNA sample mix-ups.
+-   Removing these ensures only **biologically plausible** variants
+    remain.
+
+#### 4. Protect Downstream Analyses:
+
+GWAS assumes that each tested SNP is a valid, well-measured marker.
+Poor-quality SNPs distort:
+
+-   Allele frequencies,
+-   Effect estimates,
+-   P-values, and can lead to irreproducible results.
+
+Per-SNP QC is about trust:
+
+> Are we confident this SNP really shows what we think it does?
+
+A robust GWAS filters out unreliable SNPs **before** the main analysis —
+ensuring that any significant hits are due to **real biological
+effects**, not technical artifacts.
+
+Per-SNP QC is a fundamental safeguard in modern genetic studies. Without
+it, even the most advanced association methods can produce misleading
+results. It’s simple in principle: keep only high-quality, well-behaved
+SNPs, so our study has the best chance of finding true genetic
+associations that replicate.
+
+#### SNP call rate (Missingness)
+
+Remove SNPs with too much missing data across all samples. High
+missingness suggests unreliable genotyping at that position. Remove SNPs
+missing in &gt;2–5% of samples.
 
 #### Minor Allele Frequency
 
+Filter out SNPs that are too rare to analyze robustly. Variants with
+extremely low frequency often have unstable allele frequency estimates
+and low statistical power. Drop SNPs with MAF below 0.01 (1%) or 0.05
+(5%) — this depends on your sample size and study design.
+
 #### SNPs failing Hardy Weinberg equilibrium
 
--   If the frequency of observed genotypes of a variant in a population
-    can be derived from the observed allele frequencies, the genetic
-    variant is said to be in Hardy–Weinberg equilibrium.
--   Genotype frequencies remain stable from one generation to another in
-    the absence of any evolutionary pressure (selection, mutation and
-    migration).
--   The goodness-of-fit test is used to test HWE is not a powerful test
-    and reliability of results depends on the sample size.
+Test whether observed genotype frequencies match those expected under
+random mating. Large deviations in controls often signal genotyping
+errors, population substructure, or sample contamination. Remove SNPs
+with HWE p-value below a strict threshold (e.g., 1e-6) in controls only
+— not in cases, because true disease associations can also cause
+deviations.
 
-<table>
-<thead>
-<tr>
-<th>Sample size</th>
-<th>50</th>
-<th>100</th>
-<th>200</th>
-<th>300</th>
-<th>400</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>AA count</td>
-<td>21</td>
-<td>42</td>
-<td>84</td>
-<td>126</td>
-<td>168</td>
-</tr>
-<tr>
-<td>AB count</td>
-<td>25</td>
-<td>50</td>
-<td>100</td>
-<td>150</td>
-<td>200</td>
-</tr>
-<tr>
-<td>BB count</td>
-<td>4</td>
-<td>8</td>
-<td>16</td>
-<td>24</td>
-<td>32</td>
-</tr>
-<tr>
-<td>HWE p value</td>
-<td>0.52</td>
-<td>0.26</td>
-<td>0.08</td>
-<td><strong>0.02</strong></td>
-<td><strong>0.009</strong></td>
-</tr>
-</tbody>
-</table>
+#### Duplicates, Multi-allelic or Non-biallelic Sites
 
-Source: Genetic Epidemiology: Mehmet T Dorak
+Many QC workflows keep only biallelic SNPs. Most standard GWAS tools
+assume SNPs have only two alleles (e.g., A/T). Complex variants often
+require special treatment or separate analysis.
 
--   Rule of thumb: the heterozygote frequency can only reach a maximum
-    of 50%. If heterozygote frequencies are more than 50%, it is a clear
-    sign of HWD, regardless of statistical test result.
--   Most common reason is not biological, **genotyping error** is most
-    plausible exploration.
+# References
 
-#### PLINK Command
+1- Marees, A.T., et al, 2018. A tutorial on conducting genome‐wide
+association studies: Quality control and statistical analysis. *Int J
+Methods Psychiatr Res*, Jun; 27(2): e1608.
 
-    ./plink2 --bfile 4_QC_Raw_GWAS_data --geno 0.01 --hwe 0.00000001 --make-bed --out 5_QC_Raw_GWAS_data
+2- Anderson, C.A. et al, 2010. Data quality control in genetic
+case-control association studies. *Nat Protoc*, Sep:5(9):1564-73
 
-#### 
+3- Singh, Sandeep Kumar, “A Case-Only Genome-wide Association Study of
+Gender- and Age-specific Risk Markers for Childhood Leukemia” (2015).
+FIU Electronic Theses and Dissertations. 1832
