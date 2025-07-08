@@ -12,5 +12,6 @@ Chapters:
         -   [Individuals with high
             Heterozygosity](chapters/QC/Individual-QC/Ind-Hetr)
         -   [Relatedness](chapters/QC/Individual-QC/Relatedness)
-        -   [Spurious Ancestry](chapters/QC/Individual-QC/Ancestry)
+        -   [Population
+            Stratification](chapters/QC/Individual-QC/Ancestry)
     -   [Per SNP Quality Control](chapters/QC/SNP-QC)
