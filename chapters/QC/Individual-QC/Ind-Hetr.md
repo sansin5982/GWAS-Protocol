@@ -18,24 +18,26 @@ chromosomes).
 The heterozygosity rate is an important **per-sample QC** metric in GWAS
 because it can reveal **biological or technical problems** in your data.
 
-### 1. Expected Pattern:
+### 1. Expected Pattern
 
 Most individuals from the same ancestry will have **similar
 heterozygosity rates**, because the expected level of genetic variation
 is stable within a population.
 
-### 2. Low Heterozygosity:
+### 2. Low Heterozygosity
 
 If an individual’s heterozygosity rate is **much lower** than the rest:
 \* It might indicate **inbreeding** (more homozygous genotypes than
 expected). \* Or poor genotyping quality that caused some heterozygous
 calls to be missed.
 
-### 3. High Heterozygosity:
+### 3. High Heterozygosity
 
-If an individual’s heterozygosity rate is **unusually high**: \* It can
-signal **DNA contamination** (e.g., DNA from two people mixed, showing
-extra heterozygous calls). \* Or systematic genotyping error.
+If an individual’s heterozygosity rate is **unusually high**:
+
+-   It can signal **DNA contamination** (e.g., DNA from two people
+    mixed, showing extra heterozygous calls).
+-   Or systematic genotyping error.
 
 #### How is it Used in QC?
 
@@ -47,7 +49,7 @@ extra heterozygous calls). \* Or systematic genotyping error.
 -   This keeps our dataset free from hidden contamination, inbreeding
     artifacts, or low-quality samples.
 
-#### PLINK command
+#### PLINK command to calculate heterozygosity rate
 
     ./plink --bfile 1_QC_Raw_GWAS_data --het --out outlying_heterozygosity_rate
 
@@ -152,6 +154,25 @@ standard deviation.
 <p class="caption">
 Individual missingness and heterozygoisty rate
 </p>
+
+#### Exclude failed individuals
+
+    exclude<- subset(hetro_miss, hetro_miss$F_MISS >= 0.01 | hetro_miss$obs_hetero_rate  <= 0.1836184) %>% 
+      select(1:2)
+
+    # create text file
+    write.table(exclude, "Missing_Heter/hetrocheckexclude.txt", 
+                row.names=FALSE, 
+                col.names = FALSE,
+                sep="\t", 
+                quote=FALSE)
+
+Previous step will create hetrocheckexclude.txt\` file that contains
+sample failed missingness and heterozygoisty rate
+
+#### PLINK command to exclude samples
+
+    ./plink --bfile 1_QC_Raw_GWAS_data --remove hetrocheckexclude.txt --make-bed --out1_QC_Raw_GWAS_data 
 
 The heterozygosity rate is a simple but powerful QC check. By flagging
 individuals with too high or too low genetic diversity, it protects your

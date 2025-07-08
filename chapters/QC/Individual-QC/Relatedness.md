@@ -2,7 +2,7 @@
 
 **Relatedness QC** is the step in genome-wide association studies where
 we **identify and manage individuals who are closely related to each
-other** in your sample.
+other** in our sample.
 
 Most GWAS assume that all individuals are **statistically independent**
 — meaning they’re **unrelated** beyond distant population-level
@@ -17,10 +17,10 @@ heritability estimates.
     fully independent observations.
 
 -   **Allele frequency bias**: The presence of close relatives can
-    over-represent certain alleles in your sample.
+    over-represent certain alleles in our sample.
 
 -   **Inflated test statistics**: The GWAS model assumes that the errors
-    are independent. Relatedness violates this, so your p-values may be
+    are independent. Relatedness violates this, so our p-values may be
     **too small** — leading to false positives.
 
 #### How is Relatedness Measured?
@@ -98,6 +98,9 @@ got it from your mother, that “A” is IBD.
 <p class="caption">
 Identical By Descent
 </p>
+
+[Image
+Credit](https://bio.libretexts.org/Bookshelves/Genetics/Population_and_Quantitative_Genetics_%28Coop%29/02%3A_Allele_and_Genotype_Frequencies)
 
 ### Identical By State (IBS)
 
