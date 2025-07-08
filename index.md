@@ -15,3 +15,7 @@ Chapters:
         -   [Population
             Stratification](chapters/QC/Individual-QC/Ancestry)
     -   [Per SNP Quality Control](chapters/QC/SNP-QC)
+        -   [Minor Allele Frequencyl](chapters/QC/SNP-QC/MAF)
+        -   [Individuals with high
+            missingnessl](chapters/QC/SNP-QC/SNP-Miss)
+        -   [Hardy-Weinberg Equilibrium (HWE)l](chapters/QC/SNP-QC/HWE)

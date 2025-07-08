@@ -129,6 +129,14 @@ avoid false positives.
       xlab("MDS Dimension 1") +
       ylab("MDS Dimension 2") +
       ggtitle("MDS Plot: Dimension 1 vs Dimension 2")+
+      scale_x_continuous(
+        limits = c(-0.1, 0.15),  # Example range, adjust as needed
+        breaks = seq(-0.1, 0.15, by = 0.05)
+      ) +
+      scale_y_continuous(
+        limits = c(-0.2, 0.4),
+        breaks = seq(-0.2, 0.4, by = 0.05)
+      ) +
       theme_classic()
 
 <img src="MDS_population_stratification.png" alt="Population Stratification by Multidimensional Scaling" width="480" />
@@ -138,8 +146,111 @@ Population Stratification by Multidimensional Scaling
 
 #### Approach 2: Principal component analysis
 
+**Principal Component Analysis (PCA)** is a statistical method that
+reduces your **genome-wide SNP data** into **principal components
+(PCs)** — axes that summarize the **major directions of genetic
+variation**.
+
+#### In a GWAS:
+
+PCA is used to:
+
+-   Detect hidden population structure (e.g., subtle ancestry
+    differences).
+-   Identify ancestry outliers.
+-   Provide PCs as covariates to adjust for stratification, which helps
+    **prevent false positives**.
+
+#### Why do we run PCA in GWAS?
+
+-   Different ancestral groups naturally have different allele
+    frequencies.
+
+-   If not adjusted, this population stratification can cause SNPs to
+    appear associated with our trait just because they track ancestry —
+    not because they affect the trait.
+
+PCA solves this by:
+
+-   1.  Revealing structure (plots show clusters).
+-   1.  Providing PCs as **numerical covariates** to include in your
+        association model.
+
 #### PLINK Command
 
-    .\plink --bfile 3_QC_Raw_GWAS_data --genome --cluster --pca 10
+    ./plink --bfile 3_QC_Raw_GWAS_data --extract raw-GWAS-data.prune.in --genome --cluster --pca 10 --out PCA
 
--   We can also utilize hapmap data to perform PCA
+#### Output:
+
+-   PCA.eigenvec → individuals’ coordinates on each PC.
+-   PCA.eigenval → eigenvalues (variance explained).
+
+<!-- -->
+
+    # Read eigenvalues and eigenvectors
+    eigenvalues <- fread("plink.eigenval")
+    eigenvectors <- fread("plink.eigenvec")
+
+    # Add PC numbers and percent variance
+    eigenvalues$PC <- 1:nrow(eigenvalues)
+    eigenvalues$variance_percent <- round((eigenvalues$V1 / sum(eigenvalues$V1)) * 100, 2)
+
+    # Scree plot
+    ggplot(eigenvalues, aes(x = PC, y = variance_percent)) +
+      geom_bar(stat = "identity", fill = "steelblue") +
+      labs(
+        title = "Scree Plot",
+        x = "Principal Component",
+        y = "Variance Explained (%)"
+      ) +
+      theme_classic()
+
+<img src="Scree_plot.png" alt="Scree PLot" width="480" />
+<p class="caption">
+Scree PLot
+</p>
+
+    # Calculate PC1 and PC2 mean/sd
+    mean_PC1 <- mean(eigenvectors$V3)
+    sd_PC1 <- sd(eigenvectors$V3)
+
+    mean_PC2 <- mean(eigenvectors$V4)
+    sd_PC2 <- sd(eigenvectors$V4)
+
+    # Flag outliers
+    eigenvectors$outlier <- ifelse(
+      abs(eigenvectors$V3 - mean_PC1) > 3 * sd_PC1 |
+        abs(eigenvectors$V4 - mean_PC2) > 3 * sd_PC2,
+      "Outlier", "Inlier"
+    )
+
+#### Creating plot between PC1 and PC2
+
+    # Plot with outliers
+    png("PC_plot.png")
+    ggplot(eigenvectors, aes(x = V3, y = V4)) +
+      geom_point(size = 2) +
+      geom_hline(yintercept = 0, linetype = "dotted") +
+      geom_vline(xintercept = 0, linetype = "dotted") +
+      labs(
+        title = "PCA: PC1 vs PC2",
+        x = paste0("PC1 (", eigenvalues$variance_percent[1], "%)"),
+        y = paste0("PC2 (", eigenvalues$variance_percent[2], "%)")
+      ) +
+      scale_x_continuous(
+        limits = c(-0.5, 0.2),  # Example range, adjust as needed
+        breaks = seq(-0.5, 0.2, by = 0.1)
+      ) +
+      scale_y_continuous(
+        limits = c(-0.1, 1),
+        breaks = seq(-0.1, 1, by = 0.1)
+      ) +
+      theme_classic()
+
+#### Saving outliers
+
+    # Save outlier list for PLINK
+    outliers <- subset(eigenvectors, outlier == "Outlier")
+    write.table(outliers[, c("V1", "V2")],
+                "PCA_outliers.txt",
+                quote = FALSE, row.names = FALSE, col.names = FALSE)
