@@ -1,3 +1,10 @@
+<script type="text/javascript" async
+    src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+</script>
+
 # Hardy–Weinberg Equilibrium (HWE)
 
 **HWE** is a **fundamental principle** in population genetics that
@@ -34,8 +41,11 @@ $$
 \large p + q = 1
 $$
 
-The expected genotype frequencies are: \* *A**A* : *p*<sup>2</sup> \*
-*A**a* : 2*p**q* \* *a**a* : *q*<sup>2</sup>
+The expected genotype frequencies are:
+
+-   *A**A* : *p*<sup>2</sup>
+-   *A**a* : 2*p**q*
+-   *a**a* : *q*<sup>2</sup>
 
 #### Example:
 
