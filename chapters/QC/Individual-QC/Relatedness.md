@@ -1,3 +1,10 @@
+<script type="text/javascript" async
+    src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+</script>
+
 # Relatedness
 
 **Relatedness QC** is the step in genome-wide association studies where
@@ -464,7 +471,7 @@ So **pi-hat** sums the probability that:
 
 Tools like PLINK estimate pi-hat using genotype data:
 
-1.  F\* or each SNP, it looks at both individuals’ genotypes.
+1.  For each SNP, it looks at both individuals’ genotypes.
 2.  It counts:
 
 -   The proportion of SNPs where they share **0, 1, or 2** alleles IBS
@@ -525,7 +532,7 @@ separately** from the main autosomal pipeline.
 
 -   Create independent SNPs through pruning
 
-#### PLINK command
+#### PLINK command to prune LD SNPs
 
     .\plink     --bfile     Autosomal   --indep-pairwise    50 5 0.2 --out raw-GWAS-data
 
@@ -551,8 +558,7 @@ separately** from the main autosomal pipeline.
 So this removes SNPs that are **highly correlated**, leaving you with a
 **pruned set of approximately independent markers**.
 
-it will generate raw-GWAS-data.prune.in file. This file use in next step
-\* Check relatedness
+-   This step will generate raw-GWAS-data.prune.in file.
 
 #### Purpose:
 
