@@ -10,9 +10,10 @@
 **HWE** is a **fundamental principle** in population genetics that
 describes how **allele and genotype frequencies** behave in an
 **idealized population** from one generation to the next — **if certain
-assumptions hold true**.
+assumptions hold true**. The law is named after G.H. Hardy and Wilhelm
+Weinberg.
 
-#### Basic idea
+#### Basic idea behind HWE
 
 If:
 
@@ -43,9 +44,15 @@ $$
 
 The expected genotype frequencies are:
 
--   *A**A* : *p*<sup>2</sup>
--   *A**a* : 2*p**q*
--   *a**a* : *q*<sup>2</sup>
+-   AA (dominant homozygous frequency):*p*<sup>2</sup>
+-   Aa (heterozygous frequency):2pq
+-   aa (recessive homozygous frequency):*q*<sup>2</sup>
+
+and
+
+$$
+\large p^2 + 2pq + q^2 = 2
+$$
 
 #### Example:
 
@@ -190,6 +197,14 @@ Source: Genetic Epidemiology: Mehmet T Dorak
 -   **Rule of thumb**: the heterozygote frequency can only reach a
     maximum of 50%. If heterozygote frequencies are more than 50%, it is
     a clear sign of HWD, regardless of statistical test result.
+
+<img src="HWE.png" alt="Hardy–Weinberg principle" width="330" />
+<p class="caption">
+Hardy–Weinberg principle
+</p>
+
+[Image
+Credit](https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle)
 
 -   Most common reason is not biological, **genotyping error** is most
     plausible exploration.
