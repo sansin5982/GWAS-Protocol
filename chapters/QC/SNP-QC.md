@@ -89,6 +89,35 @@ Many QC workflows keep only biallelic SNPs. Most standard GWAS tools
 assume SNPs have only two alleles (e.g., A/T). Complex variants often
 require special treatment or separate analysis.
 
+Though we can remove all low-quality SNPs step by step, but filtering
+them together in a single PLINK run is standard, efficient, and
+recommended.
+
+#### The filters are independent
+
+-   Each QC filter (SNP call rate, MAF, HWE) is just a logical check.
+-   If a SNP fails any one filter, you want it gone.
+
+#### One step is faster and easier to track
+
+-   Running everything together means:
+
+    -   Only one PLINK command.
+    -   One consistent output.
+    -   Less chance of accidental reprocessing or forgetting an
+        intermediate file.
+
+#### Exception: When you must filter on a subset
+
+-   One case when we DO break it up:
+
+-   **HWE**: We should filter on controls only, not all samples.
+
+So we might:
+
+-   Extract controls → run `--hwe` → get list of SNPs that pass.⃣
+-   Remove those SNPs from the full dataset.
+
 # References
 
 1- Marees, A.T., et al, 2018. A tutorial on conducting genome‐wide
@@ -101,3 +130,6 @@ case-control association studies. *Nat Protoc*, Sep:5(9):1564-73
 3- Singh, Sandeep Kumar, “A Case-Only Genome-wide Association Study of
 Gender- and Age-specific Risk Markers for Childhood Leukemia” (2015).
 FIU Electronic Theses and Dissertations. 1832
+
+4- Ricopili pipeline (PGC): does HWE control-only first → then combines
+other filters.
