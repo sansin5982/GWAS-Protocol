@@ -30,7 +30,7 @@ distribution.
 
 #### The classic formula
 
-Suppose you have:
+Suppose we have:
 
 -   Two alleles: **A** and **a**.
 -   The frequency of allele A = **p**.
@@ -56,19 +56,21 @@ $$
 
 #### Example:
 
-If allele A has frequency 0.7 and a has frequency 0.3: \* AA:
-0.7<sup>2</sup> = 0.49 \* Aa: 2 x 0.7 x 0.3 = 0.42 \* aa:
-0.3<sup>2</sup> = 0.09
+If allele A has frequency 0.7 and a has frequency 0.3:
+
+-   AA: 0.7<sup>2</sup> = 0.49
+-   Aa: 2 x 0.7 x 0.3 = 0.42
+-   aa: 0.3<sup>2</sup> = 0.09
 
 So we expect ~49% AA, 42% Aa, and 9% aa in the population.
 
 #### Why is HWE useful?
 
-HWE gives you a **baseline expectation** for how genotypes should be
-distributed **if there’s no weirdness** happening at that locus in your
+HWE gives us a **baseline expectation** for how genotypes should be
+distributed **if there’s no weirdness** happening at that locus in our
 population.
 
-If you observe **large deviations** from HWE:
+If we observe **large deviations** from HWE:
 
 -   It suggests something interesting or problematic is going on.
 -   It could be **biological**: selection, inbreeding, non-random
@@ -78,7 +80,7 @@ If you observe **large deviations** from HWE:
 
 #### Why test for HWE in GWAS QC?
 
-In GWAS, you usually:
+In GWAS, we usually:
 
 -   Test HWE **in controls only**, not cases.
 -   Why? Because the disease itself may cause true deviations in cases.
@@ -89,11 +91,11 @@ A **SNP with big HWE deviation in controls** is a red flag:
 -   Maybe there’s allele dropout.
 -   Maybe there’s cryptic population structure.
 
-So you **exclude** SNPs that deviate strongly from HWE in controls,
+So we **exclude** SNPs that deviate strongly from **HWE in controls**,
 using a **stringent p-value** cutoff (e.g., p &lt; 1e–6).
 
 We keep only SNPs that behave as expected under simple population
-genetics — boosting trust that any association you see is real, not an
+genetics — boosting trust that any association we see is real, not an
 artifact.
 
 #### How is HWE tested?
@@ -110,7 +112,7 @@ HWE is not only a QC filter — it can also reveal real biology:
 
 -   Deviations might reflect **selection pressure** at that site.
 -   Or **inbreeding**, which reduces heterozygosity.
--   Or **population substructure** (e.g., if your sample includes mixed
+-   Or **population substructure** (e.g., if we sample includes mixed
     ancestries).
 
 So **for controls** → big deviations usually mean technical problems →
@@ -134,16 +136,18 @@ Testing for HWE:
 
 -   Is a standard part of every GWAS pipeline.
 
--   If the frequency of observed genotypes of a variant in a population
-    can be derived from the observed allele frequencies, the genetic
-    variant is said to be in HWE.
+-   If the frequencies of observed genotypes for a variant in a
+    population can be predicted directly from the observed allele
+    frequencies, the genetic variant is said to be in Hardy–Weinberg
+    Equilibrium (HWE).
 
--   Genotype frequencies remain stable from one generation to another in
-    the absence of any evolutionary pressure (selection, mutation and
-    migration).
+-   Genotype frequencies remain stable from one generation to the next
+    if there is no evolutionary pressure such as selection, mutation, or
+    migration.
 
--   The goodness-of-fit test is used to test HWE is not a powerful test
-    and reliability of results depends on the sample size.
+-   The goodness-of-fit test used to assess HWE is not a powerful test
+    by itself, and the reliability of its results depends strongly on
+    the sample size.
 
 <table>
 <thead>

@@ -1,10 +1,10 @@
 # Per SNP quality control
 
 **Per-SNP quality control** means evaluating the **quality and
-reliability** of each genetic variant (SNP) in your dataset before
-testing it for association with your trait of interest.
+reliability** of each genetic variant (SNP) in our dataset before
+testing it for association with our trait of interest.
 
-In any GWAS, you may start with **hundreds of thousands to millions** of
+In any GWAS, we may start with **hundreds of thousands to millions** of
 SNPs across the genome. But not every SNP is equally reliable — some may
 have been poorly genotyped, rarely observed, or show patterns that
 suggest technical errors.
@@ -72,7 +72,7 @@ missing in &gt;2–5% of samples.
 Filter out SNPs that are too rare to analyze robustly. Variants with
 extremely low frequency often have unstable allele frequency estimates
 and low statistical power. Drop SNPs with MAF below 0.01 (1%) or 0.05
-(5%) — this depends on your sample size and study design.
+(5%) — this depends on our sample size and study design.
 
 #### SNPs failing Hardy Weinberg equilibrium
 

@@ -8,7 +8,7 @@
 # Identification of Individuals of divergent ancestry
 
 In GWAS QC, this step means detecting individuals in our sample whose
-genetic ancestry is **different** from your main study population.
+genetic ancestry is **different** from our main study population.
 
 For example:
 
@@ -25,13 +25,13 @@ The main issue is **population stratification**:
     ancestry.
 -   If ancestry is mixed, we may see **spurious associations** —
     variants that differ because of ancestry **and not because they’re
-    truly related to your trait**.
+    truly related to our trait**.
 -   This produces **false positives**, biased effect estimates, and can
-    completely distort your results.
+    completely distort our results.
 
 **Example**: If cases and controls have slightly different ancestry on
-average (e.g., more cases with Southern European ancestry), you might
-find SNPs that simply tag that ancestry — not your disease!
+average (e.g., more cases with Southern European ancestry), we might
+find SNPs that simply tag that ancestry — not our disease!
 
 > So: Ancestry outliers must be checked, flagged, and handled properly.
 
@@ -147,9 +147,8 @@ Population Stratification by Multidimensional Scaling
 #### Approach 2: Principal component analysis
 
 **Principal Component Analysis (PCA)** is a statistical method that
-reduces your **genome-wide SNP data** into **principal components
-(PCs)** — axes that summarize the **major directions of genetic
-variation**.
+reduces our **genome-wide SNP data** into **principal components (PCs)**
+— axes that summarize the **major directions of genetic variation**.
 
 #### In a GWAS:
 
@@ -173,7 +172,7 @@ PCA is used to:
 PCA solves this by:
 
 -   1.  Revealing structure (plots show clusters).
--   1.  Providing PCs as **numerical covariates** to include in your
+-   1.  Providing PCs as **numerical covariates** to include in our
         association model.
 
 #### PLINK Command to create 10 PC
