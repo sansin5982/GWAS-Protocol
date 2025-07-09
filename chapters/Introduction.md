@@ -43,10 +43,10 @@ powerful tool in the field of genetics and genomics.
     -   [link](HRC.r1-1.GRCh37.wgs.mac5.sites.tab)[link](ftp://ngs.sanger.ac.uk/production/hrc/HRC.r1-1/)
 -   **HRC preparation checking tool**
     -   [link](https://www.well.ox.ac.uk/~wrayner/tools/HRC-1000G-check-bim-v4.2.9.zipa)
--   Set the path for these tools so you directly call them from a
-    different folder. To set the path first you have enter in that
-    specific tools
+-   Set the path for these tools so we can directly call them from a
+    different folder. To set the path first we have to enter in that
+    specific directory
 
 <!-- -->
 
-    export PATH=$PATH:$(pwd)
+    export PATH=$PATH:/mnt/d/UNIX/GWAS/plink_linux_x86_64_20230116

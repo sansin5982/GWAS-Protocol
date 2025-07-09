@@ -38,3 +38,16 @@ rates.**
 
 -   So typical GWAS filters remove SNPs missing in more than 2–5% of
     samples.
+
+# References
+
+1- Marees, A.T., et al, 2018. A tutorial on conducting genome‐wide
+association studies: Quality control and statistical analysis. *Int J
+Methods Psychiatr Res*, Jun; 27(2): e1608.
+
+2- Anderson, C.A. et al, 2010. Data quality control in genetic
+case-control association studies. *Nat Protoc*, Sep:5(9):1564-73
+
+3- Singh, Sandeep Kumar, “A Case-Only Genome-wide Association Study of
+Gender- and Age-specific Risk Markers for Childhood Leukemia” (2015).
+FIU Electronic Theses and Dissertations. 1832
