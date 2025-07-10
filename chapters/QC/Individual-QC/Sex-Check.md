@@ -93,7 +93,7 @@ metric in **genetic QC pipelines**.
 
 #### PLINK command
 
-    ./plink --bfile plink --check-sex --out Sex_Check
+    ./plink --bfile data --check-sex --out Sex_Check
 
 #### What each part means
 
@@ -115,10 +115,10 @@ metric in **genetic QC pipelines**.
 current directory (<code>./</code> means “this folder”).</td>
 </tr>
 <tr>
-<td style="text-align: left;"><code>--bfile plink</code></td>
+<td style="text-align: left;"><code>--bfile data</code></td>
 <td style="text-align: left;">Use the <strong>binary PLINK
-files</strong>: <code>plink.bed</code>, <code>plink.bim</code>, and
-<code>plink.fam</code>. These 3 files together define your genotype
+files</strong>: <code>data.bed</code>, <code>data.bim</code>, and
+<code>data.fam</code>. These 3 files together define your genotype
 dataset.</td>
 </tr>
 <tr>
@@ -372,7 +372,7 @@ and IID of the individuals that have to be removed)
 
 #### PLINK command to remove the individuals based on sex information
 
-    plink --bfile raw_GWAS_data --remove discordant-sex-individuals-file.txt --make-bed --out 1_QC_Raw_GWAS_data
+    ./plink --bfile data --remove discordant-sex-individuals-file.txt --make-bed --out Sex_check_File
 
 -   **NOTE**: We can also remove all failed individuals at last stage
     too.
