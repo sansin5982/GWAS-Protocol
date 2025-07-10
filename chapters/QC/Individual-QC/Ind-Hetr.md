@@ -51,7 +51,7 @@ If an individual’s heterozygosity rate is **unusually high**:
 
 #### PLINK command to calculate heterozygosity rate
 
-    ./plink --bfile 1_QC_Raw_GWAS_data --het --out outlying_heterozygosity_rate
+    ./plink --bfile Sex_check_File --het --out outlying_heterozygosity_rate
 
 <table>
 <thead>
@@ -94,8 +94,8 @@ If an individual’s heterozygosity rate is **unusually high**:
 <!-- -->
 
     # Missing individual & Heterozygosity rate
-    miss <- fread("SEX_data/Missing_sample/missing_data_rate.imiss")
-    hetro <- fread("SEX_data/Missing_sample/Heterozygosity_rate/outlying_heterozygosity_rate.het")
+    miss <- fread("missing_data_rate.imiss")
+    hetro <- fread("outlying_heterozygosity_rate.het")
     head(miss, 2)
     head(hetro, 2)
 
@@ -106,7 +106,7 @@ $$
 $$
 
     # Calculate the observed heterozyosity rate
-    hetro$obs_hetero_rate <- ((hetro$`N(NM)`)-hetro$`O(HOM)`)/hetro$`N(NM)`
+    hetro$obs_hetero_rate <- (hetro$`N(NM)` - hetro$`O(HOM)`) / hetro$`N(NM)`
 
 -   Merge the miss and hetro dataframe above created
 
@@ -119,7 +119,7 @@ $$
     # Creating plot
     png("Missing_hetero_check.png")
     ggplot(hetro_miss, aes(x = F_MISS, y = obs_hetero_rate))+
-      geom_point(alpha = 0.5, col = "#00bfff")+
+      geom_point(alpha = 0.5, col = "#00bfff") +
       labs(x ="Proportion of Missing genotypes(log scale)", y = "Heterozygosity rate")+
       scale_x_log10(limits = c(0.0001, 1))+
       theme_classic()+
@@ -132,18 +132,21 @@ $$
                  pch = 19,
                  size=1.6,
                  colour = "#e75480")+
-      annotate(geom="text", x=0.035, y=0.303, label="Missing genotypes (>1%)",
+      geom_point(data=hetro_miss %>%
+                   filter(obs_hetero_rate < 0.27 | obs_hetero_rate > 0.34),
+                 pch = 19,
+                 size=1.6,
+                 colour = "midnightblue")+
+      annotate(geom="text", x=0.056, y=0.325, label="Missing genotypes (>1%)",
                color="#003300")+
-      annotate(geom="text", x=0.1, y=0.285, label="Excess heterozygosity rate (Â± 3 sd from mean)",
+      annotate(geom="text", x=0.056, y=0.24, label="Excess heterozygosity rate (± 3 sd from mean)",
                color="#003300")+
-      annotate(geom="text", x=0.00017, y=0.315, label="+3 sd from mean",
+      annotate(geom="text", x=0.00017, y=0.335, label="+3 sd from mean",
                color="#003300")+
-      annotate(geom="text", x=0.00017, y=0.301, label="-3 sd from mean",
+      annotate(geom="text", x=0.00017, y=0.27, label="-3 sd from mean",
                color="#003300")+
       annotate(geom="text", x=0.0015, y=0.31, label="Genotyping > 99%",
                color="#003300")
-
-    dev.off()
 
 The above R script will create a png file containing information based
 on missing rate and heterozygosity rate. For missing rate we set a
@@ -157,11 +160,21 @@ Individual missingness and heterozygoisty rate
 
 #### Exclude failed individuals
 
-    exclude<- subset(hetro_miss, hetro_miss$F_MISS >= 0.01 | hetro_miss$obs_hetero_rate  <= 0.1836184) %>% 
+    # Exclude failed individuals
+    # Calculate mean and sd for heterozygosity
+    hetro_mean <- mean(hetro_miss$obs_hetero_rate, na.rm = TRUE)
+    hetro_sd <- sd(hetro_miss$obs_hetero_rate, na.rm = TRUE)
+
+    upper_sd <- hetro_mean + 3 * hetro_sd
+    lower_sd <- hetro_mean - 3 * hetro_sd
+
+    # Exclude failed individuals
+    exclude <- hetro_miss %>%
+      filter(F_MISS >= 0.01 | obs_hetero_rate <= lower_sd | obs_hetero_rate >= upper_sd) %>%
       select(1:2)
 
     # create text file
-    write.table(exclude, "Missing_Heter/hetrocheckexclude.txt", 
+    write.table(exclude, "hetrocheckexclude.txt", 
                 row.names=FALSE, 
                 col.names = FALSE,
                 sep="\t", 
@@ -172,7 +185,10 @@ sample failed missingness and heterozygoisty rate
 
 #### PLINK command to exclude samples
 
-    ./plink --bfile 1_QC_Raw_GWAS_data --remove hetrocheckexclude.txt --make-bed --out1_QC_Raw_GWAS_data 
+    ./plink --bfile Sex_check_File --remove hetrocheckexclude.txt --make-bed --out Imiss_heter
+
+The above steps will remove all samples those failed individual missing
+rate and heterozygosity rate
 
 The heterozygosity rate is a simple but powerful QC check. By flagging
 individuals with too high or too low genetic diversity, it protects your
