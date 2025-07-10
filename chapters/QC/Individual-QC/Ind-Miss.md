@@ -38,7 +38,7 @@ perfectly fine SNPs look unreliable.
 
 #### PLINK command to calculate missing rate.
 
-    ./plink2 --bfile 1_QC_Raw_GWAS_data --missing --out missing_data_rate
+    ./plink --bfile Sex_check_File -missing --out missing_data_rate
 
 -   Command creates the files “missing\_data\_rate.imiss” and
     “missing\_data\_rate.lmiss”.
