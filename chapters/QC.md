@@ -72,6 +72,79 @@ unstable estimates.
 
 ------------------------------------------------------------------------
 
+<table>
+<colgroup>
+<col style="width: 5%" />
+<col style="width: 47%" />
+<col style="width: 46%" />
+</colgroup>
+<thead>
+<tr>
+<th><strong>Aspect</strong></th>
+<th><strong>Per-Sample QC</strong></th>
+<th><strong>Per-SNP QC</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Goal</strong></td>
+<td>Ensure every <strong>individual/sample</strong> is reliable</td>
+<td>Ensure every <strong>genetic variant (SNP)</strong> is reliable</td>
+</tr>
+<tr>
+<td><strong>Checks Applied</strong></td>
+<td>Looks <strong>across SNPs for each person</strong></td>
+<td>Looks <strong>across people for each SNP</strong></td>
+</tr>
+<tr>
+<td><strong>Key Steps</strong></td>
+<td>• Missingness (sample call rate)<br>• Sex check (X
+heterozygosity)<br>• Heterozygosity outliers<br>•
+Relatedness/duplicates<br>• Ancestry outliers (PCA/MDS)</td>
+<td>• SNP missingness (call rate)<br>• Minor Allele Frequency (MAF)<br>•
+Hardy-Weinberg Equilibrium (HWE)<br>• Imputation quality (INFO/R²)<br>•
+Remove multi-allelic/unreliable sites</td>
+</tr>
+<tr>
+<td><strong>Why it’s needed</strong></td>
+<td>- Removes bad DNA, swaps, mislabeled or contaminated samples<br>-
+Ensures independence (no unexpected relatives)<br>- Ensures correct
+ancestry group</td>
+<td>- Filters technical genotyping errors<br>- Removes extremely rare,
+unstable variants<br>- Excludes implausible markers that could cause
+false positives</td>
+</tr>
+<tr>
+<td><strong>When to run</strong></td>
+<td><strong>Before</strong> any association tests, right after raw
+data</td>
+<td><strong>In parallel</strong> with per-sample QC, before GWAS
+tests</td>
+</tr>
+<tr>
+<td><strong>Typical Thresholds</strong></td>
+<td>• Remove samples with &gt;2–5% missing genotypes<br>• Check
+F-statistic for sex<br>• Heterozygosity ±3 SD<br>• pi-hat &gt; 0.185 →
+remove relatives<br>• PCA/MDS → remove ancestry outliers</td>
+<td>• Remove SNPs with &gt;2–5% missing calls<br>• MAF &lt; 0.01–0.05 →
+drop<br>• HWE p &lt; 1e-6 (in controls)<br>• Imputation INFO score &lt;
+0.8 → drop</td>
+</tr>
+<tr>
+<td><strong>Key Tools</strong></td>
+<td>PLINK, KING, EIGENSOFT (PCA), basic stats</td>
+<td>PLINK, bcftools, imputation tools (INFO)</td>
+</tr>
+<tr>
+<td><strong>Impact if skipped</strong></td>
+<td>Wrong or duplicate samples inflate errors, bias results</td>
+<td>Poor SNPs create false positives, reduce power</td>
+</tr>
+</tbody>
+</table>
+
+------------------------------------------------------------------------
+
 ## Conclusion
 
 QC is critical for valid, replicable GWAS results. Each step removes
