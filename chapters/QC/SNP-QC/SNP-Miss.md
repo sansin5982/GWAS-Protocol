@@ -124,7 +124,7 @@ SNP call rate
 Based on the image we will choose a more strict threshold (99%) to drop
 the SNPs. These SNPs will be dropped in next step during MAF.
 
-# References
+#### References
 
 1- Marees, A.T., et al, 2018. A tutorial on conducting genome‐wide
 association studies: Quality control and statistical analysis. *Int J
