@@ -213,6 +213,73 @@ Credit](https://en.wikipedia.org/wiki/Hardy%E2%80%93Weinberg_principle)
 -   Most common reason is not biological, **genotyping error** is most
     plausible exploration.
 
+#### Why you test HWE in controls
+
+First, the reason:
+
+-   Deviations from HWE in **controls** usually point to **technical
+    problems** like genotyping errors, batch artifacts, or DNA
+    contamination.
+
+-   True biological associations (like disease risk) **can legitimately
+    distort HWE** in **cases** — so we **do not filter based on HWE in
+    cases**.
+
+Therefore, the standard approach is to **test HWE only in controls →
+remove SNPs with significant deviation → keep reliable SNPs only**.
+
+#### PLINK STEPS to remove SNPs failing HWE
+
+#### 1. Make sure our cases & controls are correctly defined
+
+Our `.fam` file should have:
+
+-   `PHENO` column: `1` = case, `0` = control, `-9` or `NA` = missing.
+
+#### 2. Check HWE stats
+
+    ./plink --bfile 3_QC_Raw_GWAS_data --hardy --out HWE_controls
+
+#### Visualize the SNPs failing HWE
+
+    # Load .hwe
+    hwe <- fread("HWE_controls.hwe")
+
+    # Keep only TEST == "ALL" (the main HWE test)
+    hwe_all <- subset(hwe, TEST == "ALL")
+
+    # Quick histogram of p-values
+    ggplot(hwe_all, aes(x = P)) +
+      geom_histogram(binwidth = 0.01, fill = "steelblue", color = "black") +
+      labs(
+        title = "HWE P-value Distribution in Controls",
+        x = "HWE P-value",
+        y = "Number of SNPs"
+      ) +
+      theme_classic()
+
+This step will create `HWE_controls.hwe` files which contain p values to
+check \#### 3. Run the HWE test and make a keep-list
+
+    ./plink --bfile 3_QC_Raw_GWAS_data --hwe 1e-6 --write-snplist --out HWE_controls
+
+This current steps:
+
+-   `--hwe 1e-6` → keeps only SNPs with HWE p-value ≥ **1e-6** in
+    controls.
+
+-   `--write-snplist` → writes a file `HWE_controls.snplist` with the
+    IDs of SNPs that pass.
+
+<img src="HWE_rate.png" alt="HWE Failure in the data " width="480" />
+<p class="caption">
+HWE Failure in the data
+</p>
+
+#### 3. Remove the failing SNPs
+
+    ./plink --bfile 3_QC_Raw_GWAS_data --extract HWE_controls.snplist --make-bed --out 4_QC_Raw_GWAS_data
+
 #### References
 
 -   Anderson CA et al., Nature Protocols 2010: Classic QC SOP.

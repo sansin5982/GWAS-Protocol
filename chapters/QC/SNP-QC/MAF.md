@@ -111,3 +111,108 @@ absolutely are! But **testing them well** requires:
 </tr>
 </tbody>
 </table>
+
+#### PLINK command to calculate MAF
+
+    ./plink --bfile 4_QC_Raw_GWAS_data --freq --out MAF_check
+
+#### Visualize MAF
+
+    library(data.table)
+    library(ggplot2)
+
+    # Read .frq
+    frq <- fread("D:/UNIX/GWAS/plink_linux_x86_64_20230116/Sex_check/Missing_Heter/Relatedness/PCA/HWE/SNP_missing/MAF/MAF_check.frq")
+
+    # Quick histogram
+    png("MAF.png")
+    ggplot(frq, aes(x = MAF)) +
+      geom_histogram(binwidth = 0.01, fill = "steelblue", color = "black") +
+      labs(
+        title = "SNP MAF Distribution",
+        x = "Minor Allele Frequency",
+        y = "Number of SNPs"
+      ) +
+      scale_x_continuous(
+        breaks = seq(0, 1, by = 0.025)   # ticks at 0, 0.1, 0.2, ..., 1.0
+      ) +
+      theme_classic()
+
+<img src="MAF.png" alt="Histogram Representing Minor Allele Frequency in the data" width="480" />
+<p class="caption">
+Histogram Representing Minor Allele Frequency in the data
+</p>
+
+This creates:
+
+-   `MAF_check.frq` → allele frequencies for all SNPs
+
+<table>
+<thead>
+<tr>
+<th>CHR</th>
+<th>SNP</th>
+<th>A1</th>
+<th>A2</th>
+<th>MAF</th>
+<th>NCHROBS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+#### Pick a sensible MAF threshold for 200 samples
+
+Total chromosomes = 400. Suppose our MAF cutoff is 1% → that means
+minimum 4 minor alleles.
+
+BUT, having only 4 alleles gives very unstable statistics → especially
+if missingness exists.
+
+**Typical rule for small GWAS**:
+
+-   For n = 200, a **MAF cutoff of 5% **is reasonable.
+
+-   This means we expect ~20 minor alleles (5% of 400) → gives enough
+    counts for stable association tests.
+
+So we use **0.05** as your threshold.
+
+**NOTE**: The chip used to perform GWAS contains lots or rare varitants.
+Hence, they will be removed from final analysis
+
+#### PLINK command to filter SNPs failing call rate and MAF
+
+    ./plink --bfile 4_QC_Raw_GWAS_data --maf 0.05 --geno 0.01 --make-bed --out Fin
+    al_QC_SNPs
+
+This removes:
+
+-   SNPs with MAF &lt; 5%
+
+-   SNPs with &gt;1% missingness
+
+# References
+
+1- Marees, A.T., et al, 2018. A tutorial on conducting genome‐wide
+association studies: Quality control and statistical analysis. *Int J
+Methods Psychiatr Res*, Jun; 27(2): e1608.
+
+2- Anderson, C.A. et al, 2010. Data quality control in genetic
+case-control association studies. *Nat Protoc*, Sep:5(9):1564-73
+
+3- Singh, Sandeep Kumar, “A Case-Only Genome-wide Association Study of
+Gender- and Age-specific Risk Markers for Childhood Leukemia” (2015).
+FIU Electronic Theses and Dissertations. 1832
+
+4- Ricopili pipeline (PGC): does HWE control-only first → then combines
+other filters.
