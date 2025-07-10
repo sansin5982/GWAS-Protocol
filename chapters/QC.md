@@ -102,8 +102,8 @@ unstable estimates.
 heterozygosity)<br>• Heterozygosity outliers<br>•
 Relatedness/duplicates<br>• Ancestry outliers (PCA/MDS)</td>
 <td>• SNP missingness (call rate)<br>• Minor Allele Frequency (MAF)<br>•
-Hardy-Weinberg Equilibrium (HWE)<br>• Imputation quality (INFO/R²)<br>•
-Remove multi-allelic/unreliable sites</td>
+Hardy-Weinberg Equilibrium (HWE)<br>• Remove multi-allelic/unreliable
+sites</td>
 </tr>
 <tr>
 <td><strong>Why it’s needed</strong></td>
@@ -127,8 +127,7 @@ tests</td>
 F-statistic for sex<br>• Heterozygosity ±3 SD<br>• pi-hat &gt; 0.185 →
 remove relatives<br>• PCA/MDS → remove ancestry outliers</td>
 <td>• Remove SNPs with &gt;2–5% missing calls<br>• MAF &lt; 0.01–0.05 →
-drop<br>• HWE p &lt; 1e-6 (in controls)<br>• Imputation INFO score &lt;
-0.8 → drop</td>
+drop<br>• HWE p &lt; 1e-6 (in controls)</td>
 </tr>
 <tr>
 <td><strong>Key Tools</strong></td>

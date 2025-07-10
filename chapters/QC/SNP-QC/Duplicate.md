@@ -59,6 +59,125 @@ assume each site is unique and bi-allelic** — by default.
 -   Hardy-Weinberg test, allele frequency checks, and relatedness stats
     can get distorted by multi-allelics and duplicated markers.
 
+### How can they break imputation?
+
+This is critical:
+
+Most phasing and imputation tools — like **SHAPEIT, EAGLE, Minimac4,
+Beagle, IMPUTE2** — assume: \* **One unique site per genomic position**
+\* Exactly **two alleles** at each position
+
+**If a site has multiple alleles or repeats, the phasing step can’t
+build a clean haplotype**.
+
+#### Results:
+
+-   Site might be silently skipped.
+-   Haplotype model can break → segments fail to phase properly.
+-   Reference panel matching fails → no imputed genotypes.
+-   Or worse: the imputed data may contain strand flips or misaligned
+    alleles.
+
+Therefore: \* It’s strongly recommended to remove or fix these sites
+before phasing and imputation — not after!
+
+#### What should you do? Remove or keep?
+
+Standard practice: \* For GWAS: **Remove duplicates and multi-allelics**
+→ keep only unique bi-allelic SNPs. \* For phasing/imputation: **Must
+remove or split multi-allelics** → tools expect bi-allelic input. \* For
+post-imputation QC: Double-check the output for unresolved
+multi-allelics if you merged multiple sources.
+
+#### Check for duplicate sites
+
+-   Duplicates break coordinate uniqueness — imputation tools fail or
+    drop them.
+
+<!-- -->
+
+    ./plink --bfile Imiss_heter --list-duplicate-vars suppress-first --out Duplicate_SNPs
+
+This will output a .dupvar file listing:
+
+-   Duplicate IDs (same SNP name) or
+-   Same position with multiple entries
+
+#### Selecting only duplicated SNPs
+
+    #### Bi allelic and Duplicate SNPs
+    library(data.table)
+    library(dplyr)
+
+    # Load dupvar file
+    dupvar <- fread("Duplicate_SNPs.dupvar") %>% 
+      rename("SNP" = IDS, "BP" = POS)
+    head(dupvar)
+
+    ./plink --bfile Imiss_heter --missing --out mydata_missing
+
+This gives `mydata_missing.lmiss`
+
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">CHR</th>
+<th style="text-align: left;">SNP</th>
+<th style="text-align: left;">N_MISS</th>
+<th style="text-align: left;">N_GENO</th>
+<th style="text-align: left;">F_MISS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+
+    # Load missingness data
+    lmiss <- fread("mydata_missing.lmiss")
+    bim <- fread("Imiss_heter.bim") %>% 
+      rename("SNP" = V2, "BP" = V4) %>% 
+      select(2, 4)
+
+    dup_lmiss <- bim %>% 
+      left_join(lmiss, by = "SNP") %>% 
+      right_join(dupvar, by = "BP") %>% 
+      select(-7, -9)
+
+
+    # Group by BP and pick SNP with min F_MISS in each group
+    dup_lmiss_best <- dup_lmiss[, .SD[which.min(F_MISS)], by = BP]
+
+
+    to_exclude <- dup_lmiss_best %>% 
+      select(CHR.x, BP, ALLELES, SNP.x) %>% 
+      rename("CHR" = CHR.x, "POS" = BP, "IDS" = SNP.x)
+
+    # Write to file
+    write.table(
+      to_exclude,
+      "mydata_dropdups.txt",
+      row.names = FALSE,
+      col.names = TRUE,
+      quote = FALSE
+    )
+
+**Best action**: Keep the best version (highest call rate) — or just
+drop all duplicates if we don’t trust them.
+
+#### Remove multi-allelic sites
+
+Phasing/imputation assumes biallelic SNPs. Multi-allelic sites can’t be
+modeled in the simple 0/1 allele framework.
+
+     ./plink --bfile No_Dup_SNP --biallelic-only strict --make-bed --out biallelic
+
 #### References
 
 Ricopili (PGC pipeline) — removes duplicates & non-biallelic sites
