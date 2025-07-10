@@ -5,6 +5,8 @@ Chapters:
 -   [Introduction to GWAS and tools required](chapters/Introduction)
 -   [File formats to perform GWAS](chapters/File-formats)
 -   [Quality Control](chapters/QC)
+    -   [Duplicate, Multi-allelic, and Non-biallelic
+        sites](chapters/QC/SNP-QC/Duplicate)
     -   [Per Individual Quality Control](chapters/QC/Individual-QC)
         -   [Sex Discrepency](chapters/QC/Individual-QC/Sex-Check)
         -   [Individuals with high
@@ -15,7 +17,11 @@ Chapters:
         -   [Population
             Stratification](chapters/QC/Individual-QC/Ancestry)
     -   [Per SNP Quality Control](chapters/QC/SNP-QC)
+        -   [Duplicate, Multi-allelic, and Non-biallelic
+            sites](chapters/QC/SNP-QC/Duplicate)
         -   [Hardy-Weinberg Equilibrium (HWE)](chapters/QC/SNP-QC/HWE)
         -   [Individuals with high
             missingness](chapters/QC/SNP-QC/SNP-Miss)
         -   [Minor Allele Frequency](chapters/QC/SNP-QC/MAF)
+        -   [Duplicate, Multi-allelic, and Non-biallelic
+            sites](chapters/QC/SNP-QC/Duplicate)
