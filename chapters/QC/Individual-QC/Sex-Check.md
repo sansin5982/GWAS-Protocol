@@ -1,3 +1,10 @@
+<script type="text/javascript" async
+    src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+</script>
+<script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+</script>
+
 # Sex discrepency in a GWAS
 
 ## Identification of individuals with discordant sex information
@@ -305,12 +312,14 @@ observed heterozygosity is quite a bit higher than expected.
 Sometimes mild negatives are normal noise.
 
 But **strongly negative F scores** (e.g., &lt; -0.3) are unusual — they
-can indicate: \* **Bad SNP calls** on the X chromosome. \* **Poor
-genotyping quality** → excess false heterozygotes. \*
-**Cross-contamination** → mixed DNA causes extra heterozygosity. \*
-**Mislabeled sex** → e.g., truly male but showing high heterozygosity
-due to error. \* **Aneuploidy** (very rare, e.g., XXY Klinefelter, or
-mosaicism).
+can indicate:
+
+-   **Bad SNP calls** on the X chromosome.
+-   **Poor genotyping quality** → excess false heterozygotes.
+-   **Cross-contamination** → mixed DNA causes extra heterozygosity.
+-   **Mislabeled sex** → e.g., truly male but showing high
+    heterozygosity due to error.
+-   **Aneuploidy** (very rare, e.g., XXY Klinefelter, or mosaicism).
 
 #### What we should do
 

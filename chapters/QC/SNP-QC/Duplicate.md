@@ -36,25 +36,36 @@ assume each site is unique and bi-allelic** — by default.
 
 -   Many GWAS tools (e.g., PLINK) assume SNPs are **bi-allelic** when
     coding genotypes.
--   If you have more than two alleles, PLINK must decide how to encode
+-   If we have more than two alleles, PLINK must decide how to encode
     them as 0, 1, 2 — but this is ambiguous for &gt;2 alleles.
 -   Some older GWAS software can crash, error out, or silently miscode
     genotypes.
 
 #### Statistical issues:
 
--   Association tests assume your variant is well-defined:
+-   Association tests assume our variant is well-defined:
 
     -   The genotypes map cleanly to **homozygous reference,
         heterozygous**, and **homozygous alternate**.
 
--   Multi-allelic SNPs can split your sample into multiple genotype
+-   Multi-allelic SNPs can split our sample into multiple genotype
     groups with very small counts → unstable p-values.
 
 -   Duplicate positions may inflate the apparent number of tests →
-    messes up your multiple testing correction.
+    messes up our multiple testing correction.
 
 #### Downstream QC confusion:
 
 -   Hardy-Weinberg test, allele frequency checks, and relatedness stats
     can get distorted by multi-allelics and duplicated markers.
+
+#### References
+
+Ricopili (PGC pipeline) — removes duplicates & non-biallelic sites
+before per-SNP QC.
+
+HRC Imputation SOP — same: bi-allelic only before imputation, QC must
+match.
+
+1000 Genomes and UK Biobank pipelines: clean VCFs must be bi-allelic for
+phasing & all QC steps.
