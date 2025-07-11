@@ -75,14 +75,19 @@ to visualize genetic distances between individuals in a dataset.
 #### Why use MDS for population stratification?
 
 MDS helps **detect subtle ancestry differences** and hidden population
-structure. \* Just like PCA, it can reveal: \* Different ancestral
-groups (e.g., European vs. Asian clusters). \* Cryptic structure within
-a single ancestry. \* Unexpected outliers that need to be removed to
-avoid false positives.
+structure. \* Just like PCA, it can reveal:
+
+-   Different ancestral groups (e.g., European vs. Asian clusters).
+-   Cryptic structure within a single ancestry.
+-   Unexpected outliers that need to be removed to avoid false
+    positives.
 
 #### PLINK Command
 
-    .\plink --bfile 3_QC_Raw_GWAS_data --extract raw-GWAS-data.prune.in --genome --cluster --mds-plot 10
+    ./plink --bfile Relatedness --extract PRUNE_DATA.prune.in --genome --cluster --mds-plot 10
+
+-   `--extract PRUNE_DATA.prune.in`: Autosomal pruned SNP during
+    Relatedness check
 
 -   `--genome`: This computes the pairwise IBS/IBD matrix for all pairs
     of individuals.
@@ -104,7 +109,7 @@ avoid false positives.
 
 <!-- -->
 
-    MDS <- fread("D:/UNIX/GWAS/plink_linux_x86_64_20230116/Sex_check/Missing_Heter/Relatedness/MDS/plink.mds")
+    MDS <- fread("plink.mds")
     MDS
 
     ###  Get the mean and standard deviation for each dimension 
@@ -177,7 +182,7 @@ PCA solves this by:
 
 #### PLINK Command to create 10 PC
 
-    ./plink --bfile 3_QC_Raw_GWAS_data --extract raw-GWAS-data.prune.in --genome --cluster --pca 10 --out PCA
+    ./plink --bfile Relatedness --extract PRUNE_DATA.prune.in --genome --cluster --pca 10 --out PCA
 
 #### Output:
 
@@ -227,22 +232,20 @@ Scree PLot
 
     # Plot with outliers
     png("PC_plot.png")
-    ggplot(eigenvectors, aes(x = V3, y = V4)) +
+    ggplot(eigenvectors, aes(x = V3, y = V4, color = outlier)) +
       geom_point(size = 2) +
-      geom_hline(yintercept = 0, linetype = "dotted") +
-      geom_vline(xintercept = 0, linetype = "dotted") +
       labs(
-        title = "PCA: PC1 vs PC2",
+        title = "PCA: Outlier Detection",
         x = paste0("PC1 (", eigenvalues$variance_percent[1], "%)"),
         y = paste0("PC2 (", eigenvalues$variance_percent[2], "%)")
       ) +
       scale_x_continuous(
-        limits = c(-0.5, 0.2),  # Example range, adjust as needed
-        breaks = seq(-0.5, 0.2, by = 0.1)
+        limits = c(-0.3, 0.2),  # Example range, adjust as needed
+        breaks = seq(-0.3, 0.2, by = 0.2)
       ) +
       scale_y_continuous(
-        limits = c(-0.1, 1),
-        breaks = seq(-0.1, 1, by = 0.1)
+        limits = c(-0.8, 0.5),
+        breaks = seq(-0.8, 0.5, by = 0.2)
       ) +
       theme_classic()
 
