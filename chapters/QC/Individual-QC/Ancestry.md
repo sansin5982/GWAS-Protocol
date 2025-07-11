@@ -209,9 +209,9 @@ PCA solves this by:
       ) +
       theme_classic()
 
-<img src="Scree_plot.png" alt="Scree PLot" width="480" />
+<img src="Scree_plot.png" alt="Scree Plot" width="480" />
 <p class="caption">
-Scree PLot
+Scree Plot
 </p>
 
     # Calculate PC1 and PC2 mean/sd
@@ -265,6 +265,8 @@ Principal Component 1 vs Principal Component 2
 #### PLINK command to remove outliers using Principal Components
 
     ./plink --bfile 3_QC_Raw_GWAS_data --remove PCA_outliers.txt --make-bed --out 4_QC_Raw_GWAS_data
+
+This step will remove samples identified outliers.
 
 -   **Note**: Even after removing clear outliers, subtle structure
     remains → include top PCs as covariates for final analysis
