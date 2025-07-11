@@ -499,12 +499,13 @@ $$
 
 #### PLINK command to keep only autosomes and exclude X chromosome
 
-    .\plink     --bfile     2_QC_Raw_GWAS_data      --chr 1-22  --make-bed --out Autosomal
+    ./plink --bfile biallelic --chr 1-22 --make-bed --out Autosomal
 
 #### Autosomal QC checks assume diploidy
 
 The above command is used to “Extract only autosomal SNPs (1–22) from my
-raw GWAS data and save them as a new binary file called Autosomal.”
+biallelic binary data and save them as a new binary file called
+Autosomal.”
 
 All of these previous steps, exclduing sex check, assume that every
 chromosome is diploid. X chromosome breaks this rule.
@@ -534,7 +535,7 @@ separately** from the main autosomal pipeline.
 
 #### PLINK command to prune LD SNPs
 
-    .\plink     --bfile     Autosomal   --indep-pairwise    50 5 0.2 --out raw-GWAS-data
+    ./plink --bfile Autosomal --indep-pairwise 50 5 0.2 --out PRUNE_DATA
 
 -   \`.: This runs PLINK
 
@@ -558,7 +559,7 @@ separately** from the main autosomal pipeline.
 So this removes SNPs that are **highly correlated**, leaving you with a
 **pruned set of approximately independent markers**.
 
--   This step will generate raw-GWAS-data.prune.in file.
+-   This step will generate `PRUNE_DATA.prune.in` file.
 
 #### Purpose:
 
@@ -570,14 +571,12 @@ is important because:
 -   **Mixed models**: LD-pruned sets make kinship estimates more
     accurate.
 
-This step will generate a `raw-GWAS-data.prune.in` file
-
 #### PLINK command
 
-    .\plink --bfile 2_QC_Raw_GWAS_data -–extract raw-GWAS-data.prune.in  --genome --out related_check
+    ./plink --bfile biallelic --extract PRUNE_DATA.prune.in --genome --out related_check
 
--   `-–extract raw-GWAS-data.prune.in`: “Only use the pruned SNPs listed
-    in raw-GWAS-data.prune.in.”
+-   `--extract PRUNE_DATA.prune.in`: “Only use the pruned SNPs listed in
+    PRUNE\_DATA.prune.in.”
 -   `--genome`: This tells PLINK to calculate pairwise IBD statistics
     for every possible pair of individuals in the dataset.
 
@@ -586,8 +585,9 @@ pi-hat &gt; ~0.185. Decide which individual to keep from each pair
 (usually the one with better QC, more complete data, or fewer missing
 phenotypes).
 
-    relatedness <- fread("D:/UNIX/GWAS/plink_linux_x86_64_20230116/Sex_check/Missing_Heter/Relatedness/related_check.genome")
+    relatedness <- fread("related_check.genome")
 
+    png("Related_samples.png")
     related2 <- subset(relatedness, relatedness$PI_HAT >=0.2)
     ggplot(relatedness, aes(x = PI_HAT, y = FID1))+
       geom_point(alpha=0.5, col = "#00bfff")+
@@ -596,15 +596,15 @@ phenotypes).
       scale_x_continuous(breaks = round(seq(0, 1, by = 0.1), 1))+
       theme(axis.text.y = element_blank(),
             axis.ticks.y = element_blank())+
-      geom_vline(xintercept = 0.2, col = "Grey")+
+      geom_vline(xintercept = 0.185, col = "Grey")+
       geom_point(data=relatedness %>%
                    filter(PI_HAT >= 0.2),
                  pch = 19,
                  size=1.6,
                  colour = "#e75480")+
-      annotate(geom="text", x=0.27, y=1.0, label="Independent Samples",
+      annotate(geom="text", x=0.19, y=1.0, label="Independent Samples",
                color="#003300")+
-      annotate(geom="text", x=0.93, y=1.0, label="Duplicate",
+      annotate(geom="text", x=0.93, y=1.0, label="Duplicates",
                color="#003300")
 
 <img src="Related_samples.png" alt="Relatedness" width="480" />
@@ -614,11 +614,13 @@ Relatedness
 
 ### Subsetting failed samples and creating a text file
 
+    ### Removing failed samples
+    related2 <- subset(relatedness, relatedness$PI_HAT >=0.185)
     Failed_relatedness <- related2 %>% 
       select(1:2)
 
     ## Saving file 
-    write.table(Failed_relatedness,  "Missing_Heter/Relatedness/relatedness_failed.txt", 
+    write.table(Failed_relatedness,  "relatedness_failed.txt", 
                 row.names = FALSE, 
                 col.names = FALSE,
                 quote = FALSE)
@@ -627,7 +629,7 @@ Here `relatedness_failed.txt` contains failed related sample
 
 #### Removing Failed samples from relatedness
 
-    .\plink --bfile 2_QC_Raw_GWAS_data --remove relatedness_failed.txt --make-bed --out 3_QC_Raw_GWAS_data 
+    ./plink --bfile biallelic --remove relatedness_failed.txt --make-bed --out Relatedness 
 
 This step will create new binary files excluding failed related samples.
 

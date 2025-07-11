@@ -112,7 +112,6 @@ This will output a .dupvar file listing:
     # Load dupvar file
     dupvar <- fread("Duplicate_SNPs.dupvar") %>% 
       rename("SNP" = IDS, "BP" = POS)
-    head(dupvar)
 
     ./plink --bfile Imiss_heter --missing --out mydata_missing
 
@@ -177,6 +176,9 @@ Phasing/imputation assumes biallelic SNPs. Multi-allelic sites can’t be
 modeled in the simple 0/1 allele framework.
 
      ./plink --bfile No_Dup_SNP --biallelic-only strict --make-bed --out biallelic
+
+This step will create a new binary file containing only biallelic
+alleles
 
 #### References
 
