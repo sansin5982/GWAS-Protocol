@@ -17,8 +17,6 @@ Chapters:
         -   [Population
             Stratification](chapters/QC/Individual-QC/Ancestry)
     -   [Per SNP Quality Control](chapters/QC/SNP-QC)
-        -   [Duplicate, Multi-allelic, and Non-biallelic
-            sites](chapters/QC/SNP-QC/Duplicate)
         -   [Hardy-Weinberg Equilibrium (HWE)](chapters/QC/SNP-QC/HWE)
         -   [Individuals with high
             missingness](chapters/QC/SNP-QC/SNP-Miss)
