@@ -1,3 +1,5 @@
+# Introduction
+
 A genome-wide association study (GWAS) is a type of study that uses
 genomic data to identify genetic variations that are associated with a
 particular trait or disease (Marees et al, 2018).The National Institute
@@ -24,6 +26,32 @@ diabetes, cancer, and many others. By utilizing large sample sizes and
 high-throughput genotyping technologies, GWAS has revolutionized our
 understanding of the genetic basis of complex traits and has become a
 powerful tool in the field of genetics and genomics.
+
+## Study Design and Data Collection
+
+-   **Objective**: Identify genetic variants associated with a
+    phenotype, such as disease status (case-control) or a quantitative
+    trait (e.g., height).
+
+-   **Data Requirements**:
+
+    -   \***Genotype Data**: SNP array or whole-genome sequencing data,
+        typically in PLINK binary format (.bed for genotypes, .bim for
+        variant information, .fam for sample information) or VCF format.
+    -   **Phenotype Data**: Case-control status (e.g., 1 for controls, 2
+        for cases) or quantitative traits, stored in the .fam file or a
+        separate .phe file.
+    -   **Covariates**: Variables like age, sex, or principal components
+        (PCs) to account for population structure, stored in a covariate
+        file.
+
+**Sample Size**: Ensure sufficient sample size for statistical power,
+typically thousands of individuals for complex traits, depending on
+effect size and allele frequency.
+
+-   **Ethical Considerations**: Obtain informed consent, comply with
+    Institutional Review Board (IRB) approvals, and ensure data privacy
+    in accordance with ethical guidelines.
 
 # Material and Methods
 
