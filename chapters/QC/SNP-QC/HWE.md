@@ -84,6 +84,11 @@ In GWAS, we usually:
 
 -   Test HWE **in controls only**, not cases.
 -   Why? Because the disease itself may cause true deviations in cases.
+-   Test HWE in **autosomal chromosoems** only, not on sex chromosomes
+-   Why? Becuase males contain only one X chromosome and females 2 X
+    chromosomes. Hence, HWE will be performed only on females during X
+    chromosome analysis. Here, we will just perform it for autosomal
+    chromosome.
 
 A **SNP with big HWE deviation in controls** is a red flag:
 
@@ -236,9 +241,13 @@ Our `.fam` file should have:
 
 -   `PHENO` column: `1` = case, `0` = control, `-9` or `NA` = missing.
 
-#### 2. Check HWE stats
+#### 2. Check HWE stats only in `AUTOSOME`
 
-    ./plink --bfile 3_QC_Raw_GWAS_data --hardy --out HWE_controls
+     ./plink --bfile PCA_samples --chr 1-22 --hardy --out HWE_controls
+
+We perform this test only autosomal chromosome as males contain only 1 X
+chromosome. This step will create `HWE_controls.hwe` files which contain
+p values to check HWE.
 
 #### Visualize the SNPs failing HWE
 
@@ -249,6 +258,7 @@ Our `.fam` file should have:
     hwe_all <- subset(hwe, TEST == "ALL")
 
     # Quick histogram of p-values
+    png("HWE_rate.png")
     ggplot(hwe_all, aes(x = P)) +
       geom_histogram(binwidth = 0.01, fill = "steelblue", color = "black") +
       labs(
@@ -258,10 +268,9 @@ Our `.fam` file should have:
       ) +
       theme_classic()
 
-This step will create `HWE_controls.hwe` files which contain p values to
-check \#### 3. Run the HWE test and make a keep-list
+#### 3. Run the HWE test and make a keep-list
 
-    ./plink --bfile 3_QC_Raw_GWAS_data --hwe 1e-6 --write-snplist --out HWE_controls
+    ./plink --bfile PCA_samples --hwe 1e-6 --write-snplist --out HWE_controls
 
 This current steps:
 
@@ -278,7 +287,10 @@ HWE Failure in the data
 
 #### 3. Remove the failing SNPs
 
-    ./plink --bfile 3_QC_Raw_GWAS_data --extract HWE_controls.snplist --make-bed --out 4_QC_Raw_GWAS_data
+    ./plink --bfile PCA_samples --extract HWE_controls.snplist --make-bed --out HWE_SNPs
+
+This step will create a new binary file `HWE_SNPs`, after excluding SNPs
+failing HWE in controls only for autosomal chromosome.
 
 #### References
 
