@@ -114,7 +114,7 @@ absolutely are! But **testing them well** requires:
 
 #### PLINK command to calculate MAF
 
-    ./plink --bfile 4_QC_Raw_GWAS_data --freq --out MAF_check
+    ../plink --bfile HWE_SNPs --freq --out MAF_check
 
 #### Visualize MAF
 
