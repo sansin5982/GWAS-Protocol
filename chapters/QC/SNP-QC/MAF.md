@@ -122,7 +122,7 @@ absolutely are! But **testing them well** requires:
     library(ggplot2)
 
     # Read .frq
-    frq <- fread("D:/UNIX/GWAS/plink_linux_x86_64_20230116/Sex_check/Missing_Heter/Relatedness/PCA/HWE/SNP_missing/MAF/MAF_check.frq")
+    frq <- fread("MAF_check.frq")
 
     # Quick histogram
     png("MAF.png")
@@ -160,12 +160,12 @@ This creates:
 </thead>
 <tbody>
 <tr>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
+<td>1</td>
+<td>rs1234</td>
+<td>C</td>
+<td>T</td>
+<td>0.2128</td>
+<td>390</td>
 </tr>
 </tbody>
 </table>
@@ -187,13 +187,13 @@ if missingness exists.
 
 So we use **0.05** as your threshold.
 
-**NOTE**: The chip used to perform GWAS contains lots or rare varitants.
-Hence, they will be removed from final analysis
+**NOTE**: The chip used to perform GWAS contains lots or rare variants.
+Hence, they will be removed from final analysis as we are aiming common
+variants only.
 
 #### PLINK command to filter SNPs failing call rate and MAF
 
-    ./plink --bfile 4_QC_Raw_GWAS_data --maf 0.05 --geno 0.01 --make-bed --out Fin
-    al_QC_SNPs
+    ./plink --bfile HWE_SNPs --maf 0.05 --geno 0.01 --make-bed --out MAF_QC
 
 This removes:
 
