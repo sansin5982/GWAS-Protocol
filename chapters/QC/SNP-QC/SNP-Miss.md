@@ -41,7 +41,7 @@ rates.**
 
 #### PLINK command used to calculate the missingness
 
-    ./plink --bfile 4_QC_Raw_GWAS_data --missing --out SNP_missingness
+    ./plink --bfile HWE_SNPs --missing --out SNP_missingness
 
 This step does two things:
 
@@ -87,7 +87,7 @@ We want `SNP_missingness.lmiss`.
 
 #### Visualize call rate distribution
 
-    lmiss <- fread("D:/UNIX/GWAS/plink_linux_x86_64_20230116/Sex_check/Missing_Heter/Relatedness/PCA/HWE/SNP_missing/SNP_missingness.lmiss")
+    lmiss <- fread("SNP_missingness.lmiss")
     # Add SNP call rate column
     lmiss$CallRate <- 1 - lmiss$F_MISS
 

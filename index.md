@@ -18,6 +18,5 @@ Chapters:
             Stratification](chapters/QC/Individual-QC/Ancestry)
     -   [Per SNP Quality Control](chapters/QC/SNP-QC)
         -   [Hardy-Weinberg Equilibrium (HWE)](chapters/QC/SNP-QC/HWE)
-        -   [Individuals with high
-            missingness](chapters/QC/SNP-QC/SNP-Miss)
+        -   [SNPs with high missingness](chapters/QC/SNP-QC/SNP-Miss)
         -   [Minor Allele Frequency](chapters/QC/SNP-QC/MAF)
