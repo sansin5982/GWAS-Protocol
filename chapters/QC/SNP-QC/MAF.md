@@ -201,6 +201,9 @@ This removes:
 
 -   SNPs with &gt;1% missingness
 
+This step will create a final file to perform assocaition test or
+imputation.
+
 # References
 
 1- Marees, A.T., et al, 2018. A tutorial on conducting genome‐wide
