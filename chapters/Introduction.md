@@ -35,7 +35,7 @@ powerful tool in the field of genetics and genomics.
 
 -   **Data Requirements**:
 
-    -   \***Genotype Data**: SNP array or whole-genome sequencing data,
+    -   **Genotype Data**: SNP array or whole-genome sequencing data,
         typically in PLINK binary format (.bed for genotypes, .bim for
         variant information, .fam for sample information) or VCF format.
     -   **Phenotype Data**: Case-control status (e.g., 1 for controls, 2

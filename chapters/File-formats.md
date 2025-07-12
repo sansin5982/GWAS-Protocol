@@ -410,7 +410,11 @@ imputation, to be converted into binary PLINK format for analysis.
 
 ### Conversion: VCF to PLINK Format
 
-Tools Required: \* PLINK \* bcftools \* vcftools
+Tools Required:
+
+-   PLINK
+-   bcftools
+-   vcftools
 
 We want to convert this:
 
