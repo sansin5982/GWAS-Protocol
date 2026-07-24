@@ -19,3 +19,5 @@ Chapters:
     - [Hardy-Weinberg Equilibrium (HWE)](chapters/QC/SNP-QC/HWE)
     - [SNPs with high missingness](chapters/QC/SNP-QC/SNP-Miss)
     - [Minor Allele Frequency](chapters/QC/SNP-QC/MAF)
+    - [Differential missingness between cases and
+      controls](chapters/QC/SNP-QC/Differential-Missingness)
