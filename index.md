@@ -4,6 +4,7 @@ Chapters:
 
 - [Introduction to GWAS and Bioinformatics tools
   required](chapters/Introduction_Chapter1)
+- [Essential Genetics](chapters/Essential_Genetics_Chapter2)
 - [File formats to perform GWAS](chapters/File-formats)
 - [Quality Control](chapters/QC)
   - [Per Individual Quality Control](chapters/QC/Individual-QC)
