@@ -2,7 +2,8 @@
 
 Chapters:
 
-- [Introduction to GWAS and tools required](chapters/Introduction)
+- [Introduction to GWAS and tools
+  required](chapters/Introduction_Chapter1)
 - [File formats to perform GWAS](chapters/File-formats)
 - [Quality Control](chapters/QC)
   - [Per Individual Quality Control](chapters/QC/Individual-QC)
