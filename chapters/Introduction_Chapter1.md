@@ -60,24 +60,12 @@ error, and many other genetic variants. The diagram below is a
 conceptual illustration, **not evidence of a particular biological
 pathway**.
 
-    old <- par(mar=c(1,1,2,1)); plot.new(); plot.window(xlim=c(0,10),ylim=c(0,7))
-    box1 <- function(x,y,w,h,label,col) {rect(x-w/2,y-h/2,x+w/2,y+h/2,col=col,border="#334155",lwd=1.5);text(x,y,label,cex=.95)}
-    box1(2,5.5,3,1.1,"DNA variation\n(e.g., SNP A/G)","#D7E9F7")
-    box1(8,5.5,3,1.1,"Other genetic variants","#E8DFF5")
-    box1(5,3.5,3.4,1.1,"Biological processes\n(many possible pathways)","#D8F0E5")
-    box1(5,1.2,3.4,1.1,"Measured phenotype\n(e.g., blood pressure)","#FFF0CB")
-    box1(1.8,1.2,2.8,1.1,"Environment, age,\nother influences","#F9DDDB")
-    arrows(2.7,5,4.1,4.1,length=.12,lwd=1.7);arrows(7.3,5,5.9,4.1,length=.12,lwd=1.7)
-    arrows(5,2.9,5,1.85,length=.12,lwd=1.7);arrows(3.2,1.2,3.25,1.2,length=.12,lwd=1.7)
-
 <img src="figures/ch01-fig-1-1-1.png" alt="Figure 1.1. Conceptual relationship between genetic variation and a phenotype. The arrows represent possible influences, not proof of causation."  />
 <p class="caption">
 Figure 1.1. Conceptual relationship between genetic variation and a
 phenotype. The arrows represent possible influences, not proof of
 causation.
 </p>
-
-    par(old)
 
 ## Why perform GWAS?
 
@@ -99,21 +87,11 @@ biological expectations. A GWAS tests a much broader set of markers,
 allowing discovery beyond known pathways. Both approaches can produce
 false-positive results if study design or analysis is inadequate.
 
-    old <- par(mar=c(4,2,3,1)); plot(NA,xlim=c(0,100),ylim=c(0,3),axes=FALSE,xlab="",ylab="")
-    axis(1,at=seq(10,90,20),labels=paste0("Region ",1:5));text(0,2.45,"Candidate-gene",pos=4,font=2)
-    text(0,1.1,"Genome-wide",pos=4,font=2)
-    segments(5,2,95,2,lwd=5,col="#DCE4EC");segments(5,0.65,95,.65,lwd=5,col="#DCE4EC")
-    points(c(22,24,26,70,72),rep(2,5),pch=19,col="#D55E00",cex=1.2)
-    points(seq(7,93,length.out=55),rep(.65,55),pch=19,col="#0072B2",cex=.65)
-    text(50,2.65,"Selected markers",cex=.9);text(50,1.25,"Markers distributed across the genome",cex=.9)
-
 <img src="figures/ch01-fig-1-2-1.png" alt="Figure 1.2. Candidate-gene studies test selected genomic regions; GWAS surveys markers across the genome. Marker density is schematic."  />
 <p class="caption">
 Figure 1.2. Candidate-gene studies test selected genomic regions; GWAS
 surveys markers across the genome. Marker density is schematic.
 </p>
-
-    par(old)
 
 # Study Design and Data Collection
 
@@ -214,7 +192,6 @@ If G is the allele of interest, its frequency among cases is:
 $$
  f\_{G,\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45.
 $$
-
 Among controls:
 
 $$
@@ -231,37 +208,12 @@ other factors could explain it, and how precisely an association model
 estimates the effect. These counts are **illustrative**, not results
 from our Hapmap data.
 
-    counts <- rbind(
-      Cases = c(30, 50, 20),
-      Controls = c(45, 45, 10)
-    )
-    colnames(counts) <- c("AA", "AG", "GG")
-    stopifnot(nrow(counts) == 2L, ncol(counts) == 3L)
-
-    old_par <- par(mar = c(5, 5, 3, 2), bg = "white", las = 1)
-    bar_centres <- barplot(
-      counts, beside = TRUE,
-      col = c("#2563A6", "#E69F00"),
-      border = NA, space = c(0.15, 0.8),
-      names.arg = colnames(counts),
-      ylim = c(0, 65),
-      ylab = "Number of individuals", xlab = "Genotype",
-      main = "Genotype distribution by disease status",
-      cex.main = 1.15, cex.lab = 1.05,
-      legend.text = rownames(counts),
-      args.legend = list(x = "topright", bty = "n", inset = 0.01)
-    )
-    text(bar_centres, as.vector(counts) + 2, labels = as.vector(counts),
-         cex = 0.85, col = "#263238")
-
 <img src="figures/ch01-fig-1-3-1.png" alt="Figure 1.3. Genotype distribution in a fictional case–control study. The grouped bars show the number of cases and controls carrying AA, AG, or GG. These are illustrative counts, not Hapmap results."  />
 <p class="caption">
 Figure 1.3. Genotype distribution in a fictional case–control study. The
 grouped bars show the number of cases and controls carrying AA, AG, or
 GG. These are illustrative counts, not Hapmap results.
 </p>
-
-    par(old_par)
 
 ## The per-variant association test
 
@@ -297,26 +249,12 @@ causality.
 The following figure uses **simulated P values solely for teaching**. It
 is not an analysis of our HapMap dataset.
 
-    set.seed(101)
-    n <- 2200
-    chr <- rep(1:22,each=100)
-    p <- runif(n)
-    p[c(270,271,272,1110,1111)] <- c(1e-9,2e-10,7e-9,3e-11,8e-9)
-    xx <- seq_len(n)
-    old <- par(mar=c(4,4,2,1));plot(xx,-log10(p),pch=16,cex=.45,
-     col=ifelse(chr%%2==0,"#0072B2","#4B5563"),xaxt="n",xlab="Chromosome",ylab=expression(-log[10](P)))
-    axis(1,at=seq(50,2150,100),labels=1:22,cex.axis=.65)
-    abline(h=-log10(5e-8),lty=2,col="#C0392B",lwd=1.5)
-    legend("topright",legend="P = 5 x 10^-8",lty=2,col="#C0392B",bty="n")
-
 <img src="figures/ch01-fig-1-4-1.png" alt="Figure 1.4. Illustrative Manhattan plot generated from simulated P values. The dashed line marks P = 5 × 10^-8; no biological discoveries are implied."  />
 <p class="caption">
 Figure 1.4. Illustrative Manhattan plot generated from simulated P
 values. The dashed line marks P = 5 × 10^-8; no biological discoveries
 are implied.
 </p>
-
-    par(old)
 
 ## Data requirements
 

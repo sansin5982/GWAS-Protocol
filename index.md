@@ -2,7 +2,7 @@
 
 Chapters:
 
-- [Introduction to GWAS and tools
+- [Introduction to GWAS and Bioinformatics tools
   required](chapters/Introduction_Chapter1)
 - [File formats to perform GWAS](chapters/File-formats)
 - [Quality Control](chapters/QC)
