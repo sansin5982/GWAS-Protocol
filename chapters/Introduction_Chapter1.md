@@ -35,23 +35,6 @@ linkage disequilibrium (LD), or may reflect confounding or technical
 artifacts. LD refers to the non-random association of alleles at
 different genetic positions.
 
-## What we will learn
-
-By the end of this chapter, we should be able to:
-
-1.  Explain what GWAS measures and why it is useful.
-2.  Distinguish a SNP, genotype, phenotype, locus, and allele.
-3.  Compare candidate-gene and genome-wide study strategies.
-4.  Describe case–control and quantitative-trait GWAS designs.
-5.  Interpret the basic idea of a per-variant association test and a
-    Manhattan plot.
-6.  Identify genotype, phenotype, covariate, and metadata inputs.
-7.  Distinguish processed PLINK genotype files from raw laboratory
-    measurements.
-8.  Explain why QC, ancestry, multiple testing, and independent
-    replication matter.
-9.  Identify the software required for our practical HapMap workflow.
-
 ## From DNA variation to a phenotype
 
 Our genome contains DNA sequences organized into chromosomes. At a given
@@ -199,6 +182,7 @@ If G is the allele of interest, its frequency among cases is:
 $$
  f\_{G,\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45.
 $$
+
 Among controls:
 
 $$
