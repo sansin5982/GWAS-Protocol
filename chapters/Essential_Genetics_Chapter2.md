@@ -1,12 +1,14 @@
 ---
 title: "Chapter 2 — Essential Genetics for GWAS"
 output:
-  md_document:
-    variant: markdown
+  github_document:
     preserve_yaml: true
 ---
 
-# Chapter 2 --- Essential Genetics for GWAS
+Chapter 2 — Essential Genetics for GWAS
+================
+
+# Chapter 2 — Essential Genetics for GWAS
 
 ## Learning objectives
 
@@ -25,7 +27,7 @@ are long DNA molecules packaged with proteins. DNA is the chemical
 material that carries hereditary sequence information. A **gene** is a
 genomic region that contributes to a functional product, such as an RNA
 or protein; not all DNA belongs to protein-coding genes. A **genome**
-comprises an organism's genetic material. In human GWAS, we ordinarily
+comprises an organism’s genetic material. In human GWAS, we ordinarily
 study variation in nuclear DNA, although mitochondrial variation may
 also be relevant.
 
@@ -36,17 +38,17 @@ each biological parent. This is a useful starting model, but chromosome
 number and sex-chromosome complement can vary, and mature red blood
 cells lack nuclei.
 
-::: {.figure style="text-align: center"}
-`<img src="figures/ch02-fig-2-1-1.png" alt="Figure 2.1. Schematic hierarchy from cell to chromosome, DNA, and gene. This is conceptual and not drawn to scale."  />`{=html}
-<p class="caption">
-Figure 2.1. Schematic hierarchy from cell to chromosome, DNA, and gene.
-This is conceptual and not drawn to scale.
-</p>
-:::
+<figure>
+<img src="figures/ch02-fig-2-1-1.png"
+alt="Figure 2.1. Schematic hierarchy from cell to chromosome, DNA, and gene. This is conceptual and not drawn to scale." />
+<figcaption aria-hidden="true">Figure 2.1. Schematic hierarchy from cell
+to chromosome, DNA, and gene. This is conceptual and not drawn to
+scale.</figcaption>
+</figure>
 
 ### Autosomes and sex chromosomes
 
-Autosomes are chromosomes 1--22. The X and Y chromosomes are termed sex
+Autosomes are chromosomes 1–22. The X and Y chromosomes are termed sex
 chromosomes. Autosomal genotype coding often assumes two copies per
 person; X-chromosome analysis requires attention to ploidy,
 pseudoautosomal regions, sex-chromosome complement and the specific
@@ -59,26 +61,25 @@ DNA is a polymer of **nucleotides**. Each nucleotide contains a sugar
 (deoxyribose), a phosphate group and one nitrogenous base: **adenine
 (A), thymine (T), cytosine (C), or guanine (G)**. Two complementary DNA
 strands typically form a double helix. A pairs with T, and C pairs with
-G in standard Watson--Crick base pairing. DNA strands run in opposite
+G in standard Watson–Crick base pairing. DNA strands run in opposite
 directions, described as **antiparallel** (5′→3′ and 3′→5′).
 
-For example, if one strand is written 5′--A C G T A--3′, its
-complementary strand is 3′--T G C A T--5′. If we write both strands
-5′→3′, we must reverse the order of the complementary sequence.
+For example, if one strand is written 5′–A C G T A–3′, its complementary
+strand is 3′–T G C A T–5′. If we write both strands 5′→3′, we must
+reverse the order of the complementary sequence.
 
-::: {.figure style="text-align: center"}
-`<img src="figures/ch02-fig-2-2-1.png" alt="Figure 2.2. Complementary DNA base pairing; the two strands are antiparallel."  />`{=html}
-<p class="caption">
-Figure 2.2. Complementary DNA base pairing; the two strands are
-antiparallel.
-</p>
-:::
+<figure>
+<img src="figures/ch02-fig-2-2-1.png"
+alt="Figure 2.2. Complementary DNA base pairing; the two strands are antiparallel." />
+<figcaption aria-hidden="true">Figure 2.2. Complementary DNA base
+pairing; the two strands are antiparallel.</figcaption>
+</figure>
 
-**Worked example.** Consider 5′--A T C G--3′. The complementary strand
-aligned underneath is 3′--T A G C--5′. Written in its own 5′→3′
-direction, the complementary sequence is 5′--C G A T--3′. This
-distinction matters when discussing reference alleles, strand
-orientation and variant harmonization.
+**Worked example.** Consider 5′–A T C G–3′. The complementary strand
+aligned underneath is 3′–T A G C–5′. Written in its own 5′→3′ direction,
+the complementary sequence is 5′–C G A T–3′. This distinction matters
+when discussing reference alleles, strand orientation and variant
+harmonization.
 
 ## 2.3 Genes, gene expression, and proteins
 
@@ -110,34 +111,21 @@ limited to a biallelic, diploid locus. Multiallelic loci, structural
 variation, copy-number changes and sex chromosomes need additional
 representation.
 
-  -----------------------------------------------------------------------
-  Term                    Plain-language meaning  Example
-  ----------------------- ----------------------- -----------------------
-  Locus                   A position or region in A position on
-                          the genome              chromosome 6
+| Term | Plain-language meaning | Example |
+|:---|:---|:---|
+| Locus | A position or region in the genome | A position on chromosome 6 |
+| Allele | A sequence alternative at that position | A or G |
+| Genotype | The pair of alleles at a diploid locus | AG |
+| Homozygous | Two copies of the same allele | AA or GG |
+| Heterozygous | Two different alleles | AG |
+| Phenotype | A measured characteristic | Blood pressure |
 
-  Allele                  A sequence alternative  A or G
-                          at that position        
-
-  Genotype                The pair of alleles at  AG
-                          a diploid locus         
-
-  Homozygous              Two copies of the same  AA or GG
-                          allele                  
-
-  Heterozygous            Two different alleles   AG
-
-  Phenotype               A measured              Blood pressure
-                          characteristic          
-  -----------------------------------------------------------------------
-
-::: {.figure style="text-align: center"}
-`<img src="figures/ch02-fig-2-3-1.png" alt="Figure 2.3. Three possible unordered genotypes at a biallelic diploid autosomal locus."  />`{=html}
-<p class="caption">
-Figure 2.3. Three possible unordered genotypes at a biallelic diploid
-autosomal locus.
-</p>
-:::
+<figure>
+<img src="figures/ch02-fig-2-3-1.png"
+alt="Figure 2.3. Three possible unordered genotypes at a biallelic diploid autosomal locus." />
+<figcaption aria-hidden="true">Figure 2.3. Three possible unordered
+genotypes at a biallelic diploid autosomal locus.</figcaption>
+</figure>
 
 ### A variant is not the same as a gene
 
@@ -166,15 +154,15 @@ $$P(AA)=\frac14,\qquad P(AG)=\frac12,\qquad P(GG)=\frac14.$$
 
 These are **expected probabilities for a particular cross**, not
 observed genotype frequencies in a population. We must not confuse this
-Punnett-square result with Hardy--Weinberg equilibrium, which we will
+Punnett-square result with Hardy–Weinberg equilibrium, which we will
 develop in Chapter 4.
 
-::: {.figure style="text-align: center"}
-`<img src="figures/ch02-fig-2-4-1.png" alt="Figure 2.4. Punnett square for two heterozygous parents (AG × AG)."  />`{=html}
-<p class="caption">
-Figure 2.4. Punnett square for two heterozygous parents (AG × AG).
-</p>
-:::
+<figure>
+<img src="figures/ch02-fig-2-4-1.png"
+alt="Figure 2.4. Punnett square for two heterozygous parents (AG × AG)." />
+<figcaption aria-hidden="true">Figure 2.4. Punnett square for two
+heterozygous parents (AG × AG).</figcaption>
+</figure>
 
 ## 2.6 Genotype dosage: connecting genetics to GWAS
 
@@ -182,11 +170,11 @@ GWAS software often converts a diploid biallelic genotype into the
 number of copies of a designated **effect allele**. Suppose G is the
 effect allele:
 
-  Genotype     Number of G alleles   Dosage (G)
-  ---------- --------------------- ------------
-  AA                             0            0
-  AG                             1            1
-  GG                             2            2
+| Genotype | Number of G alleles | Dosage (G) |
+|:---------|--------------------:|-----------:|
+| AA       |                   0 |          0 |
+| AG       |                   1 |          1 |
+| GG       |                   2 |          2 |
 
 If we instead count A, the coding reverses: AA = 2, AG = 1, GG = 0.
 **The dosage coding depends on the allele chosen; it does not by itself
@@ -242,7 +230,7 @@ variants can be strand-ambiguous without additional information. Chapter
 
 ## 2.8 Genotype is not destiny
 
-A genetic variant can affect a phenotype, but a person's measured
+A genetic variant can affect a phenotype, but a person’s measured
 phenotype also reflects other variants, developmental processes,
 environmental exposures, age, measurement error and chance. For complex
 traits, many variants may each contribute small effects. Even a genuine
@@ -257,29 +245,14 @@ individual-level prediction.
 
 ## 2.9 Common misunderstandings
 
-  -----------------------------------------------------------------------
-  Misunderstanding                    Correction
-  ----------------------------------- -----------------------------------
-  A gene and an allele are the same   A gene is a genomic region; an
-  thing.                              allele is a sequence alternative at
-                                      a locus.
-
-  Every variant lies in a             Many variants occur in non-coding
-  protein-coding gene.                or intergenic regions.
-
-  A heterozygote carries two          At a diploid locus, it carries two
-  different genes.                    different alleles.
-
-  The effect allele must increase     Its estimated effect may be
-  disease risk.                       positive, negative or null.
-
-  REF always equals the non-effect    Reference and effect labels serve
-  allele.                             different purposes.
-
-  A genotype uniquely determines a    Complex phenotypes generally
-  complex phenotype.                  reflect many genetic and
-                                      non-genetic influences.
-  -----------------------------------------------------------------------
+| Misunderstanding | Correction |
+|:---|:---|
+| A gene and an allele are the same thing. | A gene is a genomic region; an allele is a sequence alternative at a locus. |
+| Every variant lies in a protein-coding gene. | Many variants occur in non-coding or intergenic regions. |
+| A heterozygote carries two different genes. | At a diploid locus, it carries two different alleles. |
+| The effect allele must increase disease risk. | Its estimated effect may be positive, negative or null. |
+| REF always equals the non-effect allele. | Reference and effect labels serve different purposes. |
+| A genotype uniquely determines a complex phenotype. | Complex phenotypes generally reflect many genetic and non-genetic influences. |
 
 ## 2.10 Practical checkpoint and reproducibility
 
@@ -315,7 +288,7 @@ models, but it does not imply causality or deterministic prediction.
 ## Concept checks
 
 1.  How do a chromosome, DNA molecule, gene, locus and allele differ?
-2.  What is the complementary strand to 5′--A G T C--3′, written both in
+2.  What is the complementary strand to 5′–A G T C–3′, written both in
     aligned and 5′→3′ orientations?
 3.  Why are AG and GA ordinarily treated as the same unphased diploid
     genotype?
@@ -343,6 +316,6 @@ models, but it does not imply causality or deterministic prediction.
     analysis. *Int J Methods Psychiatr Res.* 2018;27:e1608.
     <https://doi.org/10.1002/mpr.1608>
 
-**Next chapter:** Chapter 3 --- Genetic Variation and Genetic
-Architecture (SNPs, indels, structural variants, allele frequency
-classes, effect sizes and polygenicity).
+**Next chapter:** Chapter 3 — Genetic Variation and Genetic Architecture
+(SNPs, indels, structural variants, allele frequency classes, effect
+sizes and polygenicity).
