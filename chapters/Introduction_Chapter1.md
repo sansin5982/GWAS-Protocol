@@ -173,7 +173,11 @@ and G. For illustration, the counts below are fictional:
 If G is the allele of interest, its frequency among cases is:
 
 $$
+<<<<<<< HEAD
  f\_{{G},\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45.
+=======
+f_{G,\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45
+>>>>>>> 4884c19b92c08c33fef33080194136ee04099866
 $$
 
 Among controls:
@@ -205,7 +209,13 @@ For a binary phenotype, an additive logistic regression can be written
 as:
 
 $$
+<<<<<<< HEAD
 \log\left(\frac{p}{1-p}\right)=\beta\_{0}+\beta\_{G} G+\beta\_{A}\mathrm{Age}+\beta\_{S}\mathrm{Sex}+\cdots
+=======
+\log\left(\frac{p}{1-p}\right)
+=
+\beta_{0}+\beta_{G}G+\beta_{A}\mathrm{Age}+\beta_{S}\mathrm{Sex}+\cdots
+>>>>>>> 4884c19b92c08c33fef33080194136ee04099866
 $$
 
 Here, *p* is the modeled probability of being a case, *G* is the number
