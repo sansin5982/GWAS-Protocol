@@ -1,19 +1,3 @@
-<script>
-window.MathJax = {
-  tex: {
-    inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']],
-    processEscapes: true
-  },
-  options: {
-    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  }
-};
-</script>
-<script defer
-  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
-</script>
-
 # Introduction
 
 A **genome-wide association study (GWAS)** is an observational genetic
@@ -189,13 +173,13 @@ and G. For illustration, the counts below are fictional:
 If G is the allele of interest, its frequency among cases is:
 
 $$
- f_{{G},\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45.
+ f\_{{G},\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45.
 $$
 
 Among controls:
 
 $$
- f_{{G},\mathrm{controls}}=\frac{45+2(10)}{2(100)}=\frac{65}{200}=0.325.
+ f\_{{G},\mathrm{controls}}=\frac{45+2(10)}{2(100)}=\frac{65}{200}=0.325.
 $$
 
 The G-allele frequency is therefore 45.0% among cases and 32.5% among
@@ -221,7 +205,7 @@ For a binary phenotype, an additive logistic regression can be written
 as:
 
 $$
-\log\left(\frac{p}{1-p}\right)=\beta_{0}+\beta_{G} G+\beta_{A}\mathrm{Age}+\beta_{S}\mathrm{Sex}+\cdots
+\log\left(\frac{p}{1-p}\right)=\beta\_{0}+\beta\_{G} G+\beta\_{A}\mathrm{Age}+\beta\_{S}\mathrm{Sex}+\cdots
 $$
 
 Here, *p* is the modeled probability of being a case, *G* is the number
