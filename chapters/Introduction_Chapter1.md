@@ -1,3 +1,11 @@
+---
+title: "Introduction to GWAS and Bioinformatics tools required"
+output:
+  md_document:
+    variant: markdown
+    preserve_yaml: true
+---
+
 # Introduction
 
 A **genome-wide association study (GWAS)** is an observational genetic
@@ -6,7 +14,7 @@ statistically associated with a defined phenotype. A **phenotype** is a
 measurable characteristic, such as height, blood pressure, or whether a
 person has a particular disease. A **genetic variant** is a difference
 in DNA sequence among individuals. Many GWAS analyses focus on
-**single-nucleotide polymorphisms (SNPs)**—positions at which
+**single-nucleotide polymorphisms (SNPs)**---positions at which
 individuals may carry different DNA bases.
 
 Rather than restricting attention to genes that researchers already
@@ -43,12 +51,14 @@ error, and many other genetic variants. The diagram below is a
 conceptual illustration, **not evidence of a particular biological
 pathway**.
 
-<img src="figures/ch01-fig-1-1-1.png" alt="Figure 1.1. Conceptual relationship between genetic variation and a phenotype. The arrows represent possible influences, not proof of causation."  />
+::: {.figure style="text-align: center"}
+`<img src="figures/ch01-fig-1-1-1.png" alt="Figure 1.1. Conceptual relationship between genetic variation and a phenotype. The arrows represent possible influences, not proof of causation."  />`{=html}
 <p class="caption">
 Figure 1.1. Conceptual relationship between genetic variation and a
 phenotype. The arrows represent possible influences, not proof of
 causation.
 </p>
+:::
 
 ## Why perform GWAS?
 
@@ -70,11 +80,13 @@ biological expectations. A GWAS tests a much broader set of markers,
 allowing discovery beyond known pathways. Both approaches can produce
 false-positive results if study design or analysis is inadequate.
 
-<img src="figures/ch01-fig-1-2-1.png" alt="Figure 1.2. Candidate-gene studies test selected genomic regions; GWAS surveys markers across the genome. Marker density is schematic."  />
+::: {.figure style="text-align: center"}
+`<img src="figures/ch01-fig-1-2-1.png" alt="Figure 1.2. Candidate-gene studies test selected genomic regions; GWAS surveys markers across the genome. Marker density is schematic."  />`{=html}
 <p class="caption">
 Figure 1.2. Candidate-gene studies test selected genomic regions; GWAS
 surveys markers across the genome. Marker density is schematic.
 </p>
+:::
 
 # Study Design and Data Collection
 
@@ -85,102 +97,47 @@ criteria, an ascertainment strategy, and an analysis plan. Poor
 phenotype classification can reduce power or bias an association
 estimate. Our protocol distinguishes the following common designs:
 
-<table>
-<colgroup>
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-<col style="width: 25%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Design</th>
-<th style="text-align: left;">Outcome</th>
-<th style="text-align: left;">Example</th>
-<th style="text-align: left;">Common model</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Case–control</td>
-<td style="text-align: left;">Binary disease status</td>
-<td style="text-align: left;">Diabetes versus no diabetes</td>
-<td style="text-align: left;">Logistic regression</td>
-</tr>
-<tr>
-<td style="text-align: left;">Quantitative trait</td>
-<td style="text-align: left;">Continuous measurement</td>
-<td style="text-align: left;">Systolic blood pressure</td>
-<td style="text-align: left;">Linear regression</td>
-</tr>
-<tr>
-<td style="text-align: left;">Time-to-event</td>
-<td style="text-align: left;">Time until event/censoring</td>
-<td style="text-align: left;">Age at disease onset</td>
-<td style="text-align: left;">Survival model, e.g. Cox regression</td>
-</tr>
-<tr>
-<td style="text-align: left;">Case-only comparison</td>
-<td style="text-align: left;">Variation among affected individuals</td>
-<td style="text-align: left;">Early versus late onset among cases</td>
-<td style="text-align: left;">Model depends on the case-only research
-question</td>
-</tr>
-</tbody>
-</table>
+  -----------------------------------------------------------------------
+  Design            Outcome           Example           Common model
+  ----------------- ----------------- ----------------- -----------------
+  Case--control     Binary disease    Diabetes versus   Logistic
+                    status            no diabetes       regression
+
+  Quantitative      Continuous        Systolic blood    Linear regression
+  trait             measurement       pressure          
+
+  Time-to-event     Time until        Age at disease    Survival model,
+                    event/censoring   onset             e.g. Cox
+                                                        regression
+
+  Case-only         Variation among   Early versus late Model depends on
+  comparison        affected          onset among cases the case-only
+                    individuals                         research question
+  -----------------------------------------------------------------------
 
 A case-only comparison does **not** estimate the same disease
-susceptibility contrast as a population case–control study. Later
+susceptibility contrast as a population case--control study. Later
 chapters will cover these designs in detail.
 
-## A simple case–control example
+## A simple case--control example
 
 Suppose we compare 100 cases with 100 controls at a SNP with alleles A
 and G. For illustration, the counts below are fictional:
 
-<table>
-<thead>
-<tr>
-<th style="text-align: left;">Genotype</th>
-<th style="text-align: right;">Cases</th>
-<th style="text-align: right;">Controls</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">AA</td>
-<td style="text-align: right;">30</td>
-<td style="text-align: right;">45</td>
-</tr>
-<tr>
-<td style="text-align: left;">AG</td>
-<td style="text-align: right;">50</td>
-<td style="text-align: right;">45</td>
-</tr>
-<tr>
-<td style="text-align: left;">GG</td>
-<td style="text-align: right;">20</td>
-<td style="text-align: right;">10</td>
-</tr>
-<tr>
-<td style="text-align: left;">Total</td>
-<td style="text-align: right;">100</td>
-<td style="text-align: right;">100</td>
-</tr>
-</tbody>
-</table>
+  Genotype     Cases   Controls
+  ---------- ------- ----------
+  AA              30         45
+  AG              50         45
+  GG              20         10
+  Total          100        100
 
 If G is the allele of interest, its frequency among cases is:
 
-$$
-f_{G,\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45
-$$
+$$ f_{{G},\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45.$$
 
 Among controls:
 
-$$
-f_{G,\mathrm{controls}}=\frac{45+2(10)}{2(100)}=\frac{65}{200}=0.325
-$$
+$$ f_{{G},\mathrm{controls}}=\frac{45+2(10)}{2(100)}=\frac{65}{200}=0.325.$$
 
 The G-allele frequency is therefore 45.0% among cases and 32.5% among
 controls: a difference of **12.5 percentage points**. In everyday terms,
@@ -192,105 +149,84 @@ other factors could explain it, and how precisely an association model
 estimates the effect. These counts are **illustrative**, not results
 from our Hapmap data.
 
-<img src="figures/ch01-fig-1-3-1.png" alt="Figure 1.3. Genotype distribution in a fictional case–control study. The grouped bars show the number of cases and controls carrying AA, AG, or GG. These are illustrative counts, not Hapmap results."  />
+::: {.figure style="text-align: center"}
+`<img src="figures/ch01-fig-1-3-1.png" alt="Figure 1.3. Genotype distribution in a fictional case–control study. The grouped bars show the number of cases and controls carrying AA, AG, or GG. These are illustrative counts, not Hapmap results."  />`{=html}
 <p class="caption">
-Figure 1.3. Genotype distribution in a fictional case–control study. The
-grouped bars show the number of cases and controls carrying AA, AG, or
-GG. These are illustrative counts, not Hapmap results.
+Figure 1.3. Genotype distribution in a fictional case--control study.
+The grouped bars show the number of cases and controls carrying AA, AG,
+or GG. These are illustrative counts, not Hapmap results.
 </p>
+:::
 
 ## The per-variant association test
 
 For a binary phenotype, an additive logistic regression can be written
 as:
 
-$$
-\log\left(\frac{p}{1-p}\right)
-=
-\beta_{0}+\beta_{G}G+\beta_{A}\mathrm{Age}+\beta_{S}\mathrm{Sex}+\cdots
-$$
+$$\log\left(\frac{p}{1-p}\right)=\beta_{0}+\beta_{G} G+\beta_{A}\mathrm{Age}+\beta_{S}\mathrm{Sex}+\cdots$$
 
-Here, *p* is the modeled probability of being a case, *G* is the number
+Here, $p$ is the modeled probability of being a case, $G$ is the number
 of effect alleles (0, 1, or 2 for a diploid autosomal SNP), and
-*β*<sub>*G*</sub> is the per-allele log-odds association coefficient.
-Its exponent, exp (*β*<sub>*G*</sub>), is the per-allele odds ratio
-under this model. We will derive and interpret these quantities in the
-association chapters; the formula is introduced here only to show what
-GWAS is estimating.
+$\beta_G$ is the per-allele log-odds association coefficient. Its
+exponent, $\exp(\beta_G)$, is the per-allele odds ratio under this
+model. We will derive and interpret these quantities in the association
+chapters; the formula is introduced here only to show what GWAS is
+estimating.
 
 For quantitative traits, an additive linear model commonly takes the
-form *Y* = *β*<sub>0</sub> + *β*<sub>*G*</sub>*G* + ⋯ + *ε*, where
-*β*<sub>*G*</sub> is the estimated trait change per effect allele.
+form $Y=\beta_0+\beta_GG+\cdots+\varepsilon$, where $\beta_G$ is the
+estimated trait change per effect allele.
 
 ## Genome-wide testing and the Manhattan plot
 
 A GWAS often tests hundreds of thousands or millions of markers. A
-Manhattan plot displays each marker’s genomic position on the horizontal
-axis and −log<sub>10</sub>(*P*) on the vertical axis. Smaller P values
-appear higher. A commonly used threshold for common-variant GWAS is
-5 × 10<sup>−8</sup>, although the appropriate threshold depends on the
+Manhattan plot displays each marker's genomic position on the horizontal
+axis and $-\log_{10}(P)$ on the vertical axis. Smaller P values appear
+higher. A commonly used threshold for common-variant GWAS is
+$5\times10^{-8}$, although the appropriate threshold depends on the
 analysis and testing burden. Statistical significance does not establish
 causality.
 
 The following figure uses **simulated P values solely for teaching**. It
 is not an analysis of our HapMap dataset.
 
-<img src="figures/ch01-fig-1-4-1.png" alt="Figure 1.4. Illustrative Manhattan plot generated from simulated P values. The dashed line marks P = 5 × 10^-8; no biological discoveries are implied."  />
+::: {.figure style="text-align: center"}
+`<img src="figures/ch01-fig-1-4-1.png" alt="Figure 1.4. Illustrative Manhattan plot generated from simulated P values. The dashed line marks P = 5 × 10^-8; no biological discoveries are implied."  />`{=html}
 <p class="caption">
 Figure 1.4. Illustrative Manhattan plot generated from simulated P
-values. The dashed line marks P = 5 × 10^-8; no biological discoveries
+values. The dashed line marks P = 5 × 10\^-8; no biological discoveries
 are implied.
 </p>
+:::
 
 ## Data requirements
 
-<table>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr>
-<th style="text-align: left;">Input</th>
-<th style="text-align: left;">What it contains</th>
-<th style="text-align: left;">Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">Genotypes</td>
-<td style="text-align: left;">Alleles or genotype calls at variants</td>
-<td style="text-align: left;">PLINK <code>.bed/.bim/.fam</code>;
-VCF</td>
-</tr>
-<tr>
-<td style="text-align: left;">Phenotypes</td>
-<td style="text-align: left;">Disease status or measured trait</td>
-<td style="text-align: left;"><code>.fam</code> phenotype column or
-separate phenotype file</td>
-</tr>
-<tr>
-<td style="text-align: left;">Covariates</td>
-<td style="text-align: left;">Variables used in adjustment</td>
-<td style="text-align: left;">Age, sex, ancestry principal components,
-batch where appropriate</td>
-</tr>
-<tr>
-<td style="text-align: left;">Metadata</td>
-<td style="text-align: left;">Provenance and technical context</td>
-<td style="text-align: left;">Genome build, platform, ancestry, sample
-selection, file versions</td>
-</tr>
-</tbody>
-</table>
+  -----------------------------------------------------------------------
+  Input                   What it contains        Example
+  ----------------------- ----------------------- -----------------------
+  Genotypes               Alleles or genotype     PLINK `.bed/.bim/.fam`;
+                          calls at variants       VCF
+
+  Phenotypes              Disease status or       `.fam` phenotype column
+                          measured trait          or separate phenotype
+                                                  file
+
+  Covariates              Variables used in       Age, sex, ancestry
+                          adjustment              principal components,
+                                                  batch where appropriate
+
+  Metadata                Provenance and          Genome build, platform,
+                          technical context       ancestry, sample
+                                                  selection, file
+                                                  versions
+  -----------------------------------------------------------------------
 
 **PLINK binary files:** `.bed` stores encoded genotypes, `.bim` stores
 variant annotations including chromosome, identifier, position, and
 allele codes, and `.fam` stores sample identifiers, pedigree/sex fields,
 and a phenotype column. The two `.bim` allele columns should **not**
 automatically be labeled REF and ALT. For a standard PLINK binary
-case–control phenotype, `1` denotes control, `2` case, and `0` or `-9`
+case--control phenotype, `1` denotes control, `2` case, and `0` or `-9`
 missing.
 
 ### Sample size and power
@@ -355,15 +291,17 @@ downstream imputation.
 We keep the data and analysis outputs outside the GitHub Pages source
 repository:
 
-    E:/Github_Classes/GWAS/
-      01_Raw_Data/       # Starting Hapmap files (read-only baseline)
-      02_Sample_QC/
-      03_Variant_QC/
-      04_Imputation/
-      05_Association/
-      06_Results/
-      Logs/
-      GWAS-Protocol/    # R Markdown chapters and publishable figures
+``` text
+E:/Github_Classes/GWAS/
+  01_Raw_Data/       # Starting Hapmap files (read-only baseline)
+  02_Sample_QC/
+  03_Variant_QC/
+  04_Imputation/
+  05_Association/
+  06_Results/
+  Logs/
+  GWAS-Protocol/    # R Markdown chapters and publishable figures
+```
 
 The label `01_Raw_Data` means *raw input for our analysis*, not raw
 laboratory measurements.
@@ -389,25 +327,29 @@ when we reach that chapter.
 
 ## Verifying the starting files in R
 
-    raw_dir <- "E:/Github_Classes/GWAS/01_Raw_Data"
-    files <- file.path(raw_dir, paste0("Hapmap", c(".bed", ".bim", ".fam")))
-    stopifnot(all(file.exists(files)))
-    file.info(files)[, c("size", "mtime")]
+``` r
+raw_dir <- "E:/Github_Classes/GWAS/01_Raw_Data"
+files <- file.path(raw_dir, paste0("Hapmap", c(".bed", ".bim", ".fam")))
+stopifnot(all(file.exists(files)))
+file.info(files)[, c("size", "mtime")]
 
-    bim <- read.table(file.path(raw_dir, "Hapmap.bim"), header=FALSE)
-    fam <- read.table(file.path(raw_dir, "Hapmap.fam"), header=FALSE)
-    cat("Variants:", nrow(bim), "\n")
-    cat("Samples:", nrow(fam), "\n")
-    table(fam$V5, useNA="ifany")       # Recorded sex
-    table(fam$V6, useNA="ifany")      # Recorded phenotype
-    table(bim$V1, useNA="ifany")      # Chromosome codes
+bim <- read.table(file.path(raw_dir, "Hapmap.bim"), header=FALSE)
+fam <- read.table(file.path(raw_dir, "Hapmap.fam"), header=FALSE)
+cat("Variants:", nrow(bim), "\n")
+cat("Samples:", nrow(fam), "\n")
+table(fam$V5, useNA="ifany")       # Recorded sex
+table(fam$V6, useNA="ifany")      # Recorded phenotype
+table(bim$V1, useNA="ifany")      # Chromosome codes
+```
 
 ## Verifying the starting files with PLINK
 
 From a terminal in the raw-data folder, the following command
 **summarizes missingness without excluding variants or individuals**:
 
-    ./plink --bfile Hapmap --missing --out Raw_Missingness
+``` bash
+./plink --bfile Hapmap --missing --out Raw_Missingness
+```
 
 It creates `Raw_Missingness.log`, `.imiss` (sample-level missingness),
 and `.lmiss` (variant-level missingness). PLINK may also create `.hh` if
@@ -417,28 +359,34 @@ and after filters, warnings, decisions, and verification steps.
 
 ## The overall GWAS workflow
 
-    old <- par(mar=c(1,1,1,1));plot.new();plot.window(xlim=c(0,10),ylim=c(0,10))
-    labels <- c("Research question + phenotype definition",
-                "Genotype acquisition + provenance",
-                "Sample and variant QC",
-                "Ancestry, relatedness + covariates",
-                "Phasing/imputation (when applicable)",
-                "Association testing + diagnostics",
-                "Replication, interpretation + reporting")
-    ys <- seq(9.1,1.1,length.out=length(labels))
-    for (i in seq_along(labels)) {
-     rect(1.4,ys[i]-.39,8.6,ys[i]+.39,col=if(i==2)"#FFF0CB" else "#D7E9F7",border="#315A78",lwd=1.25)
-     text(5,ys[i],labels[i],cex=.96,font=if(i==2)2 else 1)
-     if(i<length(labels)) arrows(5,ys[i]-.4,5,ys[i+1]+.4,length=.10,lwd=1.5)
-    }
+``` r
+old <- par(mar=c(1,1,1,1));plot.new();plot.window(xlim=c(0,10),ylim=c(0,10))
+labels <- c("Research question + phenotype definition",
+            "Genotype acquisition + provenance",
+            "Sample and variant QC",
+            "Ancestry, relatedness + covariates",
+            "Phasing/imputation (when applicable)",
+            "Association testing + diagnostics",
+            "Replication, interpretation + reporting")
+ys <- seq(9.1,1.1,length.out=length(labels))
+for (i in seq_along(labels)) {
+ rect(1.4,ys[i]-.39,8.6,ys[i]+.39,col=if(i==2)"#FFF0CB" else "#D7E9F7",border="#315A78",lwd=1.25)
+ text(5,ys[i],labels[i],cex=.96,font=if(i==2)2 else 1)
+ if(i<length(labels)) arrows(5,ys[i]-.4,5,ys[i+1]+.4,length=.10,lwd=1.5)
+}
+```
 
-<img src="figures/ch01-fig-1-5-1.png" alt="Figure 1.5. Conceptual GWAS workflow. The Hapmap tutorial begins with already processed genotype calls, not raw laboratory data."  />
+::: {.figure style="text-align: center"}
+`<img src="figures/ch01-fig-1-5-1.png" alt="Figure 1.5. Conceptual GWAS workflow. The Hapmap tutorial begins with already processed genotype calls, not raw laboratory data."  />`{=html}
 <p class="caption">
 Figure 1.5. Conceptual GWAS workflow. The Hapmap tutorial begins with
 already processed genotype calls, not raw laboratory data.
 </p>
+:::
 
-    par(old)
+``` r
+par(old)
+```
 
 The diagram presents the general order of work. Specific studies may
 combine or adapt steps. Imputation is not compulsory for every
@@ -456,7 +404,7 @@ audit the practical analysis independently.
 
 # Chapter summary
 
-GWAS systematically tests genotype–phenotype associations across the
+GWAS systematically tests genotype--phenotype associations across the
 genome. Association does not by itself imply causation. The credibility
 of a GWAS depends on phenotype quality, genotype QC, study design,
 population structure, appropriate statistical models, multiple-testing
@@ -468,7 +416,7 @@ workflow, with all QC decisions documented.
 # Concept checks
 
 1.  Why can a statistically associated SNP fail to be causal?
-2.  How does a case–control GWAS differ from a quantitative-trait GWAS?
+2.  How does a case--control GWAS differ from a quantitative-trait GWAS?
 3.  What is the difference between a SNP, an allele, and a genotype?
 4.  Why is a `.bed/.bim/.fam` dataset not necessarily raw laboratory
     data?
@@ -484,11 +432,11 @@ workflow, with all QC decisions documented.
     Research.* 2018;27:e1608. <https://doi.org/10.1002/mpr.1608>.
 2.  Visscher PM, Wray NR, Zhang Q, et al. 10 years of GWAS discovery:
     Biology, function, and translation. *American Journal of Human
-    Genetics.* 2017;101:5–22.
+    Genetics.* 2017;101:5--22.
     <https://doi.org/10.1016/j.ajhg.2017.06.005>.
 3.  Abdellaoui A, Yengo L, Verweij KJH, Visscher PM. 15 years of GWAS
     discovery: Realizing the promise. *American Journal of Human
-    Genetics.* 2023;110:179–194.
+    Genetics.* 2023;110:179--194.
     <https://doi.org/10.1016/j.ajhg.2022.12.011>.
 4.  National Human Genome Research Institute. Genome-Wide Association
     Studies Fact Sheet.

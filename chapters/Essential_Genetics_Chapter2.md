@@ -8,8 +8,6 @@ output:
 Chapter 2 — Essential Genetics for GWAS
 ================
 
-# Chapter 2 — Essential Genetics for GWAS
-
 ## Learning objectives
 
 By the end of this chapter, we should be able to (1) describe how DNA,

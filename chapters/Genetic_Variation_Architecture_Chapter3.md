@@ -6,8 +6,6 @@ output:
     preserve_yaml: true
 ---
 
-# Chapter 3 --- Genetic Variation and Genetic Architecture
-
 ## Learning objectives
 
 By the end of this chapter, we should be able to distinguish major
