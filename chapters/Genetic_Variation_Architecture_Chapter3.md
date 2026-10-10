@@ -1,11 +1,11 @@
 ---
-title: "Chapter 3 — Genetic Variation and Genetic Architecture"
+title: "Genetic Variation and Genetic Architecture"
 output:
   github_document:
     preserve_yaml: true
 ---
 
-Chapter 3 — Genetic Variation and Genetic Architecture
+Genetic Variation and Genetic Architecture
 ================
 
 ## Learning objectives
@@ -90,13 +90,10 @@ biallelic SNP. Classical HLA alleles are an important example of highly
 polymorphic, sequence-defined alleles; SNPs in the MHC region are not
 interchangeable with classical HLA allele calls.
 
-<figure>
-<img src="figures/ch03-fig-3-1-1.png"
-alt="Figure 3.1. Schematic examples of sequence-variant classes. Sequences are invented for teaching and are not mapped to a genomic coordinate." />
-<figcaption aria-hidden="true">Figure 3.1. Schematic examples of
-sequence-variant classes. Sequences are invented for teaching and are
-not mapped to a genomic coordinate.</figcaption>
-</figure>
+![](figures/ch03-fig-3-1-1.png)<!-- -->
+
+*Figure 3.1. Schematic examples of sequence-variant classes. Sequences
+are invented for teaching and are not mapped to a genomic coordinate.*
 
 **Important limitation:** The figure illustrates sequence differences;
 it does not provide VCF-compliant, left-normalized variant
@@ -204,12 +201,10 @@ different cutoffs. For a sample of 100 diploid individuals, an allele
 present once has MAC 1 and an observed frequency of $1/200=0.005$
 (0.5%).
 
-<figure>
-<img src="figures/ch03-fig-3-2-1.png"
-alt="Figure 3.2. Hypothetical genotype counts and the corresponding allele copies at one biallelic SNP." />
-<figcaption aria-hidden="true">Figure 3.2. Hypothetical genotype counts
-and the corresponding allele copies at one biallelic SNP.</figcaption>
-</figure>
+![](figures/ch03-fig-3-2-1.png)<!-- -->
+
+*Figure 3.2. Hypothetical genotype counts and the corresponding allele
+copies at one biallelic SNP.*
 
 ## 3.5 From genotype to an association effect
 
@@ -240,13 +235,10 @@ This example assumes an additive effect on the **measurement scale** and
 omits covariates. It does not imply that every individual with GG has
 exactly 124 mmHg or that the variant causes the observed difference.
 
-<figure>
-<img src="figures/ch03-fig-3-3-1.png"
-alt="Figure 3.3. Predicted trait means under a hypothetical additive model. These are model predictions, not observed participant measurements." />
-<figcaption aria-hidden="true">Figure 3.3. Predicted trait means under a
-hypothetical additive model. These are model predictions, not observed
-participant measurements.</figcaption>
-</figure>
+![](figures/ch03-fig-3-3-1.png)<!-- -->
+
+*Figure 3.3. Predicted trait means under a hypothetical additive model.
+These are model predictions, not observed participant measurements.*
 
 ### Additive, dominant, and recessive models
 
@@ -322,13 +314,11 @@ components. However, describing a trait as polygenic does not mean that
 every associated variant is causal or that environmental influences are
 unimportant.
 
-<figure>
-<img src="figures/ch03-fig-3-4-1.png"
-alt="Figure 3.4. Conceptual genetic architectures. The number and sizes of plotted effects are illustrative, not estimates for a particular phenotype." />
-<figcaption aria-hidden="true">Figure 3.4. Conceptual genetic
-architectures. The number and sizes of plotted effects are illustrative,
-not estimates for a particular phenotype.</figcaption>
-</figure>
+![](figures/ch03-fig-3-4-1.png)<!-- -->
+
+*Figure 3.4. Conceptual genetic architectures. The number and sizes of
+plotted effects are illustrative, not estimates for a particular
+phenotype.*
 
 ### Penetrance and expressivity
 
@@ -362,14 +352,11 @@ SNP may therefore show association because it is correlated with another
 variant that influences the phenotype. In such a case, the observed SNP
 is a **tagging marker**, not necessarily the causal variant.
 
-<figure>
-<img src="figures/ch03-fig-3-5-1.png"
-alt="Figure 3.5. Conceptual distinction between a tested tagging SNP and a possible causal variant. The association is illustrative; the diagram does not establish causality." />
-<figcaption aria-hidden="true">Figure 3.5. Conceptual distinction
-between a tested tagging SNP and a possible causal variant. The
-association is illustrative; the diagram does not establish
-causality.</figcaption>
-</figure>
+![](figures/ch03-fig-3-5-1.png)<!-- -->
+
+*Figure 3.5. Conceptual distinction between a tested tagging SNP and a
+possible causal variant. The association is illustrative; the diagram
+does not establish causality.*
 
 LD will be introduced quantitatively in Chapter 4. Later, fine-mapping
 and functional studies can help prioritize candidate causal variants,
@@ -436,13 +423,10 @@ is not a realistic model of every population or genomic region. In
 particular, it does not model LD, relatedness, population structure, or
 genotyping error.
 
-<figure>
-<img src="figures/ch03-fig-3-6-1.png"
-alt="Figure 3.6. Genotype distribution from the reproducible simulated R example (N = 200; input G-allele frequency = 0.30)." />
-<figcaption aria-hidden="true">Figure 3.6. Genotype distribution from
-the reproducible simulated R example (N = 200; input G-allele frequency
-= 0.30).</figcaption>
-</figure>
+![](figures/ch03-fig-3-6-1.png)<!-- -->
+
+*Figure 3.6. Genotype distribution from the reproducible simulated R
+example (N = 200; input G-allele frequency = 0.30).*
 
 ### Methods and reproducibility record
 
