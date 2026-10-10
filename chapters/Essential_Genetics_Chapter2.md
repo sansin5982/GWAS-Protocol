@@ -1,11 +1,11 @@
 ---
-title: "Chapter 2 — Essential Genetics for GWAS"
+title: "Essential Genetics for GWAS"
 output:
   github_document:
     preserve_yaml: true
 ---
 
-Chapter 2 — Essential Genetics for GWAS
+Essential Genetics for GWAS
 ================
 
 ## Learning objectives

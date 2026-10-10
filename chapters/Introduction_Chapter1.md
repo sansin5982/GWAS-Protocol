@@ -6,7 +6,7 @@ output:
     preserve_yaml: true
 ---
 
-# Introduction
+# Introduction to GWAS and Bioinformatics tools required
 
 A **genome-wide association study (GWAS)** is an observational genetic
 study that tests whether genetic variants across the genome are
