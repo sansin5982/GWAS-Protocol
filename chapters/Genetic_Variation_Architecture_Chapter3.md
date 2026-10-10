@@ -1,10 +1,12 @@
 ---
 title: "Chapter 3 — Genetic Variation and Genetic Architecture"
 output:
-  md_document:
-    variant: markdown
+  github_document:
     preserve_yaml: true
 ---
+
+Chapter 3 — Genetic Variation and Genetic Architecture
+================
 
 ## Learning objectives
 
@@ -18,7 +20,7 @@ linkage disequilibrium and study design affect the interpretation of
 GWAS signals.
 
 **Scope.** We focus on the biological and statistical meaning of genetic
-variation. Population-genetic mechanisms, Hardy--Weinberg equilibrium,
+variation. Population-genetic mechanisms, Hardy–Weinberg equilibrium,
 detailed linkage disequilibrium, and population stratification are
 developed in Chapter 4. Genotyping technology and file formats are
 covered in later chapters. All numerical examples in this chapter are
@@ -88,13 +90,13 @@ biallelic SNP. Classical HLA alleles are an important example of highly
 polymorphic, sequence-defined alleles; SNPs in the MHC region are not
 interchangeable with classical HLA allele calls.
 
-::: {.figure style="text-align: center"}
-`<img src="figures/ch03-fig-3-1-1.png" alt="Figure 3.1. Schematic examples of sequence-variant classes. Sequences are invented for teaching and are not mapped to a genomic coordinate."  />`{=html}
-<p class="caption">
-Figure 3.1. Schematic examples of sequence-variant classes. Sequences
-are invented for teaching and are not mapped to a genomic coordinate.
-</p>
-:::
+<figure>
+<img src="figures/ch03-fig-3-1-1.png"
+alt="Figure 3.1. Schematic examples of sequence-variant classes. Sequences are invented for teaching and are not mapped to a genomic coordinate." />
+<figcaption aria-hidden="true">Figure 3.1. Schematic examples of
+sequence-variant classes. Sequences are invented for teaching and are
+not mapped to a genomic coordinate.</figcaption>
+</figure>
 
 **Important limitation:** The figure illustrates sequence differences;
 it does not provide VCF-compliant, left-normalized variant
@@ -105,33 +107,14 @@ representations.
 Several allele labels answer different questions and should never be
 treated as synonyms.
 
-  -----------------------------------------------------------------------
-  Term                    Meaning                 Key caution
-  ----------------------- ----------------------- -----------------------
-  Reference allele (REF)  Sequence matching the   Not necessarily the
-                          chosen reference        common or ancestral
-                          assembly at the         allele
-                          represented locus       
-
-  Alternate allele (ALT)  Sequence differing from Not necessarily the
-                          REF                     risk allele
-
-  Effect allele           Allele to which a       Its choice determines
-                          reported effect         the sign of a
-                          estimate refers         regression coefficient
-
-  Other allele            Comparator for the      May be REF or ALT
-                          effect allele in a      
-                          biallelic analysis      
-
-  Minor allele            Less frequent allele in Can change between
-                          a specified             populations
-                          population/sample       
-
-  Ancestral allele        Inferred allele state   Requires evidence; not
-                          in an evolutionary      synonymous with REF
-                          ancestor                
-  -----------------------------------------------------------------------
+| Term | Meaning | Key caution |
+|:---|:---|:---|
+| Reference allele (REF) | Sequence matching the chosen reference assembly at the represented locus | Not necessarily the common or ancestral allele |
+| Alternate allele (ALT) | Sequence differing from REF | Not necessarily the risk allele |
+| Effect allele | Allele to which a reported effect estimate refers | Its choice determines the sign of a regression coefficient |
+| Other allele | Comparator for the effect allele in a biallelic analysis | May be REF or ALT |
+| Minor allele | Less frequent allele in a specified population/sample | Can change between populations |
+| Ancestral allele | Inferred allele state in an evolutionary ancestor | Requires evidence; not synonymous with REF |
 
 For example, if a GWAS reports an effect allele G with an odds ratio of
 1.20 relative to A, the association is reported **per additional G
@@ -161,12 +144,12 @@ data.
 Consider 100 unrelated diploid individuals typed at a biallelic
 autosomal SNP:
 
-  Genotype      Number of individuals   Number of G alleles contributed
-  ----------- ----------------------- ---------------------------------
-  AA                               36                                 0
-  AG                               48                                48
-  GG                               16                                32
-  **Total**                   **100**                            **80**
+| Genotype  | Number of individuals | Number of G alleles contributed |
+|:----------|----------------------:|--------------------------------:|
+| AA        |                    36 |                               0 |
+| AG        |                    48 |                              48 |
+| GG        |                    16 |                              32 |
+| **Total** |               **100** |                          **80** |
 
 Each individual contributes two allele copies, so the total number of
 observed allele copies is $2(100)=200$. The frequency of G is:
@@ -221,13 +204,12 @@ different cutoffs. For a sample of 100 diploid individuals, an allele
 present once has MAC 1 and an observed frequency of $1/200=0.005$
 (0.5%).
 
-::: {.figure style="text-align: center"}
-`<img src="figures/ch03-fig-3-2-1.png" alt="Figure 3.2. Hypothetical genotype counts and the corresponding allele copies at one biallelic SNP."  />`{=html}
-<p class="caption">
-Figure 3.2. Hypothetical genotype counts and the corresponding allele
-copies at one biallelic SNP.
-</p>
-:::
+<figure>
+<img src="figures/ch03-fig-3-2-1.png"
+alt="Figure 3.2. Hypothetical genotype counts and the corresponding allele copies at one biallelic SNP." />
+<figcaption aria-hidden="true">Figure 3.2. Hypothetical genotype counts
+and the corresponding allele copies at one biallelic SNP.</figcaption>
+</figure>
 
 ## 3.5 From genotype to an association effect
 
@@ -248,23 +230,23 @@ $\varepsilon$ captures variation not explained by this simple model.
 Suppose $\beta_0=120$ mmHg and $\beta_G=2$ mmHg. The predicted means
 are:
 
-  Genotype     G dosage   Predicted systolic blood pressure
-  ---------- ---------- -----------------------------------
-  AA                  0                 $120+2(0)=120$ mmHg
-  AG                  1                 $120+2(1)=122$ mmHg
-  GG                  2                 $120+2(2)=124$ mmHg
+| Genotype | G dosage | Predicted systolic blood pressure |
+|:---------|---------:|----------------------------------:|
+| AA       |        0 |               $120+2(0)=120$ mmHg |
+| AG       |        1 |               $120+2(1)=122$ mmHg |
+| GG       |        2 |               $120+2(2)=124$ mmHg |
 
 This example assumes an additive effect on the **measurement scale** and
 omits covariates. It does not imply that every individual with GG has
 exactly 124 mmHg or that the variant causes the observed difference.
 
-::: {.figure style="text-align: center"}
-`<img src="figures/ch03-fig-3-3-1.png" alt="Figure 3.3. Predicted trait means under a hypothetical additive model. These are model predictions, not observed participant measurements."  />`{=html}
-<p class="caption">
-Figure 3.3. Predicted trait means under a hypothetical additive model.
-These are model predictions, not observed participant measurements.
-</p>
-:::
+<figure>
+<img src="figures/ch03-fig-3-3-1.png"
+alt="Figure 3.3. Predicted trait means under a hypothetical additive model. These are model predictions, not observed participant measurements." />
+<figcaption aria-hidden="true">Figure 3.3. Predicted trait means under a
+hypothetical additive model. These are model predictions, not observed
+participant measurements.</figcaption>
+</figure>
 
 ### Additive, dominant, and recessive models
 
@@ -274,11 +256,11 @@ compares GG with AA/AG (coding 0, 0, 1). These are statistical genotype
 codings; the word *dominant* in a regression model should not be taken
 as proof of a classical Mendelian inheritance pattern.
 
-  Genotype     Additive G   Dominant G   Recessive G
-  ---------- ------------ ------------ -------------
-  AA                    0            0             0
-  AG                    1            1             0
-  GG                    2            1             1
+| Genotype | Additive G | Dominant G | Recessive G |
+|:---------|-----------:|-----------:|------------:|
+| AA       |          0 |          0 |           0 |
+| AG       |          1 |          1 |           0 |
+| GG       |          2 |          1 |           1 |
 
 ``` r
 genotypes <- c("AA", "AG", "GG")
@@ -316,7 +298,7 @@ A tiny effect can achieve a small P value in a very large sample; a
 substantial estimated effect can be imprecise in a small sample.
 **Statistical significance and biological importance are different
 questions.** Detailed inference and association-model mathematics will
-be covered in Chapters 6 and 37--42.
+be covered in Chapters 6 and 37–42.
 
 ## 3.7 What is genetic architecture?
 
@@ -334,26 +316,25 @@ background may still vary. An **oligogenic** model involves a small
 number of contributing genes or loci. A **polygenic** trait is
 influenced by many genetic variants, often each with a small effect.
 
-Many complex phenotypes---including height, blood pressure, and
-susceptibility to common psychiatric disorders---have highly polygenic
+Many complex phenotypes—including height, blood pressure, and
+susceptibility to common psychiatric disorders—have highly polygenic
 components. However, describing a trait as polygenic does not mean that
 every associated variant is causal or that environmental influences are
 unimportant.
 
-::: {.figure style="text-align: center"}
-`<img src="figures/ch03-fig-3-4-1.png" alt="Figure 3.4. Conceptual genetic architectures. The number and sizes of plotted effects are illustrative, not estimates for a particular phenotype."  />`{=html}
-<p class="caption">
-Figure 3.4. Conceptual genetic architectures. The number and sizes of
-plotted effects are illustrative, not estimates for a particular
-phenotype.
-</p>
-:::
+<figure>
+<img src="figures/ch03-fig-3-4-1.png"
+alt="Figure 3.4. Conceptual genetic architectures. The number and sizes of plotted effects are illustrative, not estimates for a particular phenotype." />
+<figcaption aria-hidden="true">Figure 3.4. Conceptual genetic
+architectures. The number and sizes of plotted effects are illustrative,
+not estimates for a particular phenotype.</figcaption>
+</figure>
 
 ### Penetrance and expressivity
 
 **Penetrance** is the proportion of individuals with a specified
 genotype who exhibit a defined phenotype under stated conditions.
-**Expressivity** describes variation in the phenotype's manifestations
+**Expressivity** describes variation in the phenotype’s manifestations
 among individuals with that genotype. These concepts are particularly
 useful for Mendelian disorders but also remind us that genotype does not
 mechanically determine every observed outcome.
@@ -363,7 +344,7 @@ mechanically determine every observed outcome.
 **Heritability** is a population- and environment-dependent measure of
 how much variation in a phenotype is statistically attributable to
 genetic differences under a particular model. It does not mean that a
-given percentage of an individual's phenotype is genetically determined.
+given percentage of an individual’s phenotype is genetically determined.
 Nor does high heritability imply that environmental interventions cannot
 alter the phenotype.
 
@@ -381,14 +362,14 @@ SNP may therefore show association because it is correlated with another
 variant that influences the phenotype. In such a case, the observed SNP
 is a **tagging marker**, not necessarily the causal variant.
 
-::: {.figure style="text-align: center"}
-`<img src="figures/ch03-fig-3-5-1.png" alt="Figure 3.5. Conceptual distinction between a tested tagging SNP and a possible causal variant. The association is illustrative; the diagram does not establish causality."  />`{=html}
-<p class="caption">
-Figure 3.5. Conceptual distinction between a tested tagging SNP and a
-possible causal variant. The association is illustrative; the diagram
-does not establish causality.
-</p>
-:::
+<figure>
+<img src="figures/ch03-fig-3-5-1.png"
+alt="Figure 3.5. Conceptual distinction between a tested tagging SNP and a possible causal variant. The association is illustrative; the diagram does not establish causality." />
+<figcaption aria-hidden="true">Figure 3.5. Conceptual distinction
+between a tested tagging SNP and a possible causal variant. The
+association is illustrative; the diagram does not establish
+causality.</figcaption>
+</figure>
 
 LD will be introduced quantitatively in Chapter 4. Later, fine-mapping
 and functional studies can help prioritize candidate causal variants,
@@ -401,7 +382,7 @@ A **coding variant** falls within a protein-coding sequence and may be
 synonymous, missense, nonsense, or otherwise alter translation. A
 **noncoding variant** lies outside protein-coding sequence; it may
 affect transcription, splicing, chromatin regulation, RNA function, or
-have no detectable effect. A variant's location near a gene does not
+have no detectable effect. A variant’s location near a gene does not
 prove that gene is the effector.
 
 Functional interpretation requires attention to genome build, transcript
@@ -455,43 +436,27 @@ is not a realistic model of every population or genomic region. In
 particular, it does not model LD, relatedness, population structure, or
 genotyping error.
 
-::: {.figure style="text-align: center"}
-`<img src="figures/ch03-fig-3-6-1.png" alt="Figure 3.6. Genotype distribution from the reproducible simulated R example (N = 200; input G-allele frequency = 0.30)."  />`{=html}
-<p class="caption">
-Figure 3.6. Genotype distribution from the reproducible simulated R
-example (N = 200; input G-allele frequency = 0.30).
-</p>
-:::
+<figure>
+<img src="figures/ch03-fig-3-6-1.png"
+alt="Figure 3.6. Genotype distribution from the reproducible simulated R example (N = 200; input G-allele frequency = 0.30)." />
+<figcaption aria-hidden="true">Figure 3.6. Genotype distribution from
+the reproducible simulated R example (N = 200; input G-allele frequency
+= 0.30).</figcaption>
+</figure>
 
 ### Methods and reproducibility record
 
-  -----------------------------------------------------------------------
-  Item                                Record
-  ----------------------------------- -----------------------------------
-  Input                               No external genotype files; values
-                                      generated within this chapter
-
-  Software                            Base R; record the local R version
-                                      when rendering
-
-  Random seed                         `303`
-
-  Simulated sample size               200 diploid individuals
-
-  Assumed G-allele frequency          0.30
-
-  Generated data                      Two independent Bernoulli allele
-                                      draws per individual
-
-  Verification                        All dosages in 0--2; genotype
-                                      counts sum to 200
-
-  QC exclusions                       None; this is not a QC analysis
-
-  Limitations                         Does not represent real Hapmap
-                                      observations, LD, ancestry, or
-                                      errors
-  -----------------------------------------------------------------------
+| Item | Record |
+|:---|:---|
+| Input | No external genotype files; values generated within this chapter |
+| Software | Base R; record the local R version when rendering |
+| Random seed | `303` |
+| Simulated sample size | 200 diploid individuals |
+| Assumed G-allele frequency | 0.30 |
+| Generated data | Two independent Bernoulli allele draws per individual |
+| Verification | All dosages in 0–2; genotype counts sum to 200 |
+| QC exclusions | None; this is not a QC analysis |
+| Limitations | Does not represent real Hapmap observations, LD, ancestry, or errors |
 
 ``` r
 R.version.string
@@ -501,17 +466,17 @@ R.version.string
 
 ## 3.11 Common misconceptions
 
-- **"ALT means risk allele."** Incorrect. ALT is defined relative to a
+- **“ALT means risk allele.”** Incorrect. ALT is defined relative to a
   reference assembly; risk direction comes from a phenotype-specific
   association model.
-- **"The minor allele is always the same worldwide."** Incorrect. Allele
+- **“The minor allele is always the same worldwide.”** Incorrect. Allele
   frequencies differ between populations.
-- **"A significant GWAS SNP is the causal mutation."** Not necessarily.
+- **“A significant GWAS SNP is the causal mutation.”** Not necessarily.
   The marker may tag a causal variant through LD or reflect confounding.
-- **"A polygenic trait is entirely genetic."** Incorrect. Environmental
+- **“A polygenic trait is entirely genetic.”** Incorrect. Environmental
   and measurement factors may contribute substantially.
-- **"A large odds ratio always means a large absolute risk
-  difference."** Incorrect. Absolute risk also depends on baseline risk
+- **“A large odds ratio always means a large absolute risk
+  difference.”** Incorrect. Absolute risk also depends on baseline risk
   and model context.
 
 ## Chapter summary
@@ -554,11 +519,11 @@ population genetics and the statistical assumptions underlying GWAS.
 
 1.  Visscher PM, Wray NR, Zhang Q, et al. 10 years of GWAS discovery:
     Biology, function, and translation. *American Journal of Human
-    Genetics*. 2017;101:5--22.
+    Genetics*. 2017;101:5–22.
     <https://doi.org/10.1016/j.ajhg.2017.06.005>
 2.  Abdellaoui A, Yengo L, Verweij KJH, Visscher PM. 15 years of GWAS
     discovery: Realizing the promise. *American Journal of Human
-    Genetics*. 2023;110:179--194.
+    Genetics*. 2023;110:179–194.
     <https://doi.org/10.1016/j.ajhg.2022.12.011>
 3.  Marees AT, de Kluiver H, Stringer S, et al. A tutorial on conducting
     genome-wide association studies: Quality control and statistical
@@ -568,9 +533,9 @@ population genetics and the statistical assumptions underlying GWAS.
     Genomic and Genetic Terms.
     <https://www.genome.gov/genetics-glossary>
 5.  The 1000 Genomes Project Consortium. A global reference for human
-    genetic variation. *Nature*. 2015;526:68--74.
+    genetic variation. *Nature*. 2015;526:68–74.
     <https://doi.org/10.1038/nature15393>
 
-**Next chapter:** Chapter 4 --- Population Genetics: allele-frequency
-differences, Hardy--Weinberg equilibrium, genetic drift, linkage
+**Next chapter:** Chapter 4 — Population Genetics: allele-frequency
+differences, Hardy–Weinberg equilibrium, genetic drift, linkage
 disequilibrium, and the foundations of population structure.
