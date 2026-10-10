@@ -1,8 +1,17 @@
-<script type="text/javascript" async
-    src="https://polyfill.io/v3/polyfill.min.js?features=es6">
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
 </script>
-<script type="text/javascript" async
-    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js">
+<script defer
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
 </script>
 
 # Introduction
@@ -211,7 +220,9 @@ GG. These are illustrative counts, not Hapmap results.
 For a binary phenotype, an additive logistic regression can be written
 as:
 
-    \log\left(\frac{p}{1-p}\right)=\beta_{0}+\beta_{G} G+\beta_{A}\mathrm{Age}+\beta_{S}\mathrm{Sex}+\cdots
+$$
+\log\left(\frac{p}{1-p}\right)=\beta\_{0}+\beta\_{G} G+\beta\_{A}\mathrm{Age}+\beta\_{S}\mathrm{Sex}+\cdots
+$$
 
 Here, *p* is the modeled probability of being a case, *G* is the number
 of effect alleles (0, 1, or 2 for a diploid autosomal SNP), and
