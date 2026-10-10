@@ -211,9 +211,7 @@ GG. These are illustrative counts, not Hapmap results.
 For a binary phenotype, an additive logistic regression can be written
 as:
 
-$$
-\log\left(\frac{p}{1-p}\right)=\beta\_{0}+\beta\_{G} G+\beta\_{A}\mathrm{Age}+\beta\_{S}\mathrm{Sex}+\cdots
-$$
+    \log\left(\frac{p}{1-p}\right)=\beta_{0}+\beta_{G} G+\beta_{A}\mathrm{Age}+\beta_{S}\mathrm{Sex}+\cdots
 
 Here, *p* is the modeled probability of being a case, *G* is the number
 of effect alleles (0, 1, or 2 for a diploid autosomal SNP), and
