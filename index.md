@@ -4,7 +4,7 @@ Chapters:
 
 - [Introduction to GWAS and Bioinformatics tools
   required](chapters/Introduction_Chapter1)
-- [Essential Genetics](chapters/Essential_Genetics_Chapter2)
+- [Essential Genetics for GWAS](chapters/Essential_Genetics_Chapter2)
 - [Genetic Variation
   Architecture](chapters/Genetic_Variation_Architecture_Chapter3)
 - [File formats to perform GWAS](chapters/File-formats)
