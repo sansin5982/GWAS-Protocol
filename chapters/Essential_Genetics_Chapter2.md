@@ -27,12 +27,14 @@ number and sex-chromosome complement can vary, and mature red blood
 cells lack nuclei.
 
 <figure>
-<img src="figures/ch02-fig-2-1-1.png"
-alt="Figure 2.1. Schematic hierarchy from cell to chromosome, DNA, and gene. This is conceptual and not drawn to scale." />
-<figcaption aria-hidden="true">Figure 2.1. Schematic hierarchy from cell
-to chromosome, DNA, and gene. This is conceptual and not drawn to
-scale.</figcaption>
+<img src="figures/ch02-fig-2-1.png"
+alt="Figure 2.1. From cell to chromosome, DNA and gene. Conceptual illustration, not to scale." />
+<figcaption aria-hidden="true">Figure 2.1. From cell to chromosome, DNA
+and gene. Conceptual illustration, not to scale.</figcaption>
 </figure>
+
+*Figure 2.1. A gene occupies a region of DNA packaged into a
+chromosome.*
 
 ### Autosomes and sex chromosomes
 
@@ -57,11 +59,13 @@ strand is 3′–T G C A T–5′. If we write both strands 5′→3′, we must
 reverse the order of the complementary sequence.
 
 <figure>
-<img src="figures/ch02-fig-2-2-1.png"
-alt="Figure 2.2. Complementary DNA base pairing; the two strands are antiparallel." />
-<figcaption aria-hidden="true">Figure 2.2. Complementary DNA base
-pairing; the two strands are antiparallel.</figcaption>
+<img src="figures/ch02-fig-2-2.png"
+alt="Figure 2.2. Antiparallel DNA strands and complementary base pairing." />
+<figcaption aria-hidden="true">Figure 2.2. Antiparallel DNA strands and
+complementary base pairing.</figcaption>
 </figure>
+
+*Figure 2.2. A–T and C–G pairing on opposite-oriented strands.*
 
 **Worked example.** Consider 5′–A T C G–3′. The complementary strand
 aligned underneath is 3′–T A G C–5′. Written in its own 5′→3′ direction,
@@ -77,11 +81,34 @@ RNAs. Gene regulation determines where, when and how much of a gene
 product is made. A **variant near a gene** can influence gene
 regulation, but its proximity does not establish which gene it affects.
 
+In a protein-coding gene, **transcription** uses a DNA template to
+synthesize a complementary RNA transcript. In eukaryotes, the initial
+pre-mRNA is commonly processed by splicing, which removes introns and
+joins exons. **Translation** uses the mature mRNA sequence to assemble a
+polypeptide at a ribosome. Protein folding and other processing then
+contribute to protein function. In contrast, many noncoding RNA genes
+produce functional RNA molecules that are not translated into proteins.
+
+A variant in a promoter, enhancer, splice site, or untranslated region
+may affect gene expression or RNA processing without changing a
+protein-coding sequence. Such mechanisms help explain why GWAS signals
+are frequently located outside coding exons.
+
 A simplified information flow is DNA → RNA → protein. This is not a
 claim that every gene makes a protein or that phenotype depends on a
 single linear pathway. GWAS signals frequently fall outside
 protein-coding exons, which is one reason that the nearest gene is not
 automatically the causal gene.
+
+<figure>
+<img src="figures/ch02-fig-2-3.png"
+alt="Figure 2.3. From DNA to RNA to protein and cellular functions." />
+<figcaption aria-hidden="true">Figure 2.3. From DNA to RNA to protein
+and cellular functions.</figcaption>
+</figure>
+
+*Figure 2.3. Simplified protein-coding gene-expression pathway; many
+genes instead produce noncoding RNAs.*
 
 ## 2.4 Loci, alleles, and genotypes
 
@@ -99,21 +126,159 @@ limited to a biallelic, diploid locus. Multiallelic loci, structural
 variation, copy-number changes and sex chromosomes need additional
 representation.
 
-| Term | Plain-language meaning | Example |
-|:---|:---|:---|
-| Locus | A position or region in the genome | A position on chromosome 6 |
-| Allele | A sequence alternative at that position | A or G |
-| Genotype | The pair of alleles at a diploid locus | AG |
-| Homozygous | Two copies of the same allele | AA or GG |
-| Heterozygous | Two different alleles | AG |
-| Phenotype | A measured characteristic | Blood pressure |
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Term
+</th>
+
+<th>
+
+Plain-language meaning
+</th>
+
+<th>
+
+Example
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+Locus
+</td>
+
+<td>
+
+A position or region in the genome
+</td>
+
+<td>
+
+A position on chromosome 6
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Allele
+</td>
+
+<td>
+
+A sequence alternative at that position
+</td>
+
+<td>
+
+A or G
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Genotype
+</td>
+
+<td>
+
+The pair of alleles at a diploid locus
+</td>
+
+<td>
+
+AG
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Homozygous
+</td>
+
+<td>
+
+Two copies of the same allele
+</td>
+
+<td>
+
+AA or GG
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Heterozygous
+</td>
+
+<td>
+
+Two different alleles
+</td>
+
+<td>
+
+AG
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Phenotype
+</td>
+
+<td>
+
+A measured characteristic
+</td>
+
+<td>
+
+Blood pressure
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 <figure>
-<img src="figures/ch02-fig-2-3-1.png"
-alt="Figure 2.3. Three possible unordered genotypes at a biallelic diploid autosomal locus." />
-<figcaption aria-hidden="true">Figure 2.3. Three possible unordered
-genotypes at a biallelic diploid autosomal locus.</figcaption>
+<img src="figures/ch02-fig-2-4.png"
+alt="Figure 2.4. AA, AG and GG genotypes at a biallelic diploid locus." />
+<figcaption aria-hidden="true">Figure 2.4. AA, AG and GG genotypes at a
+biallelic diploid locus.</figcaption>
 </figure>
+
+*Figure 2.4. Homozygous and heterozygous allele combinations.*
 
 ### A variant is not the same as a gene
 
@@ -146,11 +311,14 @@ Punnett-square result with Hardy–Weinberg equilibrium, which we will
 develop in Chapter 4.
 
 <figure>
-<img src="figures/ch02-fig-2-4-1.png"
-alt="Figure 2.4. Punnett square for two heterozygous parents (AG × AG)." />
-<figcaption aria-hidden="true">Figure 2.4. Punnett square for two
-heterozygous parents (AG × AG).</figcaption>
+<img src="figures/ch02-fig-2-5.png"
+alt="Figure 2.5. A complete 2 by 2 Punnett square for AG by AG." />
+<figcaption aria-hidden="true">Figure 2.5. A complete 2 by 2 Punnett
+square for AG by AG.</figcaption>
 </figure>
+
+*Figure 2.5. The expected genotype probabilities are 1/4 AA, 1/2 AG and
+1/4 GG.*
 
 ## 2.6 Genotype dosage: connecting genetics to GWAS
 
@@ -158,11 +326,93 @@ GWAS software often converts a diploid biallelic genotype into the
 number of copies of a designated **effect allele**. Suppose G is the
 effect allele:
 
-| Genotype | Number of G alleles | Dosage (G) |
-|:---------|--------------------:|-----------:|
-| AA       |                   0 |          0 |
-| AG       |                   1 |          1 |
-| GG       |                   2 |          2 |
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Genotype
+</th>
+
+<th>
+
+Number of G alleles
+</th>
+
+<th>
+
+Dosage (G)
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+AA
+</td>
+
+<td>
+
+0
+</td>
+
+<td>
+
+0
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+AG
+</td>
+
+<td>
+
+1
+</td>
+
+<td>
+
+1
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+GG
+</td>
+
+<td>
+
+2
+</td>
+
+<td>
+
+2
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 If we instead count A, the coding reverses: AA = 2, AG = 1, GG = 0.
 **The dosage coding depends on the allele chosen; it does not by itself
@@ -192,6 +442,16 @@ data.frame(sample=paste0("S", seq_along(genotype)), genotype, g_dosage)
 ``` r
 stopifnot(all(g_dosage %in% 0:2))
 ```
+
+<figure>
+<img src="figures/ch02-fig-2-6.png"
+alt="Figure 2.6. Illustrative genotype dosage and quantitative-trait prediction." />
+<figcaption aria-hidden="true">Figure 2.6. Illustrative genotype dosage
+and quantitative-trait prediction.</figcaption>
+</figure>
+
+*Figure 2.6. A hypothetical additive effect, not a prediction from the
+HapMap data.*
 
 ### Why dosage is not always 0, 1, or 2
 
@@ -233,14 +493,117 @@ individual-level prediction.
 
 ## 2.9 Common misunderstandings
 
-| Misunderstanding | Correction |
-|:---|:---|
-| A gene and an allele are the same thing. | A gene is a genomic region; an allele is a sequence alternative at a locus. |
-| Every variant lies in a protein-coding gene. | Many variants occur in non-coding or intergenic regions. |
-| A heterozygote carries two different genes. | At a diploid locus, it carries two different alleles. |
-| The effect allele must increase disease risk. | Its estimated effect may be positive, negative or null. |
-| REF always equals the non-effect allele. | Reference and effect labels serve different purposes. |
-| A genotype uniquely determines a complex phenotype. | Complex phenotypes generally reflect many genetic and non-genetic influences. |
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Misunderstanding
+</th>
+
+<th>
+
+Correction
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+A gene and an allele are the same thing.
+</td>
+
+<td>
+
+A gene is a genomic region; an allele is a sequence alternative at a
+locus.
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Every variant lies in a protein-coding gene.
+</td>
+
+<td>
+
+Many variants occur in non-coding or intergenic regions.
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+A heterozygote carries two different genes.
+</td>
+
+<td>
+
+At a diploid locus, it carries two different alleles.
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+The effect allele must increase disease risk.
+</td>
+
+<td>
+
+Its estimated effect may be positive, negative or null.
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+REF always equals the non-effect allele.
+</td>
+
+<td>
+
+Reference and effect labels serve different purposes.
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+A genotype uniquely determines a complex phenotype.
+</td>
+
+<td>
+
+Complex phenotypes generally reflect many genetic and non-genetic
+influences.
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 ## 2.10 Practical checkpoint and reproducibility
 
