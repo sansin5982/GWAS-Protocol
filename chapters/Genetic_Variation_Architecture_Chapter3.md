@@ -8,23 +8,12 @@ output:
 Genetic Variation and Genetic Architecture
 ================
 
-## Learning objectives
-
-By the end of this chapter, we should be able to distinguish major
-classes of DNA variation; interpret reference and alternate alleles
-without confusing them with risk alleles; explain allele frequency and
-minor-allele frequency; calculate genotype and allele counts by hand;
-distinguish effect size from statistical significance; describe
-monogenic, oligogenic, and polygenic architectures; and recognize how
-linkage disequilibrium and study design affect the interpretation of
-GWAS signals.
-
-**Scope.** We focus on the biological and statistical meaning of genetic
-variation. Population-genetic mechanisms, Hardy–Weinberg equilibrium,
-detailed linkage disequilibrium, and population stratification are
-developed in Chapter 4. Genotyping technology and file formats are
-covered in later chapters. All numerical examples in this chapter are
-**hypothetical teaching examples**, not results from our Hapmap dataset.
+We focus on the biological and statistical meaning of genetic variation.
+Population-genetic mechanisms, Hardy–Weinberg equilibrium, detailed
+linkage disequilibrium, and population stratification are developed in
+Chapter 4. Genotyping technology and file formats are covered in later
+chapters. All numerical examples in this chapter are **hypothetical
+teaching examples**, not results from our Hapmap dataset.
 
 ## 3.1 What is genetic variation?
 
