@@ -1,19 +1,5 @@
----
-title: "Genetic Variation and Genetic Architecture"
-output:
-  github_document:
-    preserve_yaml: true
----
-
 Genetic Variation and Genetic Architecture
 ================
-
-We focus on the biological and statistical meaning of genetic variation.
-Population-genetic mechanisms, Hardy–Weinberg equilibrium, detailed
-linkage disequilibrium, and population stratification are developed in
-Chapter 4. Genotyping technology and file formats are covered in later
-chapters. All numerical examples in this chapter are **hypothetical
-teaching examples**, not results from our Hapmap dataset.
 
 ## 3.1 What is genetic variation?
 
@@ -79,7 +65,10 @@ biallelic SNP. Classical HLA alleles are an important example of highly
 polymorphic, sequence-defined alleles; SNPs in the MHC region are not
 interchangeable with classical HLA allele calls.
 
-![](figures/ch03-fig-3-1-1.png)<!-- -->
+<figure>
+<img src="figures/ch03-fig-3-1.png" alt="Figure 3.1" />
+<figcaption aria-hidden="true">Figure 3.1</figcaption>
+</figure>
 
 *Figure 3.1. Schematic examples of sequence-variant classes. Sequences
 are invented for teaching and are not mapped to a genomic coordinate.*
@@ -93,14 +82,150 @@ representations.
 Several allele labels answer different questions and should never be
 treated as synonyms.
 
-| Term | Meaning | Key caution |
-|:---|:---|:---|
-| Reference allele (REF) | Sequence matching the chosen reference assembly at the represented locus | Not necessarily the common or ancestral allele |
-| Alternate allele (ALT) | Sequence differing from REF | Not necessarily the risk allele |
-| Effect allele | Allele to which a reported effect estimate refers | Its choice determines the sign of a regression coefficient |
-| Other allele | Comparator for the effect allele in a biallelic analysis | May be REF or ALT |
-| Minor allele | Less frequent allele in a specified population/sample | Can change between populations |
-| Ancestral allele | Inferred allele state in an evolutionary ancestor | Requires evidence; not synonymous with REF |
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Term
+</th>
+
+<th>
+
+Meaning
+</th>
+
+<th>
+
+Key caution
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+Reference allele (REF)
+</td>
+
+<td>
+
+Sequence matching the chosen reference assembly at the represented locus
+</td>
+
+<td>
+
+Not necessarily the common or ancestral allele
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Alternate allele (ALT)
+</td>
+
+<td>
+
+Sequence differing from REF
+</td>
+
+<td>
+
+Not necessarily the risk allele
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Effect allele
+</td>
+
+<td>
+
+Allele to which a reported effect estimate refers
+</td>
+
+<td>
+
+Its choice determines the sign of a regression coefficient
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Other allele
+</td>
+
+<td>
+
+Comparator for the effect allele in a biallelic analysis
+</td>
+
+<td>
+
+May be REF or ALT
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Minor allele
+</td>
+
+<td>
+
+Less frequent allele in a specified population/sample
+</td>
+
+<td>
+
+Can change between populations
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Ancestral allele
+</td>
+
+<td>
+
+Inferred allele state in an evolutionary ancestor
+</td>
+
+<td>
+
+Requires evidence; not synonymous with REF
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 For example, if a GWAS reports an effect allele G with an odds ratio of
 1.20 relative to A, the association is reported **per additional G
@@ -130,12 +255,112 @@ data.
 Consider 100 unrelated diploid individuals typed at a biallelic
 autosomal SNP:
 
-| Genotype  | Number of individuals | Number of G alleles contributed |
-|:----------|----------------------:|--------------------------------:|
-| AA        |                    36 |                               0 |
-| AG        |                    48 |                              48 |
-| GG        |                    16 |                              32 |
-| **Total** |               **100** |                          **80** |
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Genotype
+</th>
+
+<th>
+
+Number of individuals
+</th>
+
+<th>
+
+Number of G alleles contributed
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+AA
+</td>
+
+<td>
+
+36
+</td>
+
+<td>
+
+0
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+AG
+</td>
+
+<td>
+
+48
+</td>
+
+<td>
+
+48
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+GG
+</td>
+
+<td>
+
+16
+</td>
+
+<td>
+
+32
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<strong>Total</strong>
+</td>
+
+<td>
+
+<strong>100</strong>
+</td>
+
+<td>
+
+<strong>80</strong>
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 Each individual contributes two allele copies, so the total number of
 observed allele copies is $2(100)=200$. The frequency of G is:
@@ -190,7 +415,10 @@ different cutoffs. For a sample of 100 diploid individuals, an allele
 present once has MAC 1 and an observed frequency of $1/200=0.005$
 (0.5%).
 
-![](figures/ch03-fig-3-2-1.png)<!-- -->
+<figure>
+<img src="figures/ch03-fig-3-2.png" alt="Figure 3.2" />
+<figcaption aria-hidden="true">Figure 3.2</figcaption>
+</figure>
 
 *Figure 3.2. Hypothetical genotype counts and the corresponding allele
 copies at one biallelic SNP.*
@@ -214,17 +442,102 @@ $\varepsilon$ captures variation not explained by this simple model.
 Suppose $\beta_0=120$ mmHg and $\beta_G=2$ mmHg. The predicted means
 are:
 
-| Genotype | G dosage | Predicted systolic blood pressure |
-|:---------|---------:|----------------------------------:|
-| AA       |        0 |               $120+2(0)=120$ mmHg |
-| AG       |        1 |               $120+2(1)=122$ mmHg |
-| GG       |        2 |               $120+2(2)=124$ mmHg |
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Genotype
+</th>
+
+<th>
+
+G dosage
+</th>
+
+<th>
+
+Predicted systolic blood pressure
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+AA
+</td>
+
+<td>
+
+0
+</td>
+
+<td>
+
+$120+2(0)=120$ mmHg
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+AG
+</td>
+
+<td>
+
+1
+</td>
+
+<td>
+
+$120+2(1)=122$ mmHg
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+GG
+</td>
+
+<td>
+
+2
+</td>
+
+<td>
+
+$120+2(2)=124$ mmHg
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 This example assumes an additive effect on the **measurement scale** and
 omits covariates. It does not imply that every individual with GG has
 exactly 124 mmHg or that the variant causes the observed difference.
 
-![](figures/ch03-fig-3-3-1.png)<!-- -->
+<figure>
+<img src="figures/ch03-fig-3-3.png" alt="Figure 3.3" />
+<figcaption aria-hidden="true">Figure 3.3</figcaption>
+</figure>
 
 *Figure 3.3. Predicted trait means under a hypothetical additive model.
 These are model predictions, not observed participant measurements.*
@@ -237,11 +550,113 @@ compares GG with AA/AG (coding 0, 0, 1). These are statistical genotype
 codings; the word *dominant* in a regression model should not be taken
 as proof of a classical Mendelian inheritance pattern.
 
-| Genotype | Additive G | Dominant G | Recessive G |
-|:---------|-----------:|-----------:|------------:|
-| AA       |          0 |          0 |           0 |
-| AG       |          1 |          1 |           0 |
-| GG       |          2 |          1 |           1 |
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Genotype
+</th>
+
+<th>
+
+Additive G
+</th>
+
+<th>
+
+Dominant G
+</th>
+
+<th>
+
+Recessive G
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+AA
+</td>
+
+<td>
+
+0
+</td>
+
+<td>
+
+0
+</td>
+
+<td>
+
+0
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+AG
+</td>
+
+<td>
+
+1
+</td>
+
+<td>
+
+1
+</td>
+
+<td>
+
+0
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+GG
+</td>
+
+<td>
+
+2
+</td>
+
+<td>
+
+1
+</td>
+
+<td>
+
+1
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 ``` r
 genotypes <- c("AA", "AG", "GG")
@@ -303,7 +718,10 @@ components. However, describing a trait as polygenic does not mean that
 every associated variant is causal or that environmental influences are
 unimportant.
 
-![](figures/ch03-fig-3-4-1.png)<!-- -->
+<figure>
+<img src="figures/ch03-fig-3-4.png" alt="Figure 3.4" />
+<figcaption aria-hidden="true">Figure 3.4</figcaption>
+</figure>
 
 *Figure 3.4. Conceptual genetic architectures. The number and sizes of
 plotted effects are illustrative, not estimates for a particular
@@ -341,7 +759,10 @@ SNP may therefore show association because it is correlated with another
 variant that influences the phenotype. In such a case, the observed SNP
 is a **tagging marker**, not necessarily the causal variant.
 
-![](figures/ch03-fig-3-5-1.png)<!-- -->
+<figure>
+<img src="figures/ch03-fig-3-5.png" alt="Figure 3.5" />
+<figcaption aria-hidden="true">Figure 3.5</figcaption>
+</figure>
 
 *Figure 3.5. Conceptual distinction between a tested tagging SNP and a
 possible causal variant. The association is illustrative; the diagram
@@ -412,24 +833,167 @@ is not a realistic model of every population or genomic region. In
 particular, it does not model LD, relatedness, population structure, or
 genotyping error.
 
-![](figures/ch03-fig-3-6-1.png)<!-- -->
+<figure>
+<img src="figures/ch03-fig-3-6.png" alt="Figure 3.6" />
+<figcaption aria-hidden="true">Figure 3.6</figcaption>
+</figure>
 
 *Figure 3.6. Genotype distribution from the reproducible simulated R
 example (N = 200; input G-allele frequency = 0.30).*
 
 ### Methods and reproducibility record
 
-| Item | Record |
-|:---|:---|
-| Input | No external genotype files; values generated within this chapter |
-| Software | Base R; record the local R version when rendering |
-| Random seed | `303` |
-| Simulated sample size | 200 diploid individuals |
-| Assumed G-allele frequency | 0.30 |
-| Generated data | Two independent Bernoulli allele draws per individual |
-| Verification | All dosages in 0–2; genotype counts sum to 200 |
-| QC exclusions | None; this is not a QC analysis |
-| Limitations | Does not represent real Hapmap observations, LD, ancestry, or errors |
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+
+Item
+</th>
+
+<th>
+
+Record
+</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr>
+
+<td>
+
+Input
+</td>
+
+<td>
+
+No external genotype files; values generated within this chapter
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Software
+</td>
+
+<td>
+
+Base R; record the local R version when rendering
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Random seed
+</td>
+
+<td>
+
+<code>303</code>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Simulated sample size
+</td>
+
+<td>
+
+200 diploid individuals
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Assumed G-allele frequency
+</td>
+
+<td>
+
+0.30
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Generated data
+</td>
+
+<td>
+
+Two independent Bernoulli allele draws per individual
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Verification
+</td>
+
+<td>
+
+All dosages in 0–2; genotype counts sum to 200
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+QC exclusions
+</td>
+
+<td>
+
+None; this is not a QC analysis
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Limitations
+</td>
+
+<td>
+
+Does not represent real Hapmap observations, LD, ancestry, or errors
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
 
 ``` r
 R.version.string
