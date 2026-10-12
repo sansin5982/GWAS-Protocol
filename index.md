@@ -10,3 +10,5 @@ Chapters:
 - [Population Genetics](chapters/Population_Genetics_Chapter4)
 - [Phenotypes Covariates
   Confounding](chapters/Phenotypes_Covariates_Confounding_Chapter5)
+- [Statistical Foundations
+  Chapter](chapters/Statistical_Foundations_Chapter6)
