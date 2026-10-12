@@ -217,9 +217,9 @@ discards information, although a clinically meaningful threshold may be
 required for a specific research question.
 
 <figure>
-<img src="figures/ch05-fig-5-4.png"
-alt="Figure 5.4. Continuous versus dichotomized systolic blood pressure." />
-<figcaption aria-hidden="true">Figure 5.4. Continuous versus
+<img src="figures/ch05-fig-5-2.png"
+alt="Figure 5.2. Continuous versus dichotomized systolic blood pressure." />
+<figcaption aria-hidden="true">Figure 5.2. Continuous versus
 dichotomized systolic blood pressure.</figcaption>
 </figure>
 
@@ -397,9 +397,9 @@ frequencies and phenotype distributions differ between groups for
 reasons unrelated to the tested variant’s effect.
 
 <figure>
-<img src="figures/ch05-fig-5-2.png"
-alt="Figure 5.2. Ancestry-related confounding in GWAS." />
-<figcaption aria-hidden="true">Figure 5.2. Ancestry-related confounding
+<img src="figures/ch05-fig-5-3.png"
+alt="Figure 5.3. Ancestry-related confounding in GWAS." />
+<figcaption aria-hidden="true">Figure 5.3. Ancestry-related confounding
 in GWAS.</figcaption>
 </figure>
 
@@ -430,9 +430,9 @@ on it can open a previously blocked path and induce a spurious
 association.
 
 <figure>
-<img src="figures/ch05-fig-5-3.png"
-alt="Figure 5.3. Mediator and collider structures." />
-<figcaption aria-hidden="true">Figure 5.3. Mediator and collider
+<img src="figures/ch05-fig-5-4.png"
+alt="Figure 5.4. Mediator and collider structures." />
+<figcaption aria-hidden="true">Figure 5.4. Mediator and collider
 structures.</figcaption>
 </figure>
 
@@ -460,9 +460,9 @@ variables associated with genotype and outcome, conditioning on
 inclusion can create selection bias. This is related to collider bias.
 
 <figure>
-<img src="figures/ch05-fig-5-6.png"
-alt="Figure 5.6. Selection into an analyzed GWAS sample." />
-<figcaption aria-hidden="true">Figure 5.6. Selection into an analyzed
+<img src="figures/ch05-fig-5-5.png"
+alt="Figure 5.5. Selection into an analyzed GWAS sample." />
+<figcaption aria-hidden="true">Figure 5.5. Selection into an analyzed
 GWAS sample.</figcaption>
 </figure>
 
@@ -503,9 +503,9 @@ represents a modeled association under this invented example; it is not
 an individual prediction guarantee or an empirical GWAS estimate.
 
 <figure>
-<img src="figures/ch05-fig-5-5.png"
-alt="Figure 5.5. Age-related variation and residualization." />
-<figcaption aria-hidden="true">Figure 5.5. Age-related variation and
+<img src="figures/ch05-fig-5-6.png"
+alt="Figure 5.6. Age-related variation and residualization." />
+<figcaption aria-hidden="true">Figure 5.6. Age-related variation and
 residualization.</figcaption>
 </figure>
 
