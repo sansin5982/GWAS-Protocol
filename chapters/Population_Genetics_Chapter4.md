@@ -25,9 +25,9 @@ be the frequency of A and $q$ the frequency of G. Then $p+q=1$.
 
 ![](figures/ch04-fig-4-1.png)
 
-*Figure 4.1. Forty allele copies per illustrative population. Blue
-represents G; orange represents A. These are invented teaching examples,
-not sampled populations.*
+*Figure 4.1. Population 1 represents European Population and Population
+2 represents East Asian Ancestry; Major allele is represented as A and
+minor allele isrepresented a.*
 
 ## 4.2 Counting alleles and genotypes
 
@@ -197,15 +197,10 @@ mating under the standard model; allele-frequency constancy over many
 generations additionally requires the absence of forces such as drift,
 selection, mutation and migration.
 
-<figure>
-<img src="figures/ch04-fig-4-2.png"
-alt="Figure 4.2. Expected Hardy–Weinberg genotype frequencies." />
-<figcaption aria-hidden="true">Figure 4.2. Expected Hardy–Weinberg
-genotype frequencies.</figcaption>
-</figure>
+![](figures/ch04-fig-4-2.png)
 
 *Figure 4.2. HWE expectations at an autosomal biallelic locus when p(A)
-= 0.60 and q(G) = 0.40.*
+= 0.60 and q(a) = 0.40.*
 
 **Assumptions and interpretation.** The basic model presumes random
 mating with respect to the locus, ordinary diploid inheritance and
@@ -283,11 +278,6 @@ alt="Figure 4.3. Simulated genetic drift trajectories." />
 trajectories.</figcaption>
 </figure>
 
-*Figure 4.3. Sixteen independent simulated allele-frequency trajectories
-in small (N = 20) and larger (N = 500) diploid populations, initialized
-at 0.50, with no selection or migration. Results depend on the random
-seed.*
-
 ## 4.7 Population differentiation and F-statistics
 
 Population differentiation reflects variation in allele frequencies
@@ -324,10 +314,6 @@ alt="Figure 4.4. Population structure as a potential confounder." />
 potential confounder.</figcaption>
 </figure>
 
-*Figure 4.4. Conceptual confounding diagram. Ancestry background can be
-associated with both marker frequency and phenotype distribution; the
-dashed connection is an apparent association, not a causal conclusion.*
-
 GWAS analyses commonly use ancestry principal components (PCs), suitable
 mixed models, study design restrictions and careful cohort
 harmonization. PCs summarize genetic variation; they are not perfect
@@ -350,9 +336,6 @@ alt="Figure 4.5. Illustrative two-locus haplotype frequencies." />
 <figcaption aria-hidden="true">Figure 4.5. Illustrative two-locus
 haplotype frequencies.</figcaption>
 </figure>
-
-*Figure 4.5. Four hypothetical haplotypes with frequencies 0.40, 0.10,
-0.20 and 0.30. These sum to 1 and are used in the LD calculation below.*
 
 ## 4.10 Linkage disequilibrium: D, D-prime and r-squared
 
@@ -400,13 +383,6 @@ alt="Figure 4.6. Illustrative pairwise squared correlations." />
 <figcaption aria-hidden="true">Figure 4.6. Illustrative pairwise squared
 correlations.</figcaption>
 </figure>
-
-*Figure 4.6. Pairwise squared Pearson correlations ($r^2$) calculated
-from simulated diploid SNP genotype dosages (0, 1, 2) for 1,200
-individuals across eight markers. Three independently simulated
-haplotype groups produce block-like LD. This is an illustrative
-genotype-based simulation, not empirical LD from HapMap or a GWAS
-cohort.*
 
 ## 4.12 Why population genetics matters in GWAS
 
