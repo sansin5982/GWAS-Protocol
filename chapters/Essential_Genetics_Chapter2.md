@@ -8,16 +8,6 @@ output:
 Essential Genetics for GWAS
 ================
 
-## Learning objectives
-
-By the end of this chapter, we should be able to (1) describe how DNA,
-chromosomes and genes relate to one another; (2) identify the four DNA
-bases and complementary base pairing; (3) distinguish a genomic locus,
-allele, genotype and phenotype; (4) explain diploid inheritance and
-homozygous versus heterozygous genotypes; (5) translate a biallelic
-autosomal genotype into an effect-allele dosage; and (6) recognize when
-this simplified model does not apply.
-
 ## 2.1 From cells to chromosomes
 
 Most human cells contain a **nucleus** that houses chromosomes, which
