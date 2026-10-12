@@ -133,7 +133,7 @@ and G. For illustration, the counts below are fictional:
 
 If G is the allele of interest, its frequency among cases is:
 
-$$ f_{{G},\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45.$$
+$$ f_{G},\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45.$$
 
 Among controls:
 
