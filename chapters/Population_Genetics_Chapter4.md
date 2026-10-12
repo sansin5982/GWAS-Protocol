@@ -10,15 +10,6 @@ principles explain why ancestry matters, why correlated markers can
 share association signals, and why genotype distributions require
 careful quality control.
 
-## Learning objectives
-
-By the end of this chapter, we should be able to calculate allele and
-genotype frequencies; derive Hardy–Weinberg expectations; distinguish
-equilibrium from formal tests; explain drift, migration and selection;
-interpret population differentiation and confounding; calculate
-haplotype-based linkage disequilibrium (LD); and connect these ideas to
-GWAS workflows.
-
 ## 4.1 Populations, gene pools and allele frequencies
 
 A **population** is a group of potentially interbreeding individuals
