@@ -10,6 +10,15 @@ principles explain why ancestry matters, why correlated markers can
 share association signals, and why genotype distributions require
 careful quality control.
 
+## Learning objectives
+
+By the end of this chapter, we should be able to calculate allele and
+genotype frequencies; derive Hardy–Weinberg expectations; distinguish
+equilibrium from formal tests; explain drift, migration and selection;
+interpret population differentiation and confounding; calculate
+haplotype-based linkage disequilibrium (LD); and connect these ideas to
+GWAS workflows.
+
 ## 4.1 Populations, gene pools and allele frequencies
 
 A **population** is a group of potentially interbreeding individuals
@@ -406,10 +415,12 @@ alt="Figure 4.6. Illustrative pairwise squared correlations." />
 correlations.</figcaption>
 </figure>
 
-*Figure 4.6. Heatmap of squared correlations from continuous simulated
-variables with three latent correlation groups. This is an **LD-like
-teaching visualization**, not empirical SNP LD; it illustrates
-block-like patterns without claiming genotype-based estimation.*
+*Figure 4.6. Pairwise squared Pearson correlations ($r^2$) calculated
+from simulated diploid SNP genotype dosages (0, 1, 2) for 1,200
+individuals across eight markers. Three independently simulated
+haplotype groups produce block-like LD. This is an illustrative
+genotype-based simulation, not empirical LD from HapMap or a GWAS
+cohort.*
 
 ## 4.12 Why population genetics matters in GWAS
 
@@ -851,8 +862,8 @@ Seeds
 
 <td>
 
-404 for the R drift exercise; 41, 404 and 4 used for figure-generating
-Python scripts
+404 for the R drift exercise; 41, 404, 4 and 406 used for
+figure-generating Python scripts
 </td>
 
 </tr>
@@ -881,8 +892,8 @@ Limitations
 
 <td>
 
-Figure 4.6 uses continuous simulated data, not empirical genotype LD;
-simplified FST calculation is illustrative
+Figure 4.6 uses simulated diploid SNP dosages rather than empirical
+genotype data; simplified FST calculation is illustrative
 </td>
 
 </tr>
