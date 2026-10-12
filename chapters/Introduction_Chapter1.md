@@ -137,7 +137,7 @@ $$ f_{G},\mathrm{cases}}=\frac{50+2(20)}{2(100)}=\frac{90}{200}=0.45.$$
 
 Among controls:
 
-$$ f_{{G},\mathrm{controls}}=\frac{45+2(10)}{2(100)}=\frac{65}{200}=0.325.$$
+$$ f_{G},\mathrm{controls}}=\frac{45+2(10)}{2(100)}=\frac{65}{200}=0.325.$$
 
 The G-allele frequency is therefore 45.0% among cases and 32.5% among
 controls: a difference of **12.5 percentage points**. In everyday terms,
