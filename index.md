@@ -7,6 +7,7 @@ Chapters:
 - [Essential Genetics for GWAS](chapters/Essential_Genetics_Chapter2)
 - [Genetic Variation and Genetic
   Architecture](chapters/Genetic_Variation_Architecture_Chapter3)
+- [Population Genetics](chapters/Population_Genetics_Chapter4)
 - [File formats to perform GWAS](chapters/File-formats)
 - [Quality Control](chapters/QC)
   - [Per Individual Quality Control](chapters/QC/Individual-QC)
