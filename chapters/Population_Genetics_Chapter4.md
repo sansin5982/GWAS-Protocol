@@ -23,12 +23,7 @@ At a biallelic autosomal locus, each successfully genotyped diploid
 individual contributes two allele copies. For alleles A and G, let $p$
 be the frequency of A and $q$ the frequency of G. Then $p+q=1$.
 
-<figure>
-<img src="figures/ch04-fig-4-1.png"
-alt="Figure 4.1. Two illustrative populations with different G-allele frequencies." />
-<figcaption aria-hidden="true">Figure 4.1. Two illustrative populations
-with different G-allele frequencies.</figcaption>
-</figure>
+![](figures/ch04-fig-4-1.png)
 
 *Figure 4.1. Forty allele copies per illustrative population. Blue
 represents G; orange represents A. These are invented teaching examples,
