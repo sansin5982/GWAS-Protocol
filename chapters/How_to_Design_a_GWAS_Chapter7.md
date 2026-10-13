@@ -1,3 +1,11 @@
+---
+title: "How to Design a GWAS"
+output:
+  github_document:
+    html_preview: false
+    preserve_yaml: true
+---
+
 How to Design a GWAS
 ================
 
