@@ -12,3 +12,4 @@ Chapters:
   Confounding](chapters/Phenotypes_Covariates_Confounding_Chapter5)
 - [Statistical Foundations](chapters/Statistical_Foundations_Chapter6)
 - [How to Design a GWAS](chapters/How_to_Design_a_GWAS_Chapter7)
+- [Case Control GWAS](chapters/Case_Control_GWAS_Chapter8)
