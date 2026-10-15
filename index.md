@@ -13,3 +13,4 @@ Chapters:
 - [Statistical Foundations](chapters/Statistical_Foundations_Chapter6)
 - [How to Design a GWAS](chapters/How_to_Design_a_GWAS_Chapter7)
 - [Case Control GWAS](chapters/Case_Control_GWAS_Chapter8)
+- [Statistical Models GWAS](chapters/Statistical_Models_GWAS_Chapter9)
