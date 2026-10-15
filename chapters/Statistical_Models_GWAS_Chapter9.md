@@ -141,7 +141,7 @@ c(RSS=rss, residual_variance=rss/(length(x)-2), slope_SE=se_slope)
 ```
 
     ##               RSS residual_variance          slope_SE 
-    ##           0.20000           0.10000           0.14142
+    ##         0.2000000         0.1000000         0.1414214
 
 **Figure 9.3. Residual sum of squares.** This exact quadratic objective
 uses the same four observations; the intercept is optimized for each
@@ -199,9 +199,9 @@ rbind(unadjusted=coef(summary(m_unadjusted))["G",],
       adjusted=coef(summary(m_adjusted))["G",])
 ```
 
-    ##            Estimate Std. Error t value   Pr(>|t|)
-    ## unadjusted    3.793    0.93231  4.0684 6.4413e-05
-    ## adjusted      1.346    0.78714  1.7100 8.8579e-02
+    ##            Estimate Std. Error  t value     Pr(>|t|)
+    ## unadjusted 3.792994  0.9323064 4.068399 0.0000644125
+    ## adjusted   1.346018  0.7871431 1.710004 0.0885793630
 
 **Figure 9.4. Adjusted and unadjusted genotype coefficients.** These
 estimates come from an independently generated fixed-seed Python
@@ -265,13 +265,13 @@ generated, fixed-seed simulation.
 head(data.frame(leverage=hatvalues(m_adjusted),cooks_D=cooks.distance(m_adjusted)))
 ```
 
-    ##   leverage    cooks_D
-    ## 1 0.011473 0.00623164
-    ## 2 0.022502 0.00028974
-    ## 3 0.021385 0.00050071
-    ## 4 0.018538 0.00324274
-    ## 5 0.016660 0.00077251
-    ## 6 0.014669 0.00460918
+    ##     leverage      cooks_D
+    ## 1 0.01147324 0.0062316415
+    ## 2 0.02250227 0.0002897372
+    ## 3 0.02138508 0.0005007102
+    ## 4 0.01853776 0.0032427378
+    ## 5 0.01666041 0.0007725116
+    ## 6 0.01466915 0.0046091842
 
 Robust sandwich standard errors can help under heteroscedasticity, but
 they do not correct an omitted confounder. For related observations, the
@@ -306,8 +306,8 @@ stopifnot(abs(p1-1/7)<1e-12)
 c(p0=p0,odds0=odds0,p1=p1)
 ```
 
-    ##      p0   odds0      p1 
-    ## 0.10000 0.11111 0.14286
+    ##        p0     odds0        p1 
+    ## 0.1000000 0.1111111 0.1428571
 
 **Figure 9.6. Logistic link functions.** These curves follow the
 equations, with no empirical data.
@@ -349,10 +349,10 @@ stopifnot(fit_log$converged)
 summary(fit_log)$coefficients
 ```
 
-    ##             Estimate Std. Error  z value   Pr(>|z|)
-    ## (Intercept) -1.28509   0.122641 -10.4785 1.0843e-25
-    ## g            0.50771   0.107971   4.7023 2.5729e-06
-    ## pc           0.48611   0.078753   6.1726 6.7195e-10
+    ##               Estimate Std. Error    z value     Pr(>|z|)
+    ## (Intercept) -1.2850949 0.12264089 -10.478519 1.084283e-25
+    ## g            0.5077068 0.10797065   4.702267 2.572893e-06
+    ## pc           0.4861058 0.07875277   6.172555 6.719532e-10
 
 ## 9.10 Case–control association: effect sizes and ascertainment
 
@@ -373,8 +373,8 @@ CI_OR <- exp(b+c(-1,1)*qnorm(.975)*se)
 c(OR=OR_hat,lower95=CI_OR[1],upper95=CI_OR[2])
 ```
 
-    ##      OR lower95 upper95 
-    ##  1.6615  1.3446  2.0530
+    ##       OR  lower95  upper95 
+    ## 1.661477 1.344589 2.053048
 
 **Figure 9.7. Probability by genotype dosage.** This independent
 mathematical illustration uses the hypothetical model logit(p) = -1 +
@@ -414,9 +414,9 @@ score_test <- anova(fit_null,fit_log,test="Rao")
 data.frame(test=c("Wald","Likelihood ratio"),statistic=c(wald_z,lrt),p_value=c(wald_p,lrt_p))
 ```
 
-    ##               test statistic    p_value
-    ## 1             Wald    4.7023 2.5729e-06
-    ## 2 Likelihood ratio   22.4902 2.1121e-06
+    ##               test statistic      p_value
+    ## 1             Wald  4.702267 2.572893e-06
+    ## 2 Likelihood ratio 22.490240 2.112140e-06
 
 ``` r
 score_test
@@ -426,9 +426,9 @@ score_test
     ## 
     ## Model 1: case ~ pc
     ## Model 2: case ~ g + pc
-    ##   Resid. Df Resid. Dev Df Deviance  Rao Pr(>Chi)    
-    ## 1       898       1061                              
-    ## 2       897       1038  1     22.5 22.6    2e-06 ***
+    ##   Resid. Df Resid. Dev Df Deviance    Rao  Pr(>Chi)    
+    ## 1       898     1061.0                                 
+    ## 2       897     1038.5  1    22.49 22.593 2.002e-06 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -493,8 +493,8 @@ anova(fit_additive,fit_genotypic,test="Chisq")
     ## Model 1: case ~ g + pc
     ## Model 2: case ~ g_factor + pc
     ##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)
-    ## 1       897       1038                     
-    ## 2       896       1037  1      1.2     0.27
+    ## 1       897     1038.5                     
+    ## 2       896     1037.3  1   1.1982   0.2737
 
 The genotypic-versus-additive comparison is a one-degree-of-freedom
 *departure-from-additivity* test (assuming nested fits with identical
@@ -540,7 +540,7 @@ c(OR_tested=exp(coef(fit_log)["g"]),OR_other=exp(coef(reverse_fit)["g_other"]))
 ```
 
     ##      OR_tested.g OR_other.g_other 
-    ##          1.66148          0.60187
+    ##        1.6614767        0.6018742
 
 **Figure 9.10. Effect-allele reversal.** Values are calculated from a
 hypothetical beta and do not represent a locus.
@@ -578,15 +578,15 @@ m_anc_adj<-lm(y_anc~g_anc+ancestry)
 coef(summary(m_pooled))["g_anc",]
 ```
 
-    ##   Estimate Std. Error    t value   Pr(>|t|) 
-    ## 2.0550e+00 1.3756e-01 1.4939e+01 1.0822e-45
+    ##     Estimate   Std. Error      t value     Pr(>|t|) 
+    ## 2.054968e+00 1.375585e-01 1.493887e+01 1.082182e-45
 
 ``` r
 coef(summary(m_anc_adj))["g_anc",]
 ```
 
     ##   Estimate Std. Error    t value   Pr(>|t|) 
-    ##    0.15326    0.15644    0.97967    0.32749
+    ##  0.1532616  0.1564424  0.9796679  0.3274877
 
 **Figure 9.11. Confounding illustration.** This independent fixed-seed
 simulation has zero genetic effect; any apparent association arises from
@@ -787,8 +787,8 @@ print(anova(fit_gen_null,fit_genotypic,test="Chisq"))
     ## Model 1: case ~ pc
     ## Model 2: case ~ g_factor + pc
     ##   Resid. Df Resid. Dev Df Deviance Pr(>Chi)    
-    ## 1       898       1061                         
-    ## 2       896       1037  2     23.7  7.2e-06 ***
+    ## 1       898     1061.0                         
+    ## 2       896     1037.3  2   23.688 7.18e-06 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
@@ -796,8 +796,10 @@ print(anova(fit_gen_null,fit_genotypic,test="Chisq"))
 print(predict(fit_log,newdata=expand.grid(g=0:2,pc=c(-1,0,1)),type="response"))
 ```
 
-    ##       1       2       3       4       5       6       7       8       9 
-    ## 0.14539 0.22037 0.31956 0.21668 0.31488 0.43299 0.31024 0.42769 0.55390
+    ##         1         2         3         4         5         6         7         8 
+    ## 0.1453931 0.2203730 0.3195616 0.2166842 0.3148831 0.4329853 0.3102418 0.4276900 
+    ##         9 
+    ## 0.5538959
 
 ## 9.22 Chapter summary
 
@@ -882,8 +884,10 @@ sessionInfo()
     ##   LAPACK version 3.12.1
     ## 
     ## locale:
-    ## [1] LC_COLLATE=English_United States.utf8  LC_CTYPE=English_United States.utf8   
-    ## [3] LC_MONETARY=English_United States.utf8 LC_NUMERIC=C                          
+    ## [1] LC_COLLATE=English_United States.utf8 
+    ## [2] LC_CTYPE=English_United States.utf8   
+    ## [3] LC_MONETARY=English_United States.utf8
+    ## [4] LC_NUMERIC=C                          
     ## [5] LC_TIME=English_United States.utf8    
     ## 
     ## time zone: Asia/Calcutta
