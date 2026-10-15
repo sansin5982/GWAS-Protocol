@@ -14,3 +14,5 @@ Chapters:
 - [How to Design a GWAS](chapters/How_to_Design_a_GWAS_Chapter7)
 - [Case Control GWAS](chapters/Case_Control_GWAS_Chapter8)
 - [Statistical Models GWAS](chapters/Statistical_Models_GWAS_Chapter9)
+- [Genotype Quality Control
+  Principles](chapters/Genotype_QC_Principles_Chapter10)
