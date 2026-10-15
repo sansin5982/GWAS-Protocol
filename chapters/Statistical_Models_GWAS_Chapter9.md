@@ -4,10 +4,9 @@ output:
   github_document:
     html_preview: false
     preserve_yaml: true
+    pandoc_args:
+      - "--metadata=title:"
 ---
-
-# Statistical Models for GWAS: Linear Regression, Logistic Regression, and
-Genetic Association Models
 
 
 ## 9.1 Why statistical models matter in GWAS
