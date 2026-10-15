@@ -70,17 +70,32 @@ For a continuous phenotype, the simple model is
 
 $$Y_i=\beta_0+\beta_1X_i+\varepsilon_i,\qquad E(\varepsilon_i\mid X_i)=0.$$
 
-The conditional mean is $E(Y_i\mid X_i)=\beta_0+\beta_1X_i$. The fitted
-value is $\hat Y_i=\hat\beta_0+\hat\beta_1X_i$; the residual is
-$e_i=Y_i-\hat Y_i$. A slope of $2$ mmHg per allele corresponds to a
-two-unit *conditional mean difference* per additional effect allele
-under additive coding, not to a two-percent increase.
+The conditional mean is:
 
-**Worked example (hypothetical):** use $x=(0,1,2,3)$ and $y=(2,3,5,6)$.
-Then $\bar x=1.5$, $\bar y=4$, $\sum(x_i-\bar x)(y_i-\bar y)=7$, and
-$\sum(x_i-\bar x)^2=5$. Therefore $\hat\beta_1=7/5=1.4$ and
-$\hat\beta_0=4-1.4(1.5)=1.9$. These $x$ values illustrate regression
-arithmetic and are *not* diploid genotype calls because 3 is included.
+- $E(Y_i\mid X_i)=\beta_0+\beta_1X_i$.
+- The fitted value is $\hat Y_i=\hat\beta_0+\hat\beta_1X_i$;
+- the residual is $e_i=Y_i-\hat Y_i$. A slope of $2$ mmHg per allele
+  corresponds to a two-unit *conditional mean difference* per additional
+  effect allele under additive coding, not to a two-percent increase.
+
+**Worked example (hypothetical):**
+
+- use $x=(0,1,2,3)$
+
+- and $y=(2,3,5,6)$
+
+- Then $\bar x=1.5$,
+
+- $\bar y=4$,
+
+- $\sum(x_i-\bar x)(y_i-\bar y)=7$,
+
+- and $\sum(x_i-\bar x)^2=5$.
+
+- Therefore $\hat\beta_1=7/5=1.4$
+
+- $\hat\beta_0=4-1.4(1.5)=1.9$. These $x$ values illustrate regression
+  arithmetic and are *not* diploid genotype calls because 3 is included.
 
 ``` r
 x <- 0:3; y <- c(2,3,5,6)
@@ -123,14 +138,17 @@ Solving them yields
 
 $$\hat\beta_1=\frac{\sum_i(x_i-\bar x)(y_i-\bar y)}{\sum_i(x_i-\bar x)^2},\qquad \hat\beta_0=\bar y-\hat\beta_1\bar x.$$
 
-The denominator must be positive: a constant predictor cannot have an
-estimated slope. For the worked example, residuals are
-$(0.1,-0.3,0.3,-0.1)$ and $RSS=0.20$. With $n=4$ and two fitted
-parameters, $\hat\sigma^2=RSS/(n-2)=0.10$; the classical slope standard
-error is
-$\sqrt{\hat\sigma^2/\sum(x_i-\bar x)^2}=\sqrt{0.1/5}\approx0.1414$.
-These small-sample calculations illustrate mechanics rather than a
-reliable GWAS effect estimate.
+The denominator must be positive:
+
+- a constant predictor cannot have an estimated slope.
+- For the worked example, residuals are $(0.1,-0.3,0.3,-0.1)$
+- and $RSS=0.20$.
+- With $n=4$ and.
+- two fitted parameters, $\hat\sigma^2=RSS/(n-2)=0.10$;
+- the classical slope standard error is
+  $\sqrt{\hat\sigma^2/\sum(x_i-\bar x)^2}=\sqrt{0.1/5}\approx0.1414$.
+  These small-sample calculations illustrate mechanics rather than a
+  reliable GWAS effect estimate.
 
 ``` r
 rss <- sum(residuals(fit_small)^2)

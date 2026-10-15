@@ -944,3 +944,13 @@ run the R code or obtained empirical genetic association results.
 **Next chapter:** Chapter 6 — Statistical Foundations for GWAS. We will
 formalize probability, estimation, hypothesis testing, confidence
 intervals, multiple testing and statistical power.
+
+### AI-assistance disclosure
+
+ChatGPT (OpenAI) assisted with educational drafting,
+mathematical-example design, R-code preparation, and figure planning.
+The examples are hypothetical or simulated; no Marees genotype analysis
+was executed for this chapter. The material requires final author
+review, local R execution, and visual inspection of knitted figures
+before publication. Scientific accuracy and interpretation remain the
+author’s responsibility.
