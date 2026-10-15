@@ -9,6 +9,8 @@ output:
 ---
 
 
+# Genotype Data Quality Control: Principles, Metrics, and Analytical Strategy
+
 ## 10.1 Introduction: why genotype quality control matters
 
 Genome-wide association studies (GWAS) test associations between genetic
