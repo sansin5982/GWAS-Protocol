@@ -8,7 +8,7 @@ output:
 
 Statistical Models for GWAS: Linear Regression, Logistic Regression, and
 Genetic Association Models
-================
+
 
 ## 9.1 Why statistical models matter in GWAS
 
