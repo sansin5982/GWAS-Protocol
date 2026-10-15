@@ -6,7 +6,7 @@ output:
     preserve_yaml: true
 ---
 
-Statistical Models for GWAS: Linear Regression, Logistic Regression, and
+# Statistical Models for GWAS: Linear Regression, Logistic Regression, and
 Genetic Association Models
 
 
