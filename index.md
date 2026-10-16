@@ -16,3 +16,5 @@ Chapters:
 - [Statistical Models GWAS](chapters/Statistical_Models_GWAS_Chapter9)
 - [Genotype Quality Control
   Principles](chapters/Genotype_QC_Principles_Chapter10)
+- [Sample-Level Quality
+  Control](chapters/Sample-quality-control_Chapter11)
