@@ -1,5 +1,5 @@
 ---
-title: "Chapter 11 — Sample-Level Quality Control Using Real HapMap Genotype Data"
+title: "Sample-Level Quality Control Using Real HapMap Genotype Data"
 output:
   github_document:
     html_preview: false
@@ -229,19 +229,6 @@ print(p1)
 
 ![](Sample-quality-control_Chapter11_files/figure-gfm/figure-11-1-missingness-1.png)<!-- -->
 
-``` r
-#ggsave("figures/ch11-fig-11-1-initial-missingness.png", p1,
-#       width = 8, height = 5, dpi = 300)
-```
-
-All six figures are defined as editable **R code chunks**. Set
-`params: run_qc_plots: true` in the YAML when the QC reports are
-available in the working directory; figures will be generated during
-rendering and also saved as PNG files in `figures/`. Leave this
-parameter `false` for website builds without genotype reports. In that
-mode the figures will not appear; no fixed PNG substitutes are silently
-used.
-
 # 11.5 Permissive variant screen before sample filtering
 
 A few extremely poor markers can artificially inflate the missingness of
@@ -305,6 +292,13 @@ filtering result.
 miss_initial <- fread("D:/TOOLS/PLINK/QC11_initial_missingness.imiss")
 miss_initial[F_MISS > 0.02,
              .(FID, IID, N_MISS, N_GENO, F_MISS)]
+```
+
+    ##      FID     IID N_MISS  N_GENO  F_MISS
+    ##    <int>  <char>  <int>   <int>   <num>
+    ## 1:  1444 NA12739  29584 1457897 0.02029
+
+``` r
 stopifnot(sum(miss_initial$F_MISS > 0.02) == 1L)
 ```
 
@@ -367,8 +361,6 @@ print(p2)
 ![](Sample-quality-control_Chapter11_files/figure-gfm/figure-11-2-sex-check-1.png)<!-- -->
 
 ``` r
-#ggsave("figures/ch11-fig-11-2-sex-check.png", p2,
-#       width = 8, height = 5, dpi = 300)
 sexcheck[STATUS == "PROBLEM", .(FID, IID, PEDSEX, SNPSEX, STATUS, F)]
 ```
 
@@ -534,8 +526,6 @@ print(p3)
 ![](Sample-quality-control_Chapter11_files/figure-gfm/figure-11-3-hwe-1.png)<!-- -->
 
 ``` r
-#ggsave("figures/ch11-fig-11-3-hwe.png", p3,
-#       width = 8, height = 8, dpi = 300)
 hwe[, .(Variants = .N, Below_1e6 = sum(P < 1e-6)), by = TEST]
 ```
 
@@ -614,20 +604,6 @@ report the **actual executed order**, rather than claiming that an
 unperformed rerun occurred. The final marker panel is adequate for the
 reported teaching analysis, but a broader long-range-LD sensitivity
 analysis is a possible improvement.
-
-**Troubleshooting documented from real execution:**
-
-1.  `QC11_het_pruning.in` was incorrect; PLINK wrote
-    `QC11_het_pruning.prune.in`.
-2.  The legacy `--range` flag caused PLINK to interpret the SNP-ID
-    `--extract` list as an interval file;
-    `--exclude range QC11_MHC_exclusion.txt` resolved the ambiguity.
-3.  The exclusion file initially lacked the fourth region-name field; it
-    was corrected to `6 25000000 34000000 MHC`.
-
-Only the **corrected** command above belongs in the executable protocol;
-the errors remain in this audit trail to show what was investigated and
-fixed.
 
 # 11.11 Individual heterozygosity and the inbreeding coefficient
 
@@ -713,11 +689,6 @@ print(p4)
 
 ![](Sample-quality-control_Chapter11_files/figure-gfm/figure-11-4-heterozygosity-1.png)<!-- -->
 
-``` r
-#ggsave("figures/ch11-fig-11-4-heterozygosity.png", p4,
-#       width = 8, height = 5, dpi = 300)
-```
-
 **Verified numerical results from the actual `.het` file:** mean F
 **−0.00893193**, sample SD **0.00841471**, lower limit **−0.03417605**,
 upper limit **0.01631219**, observed range **−0.03193 to 0.03320**. Two
@@ -792,8 +763,6 @@ print(p5)
 ![](Sample-quality-control_Chapter11_files/figure-gfm/figure-11-5-missingness-versus-heterozygosity-1.png)<!-- -->
 
 ``` r
-#ggsave("figures/ch11-fig-11-5-missingness-vs-heterozygosity.png",
- #      p5, width = 8, height = 5, dpi = 300)
 fwrite(qc, "D:/TOOLS/PLINK/QC11_combined_het_missingness.tsv", sep = "\t")
 ```
 
@@ -891,11 +860,6 @@ print(p6)
 ```
 
 ![](Sample-quality-control_Chapter11_files/figure-gfm/figure-11-6-sample-flow-1.png)<!-- -->
-
-``` r
-#ggsave("figures/ch11-fig-11-6-sample-flow.png", p6,
-#       width = 8, height = 5, dpi = 300)
-```
 
 # 11.15 Reproducibility and interpretation checklist
 
