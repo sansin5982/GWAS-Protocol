@@ -199,7 +199,7 @@ ggplot(expected,aes(Relationship,Probability,fill=State)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-3-ibd-states-1.png"
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-2-ibd-states-1.png"
 alt="Figure 12.3 (ILLUSTRATIVE). Expected IBD-state patterns for major pedigree relationships; values are theoretical, not measured HapMap values." />
 <figcaption aria-hidden="true">Figure 12.3 (ILLUSTRATIVE). Expected
 IBD-state patterns for major pedigree relationships; values are
@@ -336,7 +336,7 @@ ggplot(marker_flow,aes(Stage,SNPs)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-4-marker-flow-1.png"
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-3-marker-flow-1.png"
 alt="Figure 12.4 (VERIFIED). SNP counts recorded in PLINK logs during construction of the relatedness panel." />
 <figcaption aria-hidden="true">Figure 12.4 (VERIFIED). SNP counts
 recorded in PLINK logs during construction of the relatedness
@@ -453,7 +453,7 @@ ggplot(pairs,aes(PI_HAT,fill=RT)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-5-observed-pi-hat-1.png"
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-4-observed-pi-hat-1.png"
 alt="Figure 12.5 (OBSERVED). PI_HAT distribution for the 95 screened related pairs. Requires QC12_related_pairs.txt." />
 <figcaption aria-hidden="true">Figure 12.5 (OBSERVED). PI_HAT
 distribution for the 95 screened related pairs. Requires
@@ -475,7 +475,7 @@ ggplot(pairs,aes(Z0,Z2,color=RT)) + geom_point(size=2.8,alpha=.8) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-6-observed-ibd-triangle-1.png"
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-5-observed-ibd-triangle-1.png"
 alt="Figure 12.6 (OBSERVED). Z0 versus Z2 for screened pairs, colored by recorded relationship; dotted lines mark theoretical sibling expectation." />
 <figcaption aria-hidden="true">Figure 12.6 (OBSERVED). Z0 versus Z2 for
 screened pairs, colored by recorded relationship; dotted lines mark
@@ -576,7 +576,7 @@ ggplot() +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-7-pedigree-diagram-1.png"
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-6-pedigree-diagram-1.png"
 alt="Figure 12.7 (INFERRED FROM VERIFIED RECORDS). Solid arrows represent recorded mother–child relationships; dashed link is a putative full-sibling relationship inferred from IBD, not confirmed pedigree." />
 <figcaption aria-hidden="true">Figure 12.7 (INFERRED FROM VERIFIED
 RECORDS). Solid arrows represent recorded mother–child relationships;
@@ -672,7 +672,7 @@ ggplot(comparison,aes(IID,Missingness*100,fill=IID)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-8-missingness-comparison-1.png"
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-7-missingness-comparison-1.png"
 alt="Figure 12.8 (VERIFIED). Missing genotype fractions for the two phenotype-eligible related individuals; note the deliberately narrow axis and small absolute difference." />
 <figcaption aria-hidden="true">Figure 12.8 (VERIFIED). Missing genotype
 fractions for the two phenotype-eligible related individuals; note the
@@ -811,7 +811,7 @@ ggplot(toy,aes(Model,Estimate,ymin=Lower,ymax=Upper)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-9-se-illustration-1.png"
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-8-se-illustration-1.png"
 alt="Figure 12.9 (ILLUSTRATIVE). The same effect estimate can have different uncertainty when within-family correlation is accounted for; not an observed GWAS result." />
 <figcaption aria-hidden="true">Figure 12.9 (ILLUSTRATIVE). The same
 effect estimate can have different uncertainty when within-family
@@ -962,8 +962,8 @@ ggplot(flow,aes(Stage,N)) + geom_col(fill="#0f766e",width=.6) +
 <figure>
 <img
 src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-9-sample-flow-1.png"
-alt="Figure 12.10 (VERIFIED). Sample retention and phenotype eligibility after Chapter 12. Missing-phenotype individuals remain in the QC dataset but do not enter conventional case–control regression." />
-<figcaption aria-hidden="true">Figure 12.10 (VERIFIED). Sample retention
+alt="Figure 12.9 (VERIFIED). Sample retention and phenotype eligibility after Chapter 12. Missing-phenotype individuals remain in the QC dataset but do not enter conventional case–control regression." />
+<figcaption aria-hidden="true">Figure 12.9 (VERIFIED). Sample retention
 and phenotype eligibility after Chapter 12. Missing-phenotype
 individuals remain in the QC dataset but do not enter conventional
 case–control regression.</figcaption>
