@@ -18,3 +18,5 @@ Chapters:
   Principles](chapters/Genotype_QC_Principles_Chapter10)
 - [Sample-Level Quality
   Control](chapters/Sample-quality-control_Chapter11)
+- [Genetic Relatedness Quality
+  Contro](chapters/genetic-relatedness-IBD-IBS_Chapter12)
