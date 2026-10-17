@@ -577,8 +577,8 @@ ggplot() +
 <figure>
 <img
 src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-6-pedigree-diagram-1.png"
-alt="Figure 12.7 (INFERRED FROM VERIFIED RECORDS). Solid arrows represent recorded mother–child relationships; dashed link is a putative full-sibling relationship inferred from IBD, not confirmed pedigree." />
-<figcaption aria-hidden="true">Figure 12.7 (INFERRED FROM VERIFIED
+alt="Figure 12.8 (INFERRED FROM VERIFIED RECORDS). Solid arrows represent recorded mother–child relationships; dashed link is a putative full-sibling relationship inferred from IBD, not confirmed pedigree." />
+<figcaption aria-hidden="true">Figure 12.8 (INFERRED FROM VERIFIED
 RECORDS). Solid arrows represent recorded mother–child relationships;
 dashed link is a putative full-sibling relationship inferred from IBD,
 not confirmed pedigree.</figcaption>
@@ -673,8 +673,8 @@ ggplot(comparison,aes(IID,Missingness*100,fill=IID)) +
 <figure>
 <img
 src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-7-missingness-comparison-1.png"
-alt="Figure 12.8 (VERIFIED). Missing genotype fractions for the two phenotype-eligible related individuals; note the deliberately narrow axis and small absolute difference." />
-<figcaption aria-hidden="true">Figure 12.8 (VERIFIED). Missing genotype
+alt="Figure 12.9 (VERIFIED). Missing genotype fractions for the two phenotype-eligible related individuals; note the deliberately narrow axis and small absolute difference." />
+<figcaption aria-hidden="true">Figure 12.9 (VERIFIED). Missing genotype
 fractions for the two phenotype-eligible related individuals; note the
 deliberately narrow axis and small absolute difference.</figcaption>
 </figure>
@@ -812,8 +812,8 @@ ggplot(toy,aes(Model,Estimate,ymin=Lower,ymax=Upper)) +
 <figure>
 <img
 src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-8-se-illustration-1.png"
-alt="Figure 12.9 (ILLUSTRATIVE). The same effect estimate can have different uncertainty when within-family correlation is accounted for; not an observed GWAS result." />
-<figcaption aria-hidden="true">Figure 12.9 (ILLUSTRATIVE). The same
+alt="Figure 12.10 (ILLUSTRATIVE). The same effect estimate can have different uncertainty when within-family correlation is accounted for; not an observed GWAS result." />
+<figcaption aria-hidden="true">Figure 12.10 (ILLUSTRATIVE). The same
 effect estimate can have different uncertainty when within-family
 correlation is accounted for; not an observed GWAS result.</figcaption>
 </figure>
@@ -962,8 +962,8 @@ ggplot(flow,aes(Stage,N)) + geom_col(fill="#0f766e",width=.6) +
 <figure>
 <img
 src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-9-sample-flow-1.png"
-alt="Figure 12.9 (VERIFIED). Sample retention and phenotype eligibility after Chapter 12. Missing-phenotype individuals remain in the QC dataset but do not enter conventional case–control regression." />
-<figcaption aria-hidden="true">Figure 12.9 (VERIFIED). Sample retention
+alt="Figure 12.11 (VERIFIED). Sample retention and phenotype eligibility after Chapter 12. Missing-phenotype individuals remain in the QC dataset but do not enter conventional case–control regression." />
+<figcaption aria-hidden="true">Figure 12.11 (VERIFIED). Sample retention
 and phenotype eligibility after Chapter 12. Missing-phenotype
 individuals remain in the QC dataset but do not enter conventional
 case–control regression.</figcaption>
