@@ -110,8 +110,8 @@ allele.
 
 <figure>
 <img src="figures/ch12-fig-ibs-vs-ibd.png"
-alt="Figure 12.A. IBS matches allele labels; IBD requires inheritance of the same ancestral allele copy." />
-<figcaption aria-hidden="true">Figure 12.A. IBS matches allele labels;
+alt="Figure 12.1. IBS matches allele labels; IBD requires inheritance of the same ancestral allele copy." />
+<figcaption aria-hidden="true">Figure 12.1. IBS matches allele labels;
 IBD requires inheritance of the same ancestral allele copy.</figcaption>
 </figure>
 
@@ -128,39 +128,6 @@ mutations are ignored.
 **Key distinction:** IBS = matching observed allele state; IBD = sharing
 an ancestral copy. Genome-wide allele matching helps us *estimate* IBD;
 it does not directly prove every ancestral transmission.
-
-``` r
-library(ggplot2)
-example <- data.frame(
-  panel=rep(c("IBS without established recent IBD", "IBD through a shared ancestor"), each=3),
-  who=rep(c("Person A", "Person B", "Explanation"),2),
-  allele=c("A", "A", "Same state; origin unknown", "A", "A", "Same inherited ancestral copy"),
-  x=rep(c(1,2,1.5),2), y=rep(c(2,2,1),2)
-)
-ggplot(example, aes(x,y)) +
-  geom_label(data=subset(example,who!="Explanation"),
-             aes(label=paste(who, allele, sep="\n")), size=4.2,
-             fill="#e0f2fe", label.size=.4) +
-  geom_text(data=subset(example,who=="Explanation"),
-            aes(label=allele), size=3.7, fontface="italic") +
-  facet_wrap(~panel, nrow=1) + coord_cartesian(xlim=c(.4,2.6),ylim=c(.55,2.6)) +
-  theme_void(base_size=12) + theme(strip.text=element_text(face="bold",size=11))
-```
-
-    ## Warning: The `label.size` argument of `geom_label()` is deprecated as of ggplot2 3.5.0.
-    ## ℹ Please use the `linewidth` argument instead.
-    ## This warning is displayed once per session.
-    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-    ## generated.
-
-<figure>
-<img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-1-ibs-vs-ibd-1.png"
-alt="Figure 12.1 (ILLUSTRATIVE). IBS describes allele matching; IBD additionally requires shared ancestry. Editable ggplot2 diagram." />
-<figcaption aria-hidden="true">Figure 12.1 (ILLUSTRATIVE). IBS describes
-allele matching; IBD additionally requires shared ancestry. Editable
-ggplot2 diagram.</figcaption>
-</figure>
 
 **Why IBS alone is insufficient:** a pair of unrelated individuals can
 share thousands of common alleles. Calling them relatives based on raw
@@ -190,8 +157,8 @@ $$\widehat{\pi}=\frac{\widehat{Z}_1}{2}+\widehat{Z}_2.$$
 
 <figure>
 <img src="figures/ch12-fig-ibd-states.png"
-alt="Figure 12.B. Conceptual representation of sharing zero, one, or two allele copies identical by descent. Letters label ancestral copies, not nucleotides." />
-<figcaption aria-hidden="true">Figure 12.B. Conceptual representation of
+alt="Figure 12.2. Conceptual representation of sharing zero, one, or two allele copies identical by descent. Letters label ancestral copies, not nucleotides." />
+<figcaption aria-hidden="true">Figure 12.2. Conceptual representation of
 sharing zero, one, or two allele copies identical by descent. Letters
 label ancestral copies, not nucleotides.</figcaption>
 </figure>
@@ -232,9 +199,9 @@ ggplot(expected,aes(Relationship,Probability,fill=State)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-2-ibd-states-1.png"
-alt="Figure 12.2 (ILLUSTRATIVE). Expected IBD-state patterns for major pedigree relationships; values are theoretical, not measured HapMap values." />
-<figcaption aria-hidden="true">Figure 12.2 (ILLUSTRATIVE). Expected
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-3-ibd-states-1.png"
+alt="Figure 12.3 (ILLUSTRATIVE). Expected IBD-state patterns for major pedigree relationships; values are theoretical, not measured HapMap values." />
+<figcaption aria-hidden="true">Figure 12.3 (ILLUSTRATIVE). Expected
 IBD-state patterns for major pedigree relationships; values are
 theoretical, not measured HapMap values.</figcaption>
 </figure>
@@ -369,9 +336,9 @@ ggplot(marker_flow,aes(Stage,SNPs)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-3-marker-flow-1.png"
-alt="Figure 12.3 (VERIFIED). SNP counts recorded in PLINK logs during construction of the relatedness panel." />
-<figcaption aria-hidden="true">Figure 12.3 (VERIFIED). SNP counts
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-4-marker-flow-1.png"
+alt="Figure 12.4 (VERIFIED). SNP counts recorded in PLINK logs during construction of the relatedness panel." />
+<figcaption aria-hidden="true">Figure 12.4 (VERIFIED). SNP counts
 recorded in PLINK logs during construction of the relatedness
 panel.</figcaption>
 </figure>
@@ -486,9 +453,9 @@ ggplot(pairs,aes(PI_HAT,fill=RT)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-4-observed-pi-hat-1.png"
-alt="Figure 12.4 (OBSERVED). PI_HAT distribution for the 95 screened related pairs. Requires QC12_related_pairs.txt." />
-<figcaption aria-hidden="true">Figure 12.4 (OBSERVED). PI_HAT
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-5-observed-pi-hat-1.png"
+alt="Figure 12.5 (OBSERVED). PI_HAT distribution for the 95 screened related pairs. Requires QC12_related_pairs.txt." />
+<figcaption aria-hidden="true">Figure 12.5 (OBSERVED). PI_HAT
 distribution for the 95 screened related pairs. Requires
 QC12_related_pairs.txt.</figcaption>
 </figure>
@@ -508,9 +475,9 @@ ggplot(pairs,aes(Z0,Z2,color=RT)) + geom_point(size=2.8,alpha=.8) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-5-observed-ibd-triangle-1.png"
-alt="Figure 12.5 (OBSERVED). Z0 versus Z2 for screened pairs, colored by recorded relationship; dotted lines mark theoretical sibling expectation." />
-<figcaption aria-hidden="true">Figure 12.5 (OBSERVED). Z0 versus Z2 for
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-6-observed-ibd-triangle-1.png"
+alt="Figure 12.6 (OBSERVED). Z0 versus Z2 for screened pairs, colored by recorded relationship; dotted lines mark theoretical sibling expectation." />
+<figcaption aria-hidden="true">Figure 12.6 (OBSERVED). Z0 versus Z2 for
 screened pairs, colored by recorded relationship; dotted lines mark
 theoretical sibling expectation.</figcaption>
 </figure>
@@ -534,8 +501,8 @@ relationships if the sibling hypothesis is correct. These remain
 
 <figure>
 <img src="figures/ch12-fig-cross-family-pedigree.png"
-alt="Figure 12.C. Observed parent-child pedigree links and genetically inferred cross-family full-sibling hypothesis. Case/control labels follow PLINK phenotype codes: 2=case, 1=control." />
-<figcaption aria-hidden="true">Figure 12.C. Observed parent-child
+alt="Figure 12.7. Observed parent-child pedigree links and genetically inferred cross-family full-sibling hypothesis. Case/control labels follow PLINK phenotype codes: 2=case, 1=control." />
+<figcaption aria-hidden="true">Figure 12.7. Observed parent-child
 pedigree links and genetically inferred cross-family full-sibling
 hypothesis. Case/control labels follow PLINK phenotype codes: 2=case,
 1=control.</figcaption>
@@ -601,11 +568,17 @@ ggplot() +
   theme_void(base_size=12) + theme(legend.position="none")
 ```
 
+    ## Warning: The `label.size` argument of `geom_label()` is deprecated as of ggplot2 3.5.0.
+    ## ℹ Please use the `linewidth` argument instead.
+    ## This warning is displayed once per session.
+    ## Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+    ## generated.
+
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-6-pedigree-diagram-1.png"
-alt="Figure 12.6 (INFERRED FROM VERIFIED RECORDS). Solid arrows represent recorded mother–child relationships; dashed link is a putative full-sibling relationship inferred from IBD, not confirmed pedigree." />
-<figcaption aria-hidden="true">Figure 12.6 (INFERRED FROM VERIFIED
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-7-pedigree-diagram-1.png"
+alt="Figure 12.7 (INFERRED FROM VERIFIED RECORDS). Solid arrows represent recorded mother–child relationships; dashed link is a putative full-sibling relationship inferred from IBD, not confirmed pedigree." />
+<figcaption aria-hidden="true">Figure 12.7 (INFERRED FROM VERIFIED
 RECORDS). Solid arrows represent recorded mother–child relationships;
 dashed link is a putative full-sibling relationship inferred from IBD,
 not confirmed pedigree.</figcaption>
@@ -699,9 +672,9 @@ ggplot(comparison,aes(IID,Missingness*100,fill=IID)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-7-missingness-comparison-1.png"
-alt="Figure 12.7 (VERIFIED). Missing genotype fractions for the two phenotype-eligible related individuals; note the deliberately narrow axis and small absolute difference." />
-<figcaption aria-hidden="true">Figure 12.7 (VERIFIED). Missing genotype
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-8-missingness-comparison-1.png"
+alt="Figure 12.8 (VERIFIED). Missing genotype fractions for the two phenotype-eligible related individuals; note the deliberately narrow axis and small absolute difference." />
+<figcaption aria-hidden="true">Figure 12.8 (VERIFIED). Missing genotype
 fractions for the two phenotype-eligible related individuals; note the
 deliberately narrow axis and small absolute difference.</figcaption>
 </figure>
@@ -838,9 +811,9 @@ ggplot(toy,aes(Model,Estimate,ymin=Lower,ymax=Upper)) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-8-se-illustration-1.png"
-alt="Figure 12.8 (ILLUSTRATIVE). The same effect estimate can have different uncertainty when within-family correlation is accounted for; not an observed GWAS result." />
-<figcaption aria-hidden="true">Figure 12.8 (ILLUSTRATIVE). The same
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-9-se-illustration-1.png"
+alt="Figure 12.9 (ILLUSTRATIVE). The same effect estimate can have different uncertainty when within-family correlation is accounted for; not an observed GWAS result." />
+<figcaption aria-hidden="true">Figure 12.9 (ILLUSTRATIVE). The same
 effect estimate can have different uncertainty when within-family
 correlation is accounted for; not an observed GWAS result.</figcaption>
 </figure>
@@ -988,9 +961,9 @@ ggplot(flow,aes(Stage,N)) + geom_col(fill="#0f766e",width=.6) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-9-sample-flow-1.png"
-alt="Figure 12.9 (VERIFIED). Sample retention and phenotype eligibility after Chapter 12. Missing-phenotype individuals remain in the QC dataset but do not enter conventional case–control regression." />
-<figcaption aria-hidden="true">Figure 12.9 (VERIFIED). Sample retention
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-10-sample-flow-1.png"
+alt="Figure 12.10 (VERIFIED). Sample retention and phenotype eligibility after Chapter 12. Missing-phenotype individuals remain in the QC dataset but do not enter conventional case–control regression." />
+<figcaption aria-hidden="true">Figure 12.10 (VERIFIED). Sample retention
 and phenotype eligibility after Chapter 12. Missing-phenotype
 individuals remain in the QC dataset but do not enter conventional
 case–control regression.</figcaption>
