@@ -19,4 +19,4 @@ Chapters:
 - [Sample-Level Quality
   Control](chapters/Sample-quality-control_Chapter11)
 - [Genetic Relatedness Quality
-  Contro](chapters/genetic-relatedness-IBD-IBS_Chapter12)
+  Control](chapters/genetic-relatedness-IBD-IBS_Chapter12)
