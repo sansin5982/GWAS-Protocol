@@ -961,7 +961,7 @@ ggplot(flow,aes(Stage,N)) + geom_col(fill="#0f766e",width=.6) +
 
 <figure>
 <img
-src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-10-sample-flow-1.png"
+src="genetic-relatedness-IBD-IBS_Chapter12_files/figure-gfm/figure-12-9-sample-flow-1.png"
 alt="Figure 12.10 (VERIFIED). Sample retention and phenotype eligibility after Chapter 12. Missing-phenotype individuals remain in the QC dataset but do not enter conventional case–control regression." />
 <figcaption aria-hidden="true">Figure 12.10 (VERIFIED). Sample retention
 and phenotype eligibility after Chapter 12. Missing-phenotype
